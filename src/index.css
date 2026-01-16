@@ -1,68 +1,195 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --background: 40 33% 98%;
+    --foreground: 30 10% 15%;
+
+    --card: 40 30% 96%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 40 33% 98%;
+    --popover-foreground: 30 10% 15%;
+
+    /* Primary: Dark Wine Red */
+    --primary: 345 45% 32%;
+    --primary-foreground: 40 33% 98%;
+
+    --secondary: 40 30% 93%;
+    --secondary-foreground: 30 10% 25%;
+
+    --muted: 40 20% 92%;
+    --muted-foreground: 30 10% 45%;
+
+    /* Accent: Elegant Gold */
+    --accent: 42 65% 55%;
+    --accent-foreground: 30 10% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 345 45% 32%;
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 40 33% 98%;
+    --sidebar-foreground: 30 10% 25%;
+    --sidebar-primary: 345 45% 32%;
+    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-accent: 40 30% 93%;
+    --sidebar-accent-foreground: 30 10% 25%;
+    --sidebar-border: 40 20% 88%;
+    --sidebar-ring: 345 45% 32%;
+
+    /* Custom wedding colors */
+    --sage: 150 25% 40%;
+    --sage-light: 150 20% 90%;
+    --wine: 345 45% 32%;
+    --wine-light: 345 30% 85%;
+    --gold: 42 65% 55%;
+    --gold-light: 42 50% 88%;
+    --ivory: 40 33% 98%;
+    --cream: 40 30% 96%;
+    --charcoal: 30 10% 15%;
+
+    /* Typography */
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Raleway', sans-serif;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(345 45% 32% / 0.08);
+    --shadow-elegant: 0 8px 40px -8px hsl(345 45% 32% / 0.12);
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 30 10% 10%;
+    --foreground: 40 33% 95%;
+
+    --card: 30 10% 12%;
+    --card-foreground: 40 33% 95%;
+
+    --popover: 30 10% 10%;
+    --popover-foreground: 40 33% 95%;
+
+    --primary: 345 45% 45%;
+    --primary-foreground: 30 10% 10%;
+
+    --secondary: 30 10% 18%;
+    --secondary-foreground: 40 33% 95%;
+
+    --muted: 30 10% 20%;
+    --muted-foreground: 40 20% 65%;
+
+    --accent: 42 65% 50%;
+    --accent-foreground: 30 10% 10%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 40 33% 95%;
+
+    --border: 30 10% 20%;
+    --input: 30 10% 20%;
+    --ring: 345 45% 45%;
+
+    --sage: 150 25% 50%;
+    --sage-light: 150 15% 25%;
+    --wine: 345 45% 45%;
+    --wine-light: 345 30% 20%;
+    --gold: 42 65% 50%;
+    --gold-light: 42 30% 20%;
+    --ivory: 30 10% 10%;
+    --cream: 30 10% 12%;
+    --charcoal: 40 33% 95%;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-border;
   }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-gentle-float {
+  animation: gentle-float 4s ease-in-out infinite;
+}
+
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
 }
