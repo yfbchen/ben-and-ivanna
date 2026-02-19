@@ -72,7 +72,7 @@ const WeddingHome = () => {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="font-display text-2xl text-foreground">A & M</span>
+          <span className="font-display text-2xl text-foreground">I & B</span>
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
@@ -198,19 +198,19 @@ const WeddingHome = () => {
                 <div className="space-y-4 text-muted-foreground">
                   <div className="flex items-center justify-center gap-3">
                     <Calendar className="w-5 h-5 text-wine" />
-                    <span className="font-body">Sunday, June 15, 2025</span>
+                    <span className="font-body">Saturday, September 12, 2026</span>
                   </div>
                   <div className="flex items-center justify-center gap-3">
                     <Clock className="w-5 h-5 text-wine" />
-                    <span className="font-body">4:00 PM</span>
+                    <span className="font-body">5:00 PM</span>
                   </div>
                   <div className="flex items-center justify-center gap-3">
                     <MapPin className="w-5 h-5 text-wine" />
-                    <span className="font-body">Rose Garden Chapel</span>
+                    <span className="font-body">Gufo Cambridge (Patio)</span>
                   </div>
                   <p className="font-body text-sm pt-4">
-                    123 Garden Lane<br />
-                    Napa Valley, California 94558
+                    660 Cambridge St<br />
+                    Cambridge, MA 02141
                   </p>
                 </div>
               </div>
@@ -221,7 +221,7 @@ const WeddingHome = () => {
                 <div className="space-y-4 text-muted-foreground">
                   <div className="flex items-center justify-center gap-3">
                     <Calendar className="w-5 h-5 text-gold" />
-                    <span className="font-body">Sunday, June 15, 2025</span>
+                    <span className="font-body">Saturday, September 12, 2026</span>
                   </div>
                   <div className="flex items-center justify-center gap-3">
                     <Clock className="w-5 h-5 text-gold" />
@@ -229,11 +229,11 @@ const WeddingHome = () => {
                   </div>
                   <div className="flex items-center justify-center gap-3">
                     <MapPin className="w-5 h-5 text-gold" />
-                    <span className="font-body">Vineyard Estate</span>
+                    <span className="font-body">Gufo Cambridge (Dining Room)</span>
                   </div>
                   <p className="font-body text-sm pt-4">
-                    456 Winery Road<br />
-                    Napa Valley, California 94558
+                    660 Cambridge St<br />
+                    Cambridge, MA 02141
                   </p>
                 </div>
               </div>
@@ -389,14 +389,14 @@ const WeddingHome = () => {
       <footer className="py-16 bg-cream border-t border-border">
         <div className="container mx-auto px-6 text-center">
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">
-            Amelia & Michael
+            Ivanna & Ben
           </h2>
           <p className="font-display text-xl text-gold italic mb-8">
-            June 15, 2025
+            September 12, 2026
           </p>
           <Heart className="w-6 h-6 text-wine mx-auto" />
           <p className="text-muted-foreground font-body text-sm mt-8">
-            We can't wait to celebrate with you
+            We can't wait to celebrate with you!
           </p>
         </div>
       </footer>

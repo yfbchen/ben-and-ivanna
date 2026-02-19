@@ -65,7 +65,7 @@ const PasswordPage = () => {
           <div className="mt-16 flex items-center justify-center gap-4">
             <div className="h-px bg-border flex-1" />
             <span className="text-muted-foreground text-sm tracking-widest uppercase">
-              A & M
+              I & B
             </span>
             <div className="h-px bg-border flex-1" />
           </div>
