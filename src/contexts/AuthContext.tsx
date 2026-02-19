@@ -8,7 +8,9 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const WEDDING_PASSWORD = "forever2026"; // Change this to your wedding password
+// Get password from environment variable
+// In Vite, environment variables must be prefixed with VITE_ to be exposed to the client
+const WEDDING_PASSWORD = import.meta.env.VITE_WEDDING_PASSWORD;
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -16,6 +18,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const login = (password: string): boolean => {
+    if (!WEDDING_PASSWORD) {
+      return false;
+    }
     if (password === WEDDING_PASSWORD) {
       setIsAuthenticated(true);
       sessionStorage.setItem("wedding_auth", "true");
