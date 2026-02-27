@@ -25,9 +25,39 @@ const WeddingHome = () => {
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
+    if (!element) return;
+
+    const navOffset = 72;
+    const targetY = element.getBoundingClientRect().top + window.pageYOffset - navOffset;
+    const startY = window.pageYOffset;
+    const distance = targetY - startY;
+    const duration = 900;
+    const startTime = performance.now();
+
+    const easeInOutQuad = (t: number) =>
+      t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    const step = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      const eased = easeInOutQuad(progress);
+      window.scrollTo(0, startY + distance * eased);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
     setIsMenuOpen(false);
   };
+
+  const navItems: Array<{ label: string; sectionId: string }> = [
+    { label: "Our Wedding", sectionId: "our-wedding" },
+    { label: "Our Story", sectionId: "our-story" },
+    { label: "His Proposal", sectionId: "his-proposal" },
+    { label: "Gallery", sectionId: "gallery" },
+    { label: "Registry", sectionId: "gift" },
+  ];
 
   const handleRsvpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,27 +100,46 @@ const WeddingHome = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="font-display text-2xl text-foreground">I & B</span>
-          
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-wine text-gold border-y border-gold/40">
+        <div className="container mx-auto px-6 h-14 flex items-center gap-6">
+          <button
+            onClick={() => scrollToSection("hero")}
+            className="shrink-0 font-navBrand text-xl sm:text-2xl leading-none tracking-[0.22em] uppercase text-gold hover:text-gold/90 transition-colors"
+            aria-label="Go to top navigation"
+          >
+            IVANNA & BEN
+          </button>
+
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            {["Our Story", "Details", "RSVP", "Gift"].map((item) => (
+          <div className="hidden md:flex flex-1 items-center justify-end gap-10 pr-6">
+            {navItems.map((item) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase().replace(" ", "-"))}
-                className="font-body text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors"
+                key={item.label}
+                onClick={() => scrollToSection(item.sectionId)}
+                className="font-navLink text-[16px] lg:text-[17px] font-medium leading-none tracking-[0.08em] text-gold/90 hover:text-gold transition-colors"
               >
-                {item}
+                {item.label}
               </button>
             ))}
           </div>
 
+          {/* Desktop RSVP */}
+          <div className="hidden md:flex shrink-0">
+            <Button
+              type="button"
+              onClick={() => scrollToSection("rsvp")}
+              className="h-9 px-6 rounded-full bg-gold-light text-wine border border-gold/80 hover:bg-gold-light/90 shadow-soft font-navLink text-[16px] lg:text-[17px] font-medium leading-none tracking-[0.08em]"
+            >
+              RSVP
+            </Button>
+          </div>
+
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden ml-auto p-2 text-gold"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -98,158 +147,182 @@ const WeddingHome = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-background border-b border-border py-4 animate-fade-in">
-            <div className="container mx-auto px-6 flex flex-col gap-4">
-              {["Our Story", "Details", "RSVP", "Gift"].map((item) => (
+          <div className="md:hidden border-t border-gold/30 bg-wine animate-fade-in">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
+              {navItems.map((item) => (
                 <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase().replace(" ", "-"))}
-                  className="font-body text-sm tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors text-left py-2"
+                  key={item.label}
+                  onClick={() => scrollToSection(item.sectionId)}
+                  className="text-left font-navLink text-[16px] font-medium leading-none tracking-[0.08em] text-gold/90 hover:text-gold transition-colors py-3"
                 >
-                  {item}
+                  {item.label}
                 </button>
               ))}
+
+              <div className="pt-2 pb-1">
+                <Button
+                  type="button"
+                  onClick={() => scrollToSection("rsvp")}
+                  className="w-full h-10 rounded-full bg-gold-light text-wine border border-gold/80 hover:bg-gold-light/90 shadow-soft font-navLink text-[16px] font-medium leading-none tracking-[0.08em]"
+                >
+                  RSVP
+                </Button>
+              </div>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          // style={{ backgroundImage: `url(${heroBotanical})` }}
-        />
-        <div className="relative z-10 text-center px-6 py-32">
-          <div className="animate-fade-in-up opacity-0">
-            <p className="font-body text-sm tracking-[0.3em] uppercase text-wine mb-6">
-              We're Getting Married
-            </p>
-            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl text-foreground mb-8 leading-tight">
-              Ivanna
-              <span className="block text-4xl md:text-5xl lg:text-6xl text-gold my-4">&</span>
-              Ben
-            </h1>
-            <p className="font-display text-2xl md:text-3xl text-muted-foreground italic mb-12">
-              September 12, 2026
-            </p>
-            <Button
-              variant="elegant"
-              size="xl"
-              onClick={() => scrollToSection("rsvp")}
-            >
-              RSVP Now
-            </Button>
+      {/* Hero: Ivanna & Ben */}
+      <section
+        id="hero"
+        className="min-h-[110vh] bg-wine flex items-center pt-24"
+      >
+        <div className="container mx-auto px-6">
+          <div className="relative max-w-5xl mx-auto">
+            <div className="grid gap-4 md:gap-8 md:grid-cols-2">
+              <div className="aspect-[4/5] bg-butter border border-gold/40" />
+              <div className="aspect-[4/5] bg-butter border border-gold/40" />
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-gold text-center leading-tight">
+                Ivanna &amp; Ben
+              </h1>
+            </div>
           </div>
-        </div>
-        
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-gentle-float">
-          <Heart className="w-6 h-6 text-wine" />
         </div>
       </section>
 
-      {/* Our Story Section */}
-      <section id="our-story" className="py-24 md:py-32 bg-cream">
+      {/* Our Wedding */}
+      <section
+        id="our-wedding"
+        className="min-h-[110vh] bg-butter flex items-center"
+      >
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-wine mb-6">
+              Our Wedding
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl text-wine leading-tight mb-6">
+              The Details
+            </h2>
+            <p className="font-display text-2xl md:text-3xl text-wine/90 mb-6">
+              Saturday, September 12, 2026
+            </p>
+            <p className="font-body text-base md:text-lg text-charcoal">
+              Gufo &middot; 660 Cambridge St &middot; Cambridge, MA 02141
+            </p>
+            <p className="font-body text-base md:text-lg text-charcoal mt-4">
+              Doors Open: 5:00 PM &nbsp;&bull;&nbsp; Ceremony: 5:30 PM &nbsp;&bull;&nbsp; Reception: 7:00 PM
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story */}
+      <section
+        id="our-story"
+        className="min-h-[110vh] bg-forest flex items-center"
+      >
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="font-body text-sm tracking-[0.3em] uppercase text-wine mb-4 animate-fade-in-up opacity-0">
+            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-gold mb-6">
               Our Story
             </p>
-            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-12 animate-fade-in-up opacity-0 animation-delay-100">
+            <h2 className="font-display text-3xl md:text-5xl text-ivory mb-8">
               How It All Began
             </h2>
-            <div className="space-y-6 text-muted-foreground font-body text-lg leading-relaxed animate-fade-in-up opacity-0 animation-delay-200">
+            <div className="space-y-4 font-body text-base md:text-lg text-ivory/90 leading-relaxed">
               <p>
-                We first met at a cozy coffee shop on a rainy afternoon in October 2019. 
-                What started as a chance encounter over a shared love of lattes and 
-                literature turned into hours of conversation and laughter.
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
               </p>
               <p>
-                From that day forward, we've been inseparable—traveling the world together, 
-                adopting our beloved dog Luna, and building a life filled with love, 
-                adventure, and endless cups of coffee.
+                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                lobortis nisl ut aliquip ex ea commodo consequat.
               </p>
               <p>
-                Now, we're thrilled to begin our next chapter and would be honored 
-                to have you celebrate this special day with us.
+                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+                consequat, vel illum dolore eu feugiat nulla facilisis.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Event Details Section */}
-      <section id="details" className="py-24 md:py-32 bg-background">
+      {/* His Proposal */}
+      <section
+        id="his-proposal"
+        className="min-h-[110vh] bg-wine flex items-center"
+      >
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <p className="font-body text-sm tracking-[0.3em] uppercase text-wine mb-4">
-                Join Us
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-gold mb-6">
+              His Proposal
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl text-ivory mb-8">
+              The Question
+            </h2>
+            <div className="space-y-4 font-body text-base md:text-lg text-ivory/90 leading-relaxed">
+              <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
               </p>
-              <h2 className="font-display text-4xl md:text-5xl text-foreground">
-                Event Details
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Ceremony */}
-              <div className="bg-cream p-8 md:p-12 text-center shadow-soft">
-                <h3 className="font-display text-2xl text-foreground mb-6">The Ceremony</h3>
-                <div className="space-y-4 text-muted-foreground">
-                  <div className="flex items-center justify-center gap-3">
-                    <Calendar className="w-5 h-5 text-wine" />
-                    <span className="font-body">Saturday, September 12, 2026</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <Clock className="w-5 h-5 text-wine" />
-                    <span className="font-body">5:00 PM</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <MapPin className="w-5 h-5 text-wine" />
-                    <span className="font-body">Gufo Cambridge (Patio)</span>
-                  </div>
-                  <p className="font-body text-sm pt-4">
-                    660 Cambridge St<br />
-                    Cambridge, MA 02141
-                  </p>
-                </div>
-              </div>
-
-              {/* Reception */}
-              <div className="bg-cream p-8 md:p-12 text-center shadow-soft">
-                <h3 className="font-display text-2xl text-foreground mb-6">The Reception</h3>
-                <div className="space-y-4 text-muted-foreground">
-                  <div className="flex items-center justify-center gap-3">
-                    <Calendar className="w-5 h-5 text-gold" />
-                    <span className="font-body">Saturday, September 12, 2026</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <Clock className="w-5 h-5 text-gold" />
-                    <span className="font-body">6:00 PM - 11:00 PM</span>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <MapPin className="w-5 h-5 text-gold" />
-                    <span className="font-body">Gufo Cambridge (Dining Room)</span>
-                  </div>
-                  <p className="font-body text-sm pt-4">
-                    660 Cambridge St<br />
-                    Cambridge, MA 02141
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center mt-12">
-              <p className="font-body text-muted-foreground mb-4">
-                Dress Code: <span className="text-foreground">Cocktail Attire</span>
+              <p>
+                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                lobortis nisl ut aliquip ex ea commodo consequat.
+              </p>
+              <p>
+                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+                consequat, vel illum dolore eu feugiat nulla facilisis.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* RSVP Section */}
-      <section id="rsvp" className="py-24 md:py-32 bg-wine-light">
+      {/* Gallery */}
+      <section
+        id="gallery"
+        className="min-h-[110vh] bg-butter flex items-center"
+      >
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-wine mb-6 text-center">
+              Gallery
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl text-foreground mb-10 text-center">
+              Favorite Moments
+            </h2>
+            <div className="grid gap-4 md:grid-cols-3">
+              <div className="aspect-[4/5] bg-butter border border-wine/30" />
+              <div className="aspect-[4/5] bg-butter border border-wine/30" />
+              <div className="aspect-[4/5] bg-butter border border-wine/30" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Registry */}
+      <section
+        id="gift"
+        className="min-h-[110vh] bg-wine flex items-center"
+      >
+        <div className="container mx-auto px-6">
+          <div className="max-w-2xl mx-auto text-center text-ivory">
+            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-gold mb-6">
+              Registry
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl mb-10">
+              Gift Registry
+            </h2>
+            <div className="h-32 border border-gold/40 rounded-sm" />
+          </div>
+        </div>
+      </section>
+
+      {/* RSVP */}
+      <section id="rsvp" className="min-h-[110vh] bg-forest flex items-center">
         <div className="container mx-auto px-6">
           <div className="max-w-xl mx-auto">
             <div className="text-center mb-12">
@@ -345,42 +418,6 @@ const WeddingHome = () => {
                 {isSubmitting ? "Sending..." : "Send RSVP"}
               </Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gift Section */}
-      <section id="gift" className="py-24 md:py-32 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center">
-            <Gift className="w-12 h-12 text-gold mx-auto mb-6" />
-            <p className="font-body text-sm tracking-[0.3em] uppercase text-wine mb-4">
-              Your Presence Is Our Present
-            </p>
-            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-8">
-              Gift Registry
-            </h2>
-            <p className="text-muted-foreground font-body text-lg leading-relaxed mb-12">
-              Your presence at our wedding is the greatest gift of all. However, 
-              if you wish to honor us with a gift, a contribution to our honeymoon 
-              fund would be greatly appreciated.
-            </p>
-
-            <a
-              href="https://www.paypal.com/your-paypal-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block"
-            >
-              <Button variant="gold" size="xl">
-                <Mail className="w-5 h-5 mr-2" />
-                Send Gift via PayPal
-              </Button>
-            </a>
-
-            <p className="text-muted-foreground font-body text-sm mt-8">
-              Click above to contribute to our honeymoon fund
-            </p>
           </div>
         </div>
       </section>

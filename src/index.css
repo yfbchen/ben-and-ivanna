@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -50,10 +50,12 @@
     /* Custom wedding colors */
     --sage: 150 25% 40%;
     --sage-light: 150 20% 90%;
-    --wine: 345 45% 32%;
+    --wine: 346.8 54.3% 18.0%;
     --wine-light: 345 30% 85%;
-    --gold: 42 65% 55%;
+    --gold: 55.8 47.3% 47.6%;
     --gold-light: 42 50% 88%;
+    --butter: 54.5 47.0% 77.1%;
+    --forest: 77.1 35.6% 23.1%;
     --ivory: 40 33% 98%;
     --cream: 40 30% 96%;
     --charcoal: 30 10% 15%;
@@ -98,9 +100,9 @@
 
     --sage: 150 25% 50%;
     --sage-light: 150 15% 25%;
-    --wine: 345 45% 45%;
+    --wine: 346.8 54.3% 18.0%;
     --wine-light: 345 30% 20%;
-    --gold: 42 65% 50%;
+    --gold: 55.8 47.3% 47.6%;
     --gold-light: 42 30% 20%;
     --ivory: 30 10% 10%;
     --cream: 30 10% 12%;

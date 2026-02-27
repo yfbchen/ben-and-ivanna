@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         display: ['Cormorant Garamond', 'serif'],
         body: ['Raleway', 'sans-serif'],
+        navBrand: ['Barlow Condensed', 'sans-serif'],
+        navLink: ['FreightDispCmp Pro', 'Cormorant Garamond', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -55,6 +57,8 @@ export default {
           DEFAULT: "hsl(var(--sage))",
           light: "hsl(var(--sage-light))",
         },
+        butter: "hsl(var(--butter))",
+        forest: "hsl(var(--forest))",
         wine: {
           DEFAULT: "hsl(var(--wine))",
           light: "hsl(var(--wine-light))",
