@@ -176,13 +176,21 @@ const WeddingHome = () => {
       {/* Hero: Ivanna & Ben */}
       <section
         id="hero"
-        className="min-h-[110vh] bg-wine flex items-center pt-24"
+        className="min-h-[600px] bg-wine flex items-center justify-center pt-24"
       >
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="relative max-w-5xl mx-auto">
             <div className="grid gap-4 md:gap-8 md:grid-cols-2">
-              <div className="aspect-[4/5] bg-butter border border-gold/40" />
-              <div className="aspect-[4/5] bg-butter border border-gold/40" />
+              <img
+                src="/photo1.png"
+                alt="Ivanna and Ben"
+                className="aspect-[4/5] w-full object-cover border border-gold/40"
+              />
+              <img
+                src="/photo1.png"
+                alt="Ivanna and Ben"
+                className="aspect-[4/5] w-full object-cover border border-gold/40"
+              />
             </div>
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-gold text-center leading-tight">
@@ -196,25 +204,45 @@ const WeddingHome = () => {
       {/* Our Wedding */}
       <section
         id="our-wedding"
-        className="min-h-[110vh] bg-butter flex items-center"
+        className="min-h-[600px] bg-butter flex items-center justify-center"
       >
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-wine mb-6">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="font-body text-3xl md:text-4xl tracking-[0.3em] uppercase text-wine mb-12 md:mb-16 text-center">
               Our Wedding
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-wine leading-tight mb-6">
-              The Details
             </h2>
-            <p className="font-display text-2xl md:text-3xl text-wine/90 mb-6">
-              Saturday, September 12, 2026
-            </p>
-            <p className="font-body text-base md:text-lg text-charcoal">
-              Gufo &middot; 660 Cambridge St &middot; Cambridge, MA 02141
-            </p>
-            <p className="font-body text-base md:text-lg text-charcoal mt-4">
-              Doors Open: 5:00 PM &nbsp;&bull;&nbsp; Ceremony: 5:30 PM &nbsp;&bull;&nbsp; Reception: 7:00 PM
-            </p>
+            <div className="grid gap-8 md:gap-12 md:grid-cols-3 items-start">
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src="/calendar.png"
+                  alt="Wedding date"
+                  className="w-full max-w-[200px] object-contain mb-4"
+                />
+                <p className="font-display text-xl md:text-2xl text-wine/90">
+                  Saturday September 12, 2026
+                </p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src="/calendar.png"
+                  alt="Wedding venue"
+                  className="w-full max-w-[200px] object-contain mb-4"
+                />
+                <p className="font-body text-base md:text-lg text-charcoal">
+                  Gufo &middot; 660 Cambridge St &middot; Cambridge, MA 02141
+                </p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src="/calendar.png"
+                  alt="Wedding schedule"
+                  className="w-full max-w-[200px] object-contain mb-4"
+                />
+                <p className="font-body text-base md:text-lg text-charcoal">
+                  Doors Open: 5:00 PM &nbsp;&bull;&nbsp; Ceremony: 5:30 PM &nbsp;&bull;&nbsp; Reception: 7:00 PM
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -222,29 +250,35 @@ const WeddingHome = () => {
       {/* Our Story */}
       <section
         id="our-story"
-        className="min-h-[110vh] bg-forest flex items-center"
+        className="min-h-[600px] bg-forest flex items-center justify-center"
       >
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-gold mb-6">
-              Our Story
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-ivory mb-8">
-              How It All Began
-            </h2>
-            <div className="space-y-4 font-body text-base md:text-lg text-ivory/90 leading-relaxed">
-              <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-              </p>
-              <p>
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                lobortis nisl ut aliquip ex ea commodo consequat.
-              </p>
-              <p>
-                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                consequat, vel illum dolore eu feugiat nulla facilisis.
-              </p>
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
+          <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
+            <div className="w-full flex justify-center">
+              <img
+                src="/photo1.png"
+                alt="Our story placeholder"
+                className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
+              />
+            </div>
+            <div className="max-w-xl w-full text-center md:text-left">
+              <h2 className="font-body text-3xl md:text-3xl tracking-[0.3em] uppercase text-wine mb-6">
+                Our Story
+              </h2>
+              <div className="space-y-4 font-body text-base md:text-lg text-ivory/90 leading-relaxed">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                  euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                </p>
+                <p>
+                  Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                  lobortis nisl ut aliquip ex ea commodo consequat.
+                </p>
+                <p>
+                  Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+                  consequat, vel illum dolore eu feugiat nulla facilisis.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -253,29 +287,35 @@ const WeddingHome = () => {
       {/* His Proposal */}
       <section
         id="his-proposal"
-        className="min-h-[110vh] bg-wine flex items-center"
+        className="min-h-[600px] bg-wine flex items-center justify-center"
       >
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-gold mb-6">
-              His Proposal
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-ivory mb-8">
-              The Question
-            </h2>
-            <div className="space-y-4 font-body text-base md:text-lg text-ivory/90 leading-relaxed">
-              <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-              </p>
-              <p>
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                lobortis nisl ut aliquip ex ea commodo consequat.
-              </p>
-              <p>
-                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                consequat, vel illum dolore eu feugiat nulla facilisis.
-              </p>
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
+          <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
+            <div className="order-2 md:order-1 max-w-xl w-full text-center md:text-left">
+              <h2 className="font-body text-3xl md:text-3xl tracking-[0.3em] uppercase text-gold mb-6">
+                His Proposal
+              </h2>
+              <div className="space-y-4 font-body text-base md:text-lg text-ivory/90 leading-relaxed">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                  euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                </p>
+                <p>
+                  Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                  lobortis nisl ut aliquip ex ea commodo consequat.
+                </p>
+                <p>
+                  Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+                  consequat, vel illum dolore eu feugiat nulla facilisis.
+                </p>
+              </div>
+            </div>
+            <div className="order-1 md:order-2 w-full flex justify-center">
+              <img
+                src="/photo1.png"
+                alt="Proposal placeholder"
+                className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
+              />
             </div>
           </div>
         </div>
@@ -284,10 +324,10 @@ const WeddingHome = () => {
       {/* Gallery */}
       <section
         id="gallery"
-        className="min-h-[110vh] bg-butter flex items-center"
+        className="min-h-[600px] bg-butter flex items-center justify-center"
       >
-        <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
+          <div className="max-w-5xl mx-auto w-full">
             <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-wine mb-6 text-center">
               Gallery
             </p>
@@ -295,9 +335,21 @@ const WeddingHome = () => {
               Favorite Moments
             </h2>
             <div className="grid gap-4 md:grid-cols-3">
-              <div className="aspect-[4/5] bg-butter border border-wine/30" />
-              <div className="aspect-[4/5] bg-butter border border-wine/30" />
-              <div className="aspect-[4/5] bg-butter border border-wine/30" />
+              <img
+                src="/photo1.png"
+                alt="Gallery placeholder"
+                className="aspect-[4/5] w-full object-cover border border-wine/30"
+              />
+              <img
+                src="/photo1.png"
+                alt="Gallery placeholder"
+                className="aspect-[4/5] w-full object-cover border border-wine/30"
+              />
+              <img
+                src="/photo1.png"
+                alt="Gallery placeholder"
+                className="aspect-[4/5] w-full object-cover border border-wine/30"
+              />
             </div>
           </div>
         </div>
@@ -306,117 +358,131 @@ const WeddingHome = () => {
       {/* Registry */}
       <section
         id="gift"
-        className="min-h-[110vh] bg-wine flex items-center"
+        className="min-h-[600px] bg-wine flex items-center justify-center"
       >
-        <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center text-ivory">
-            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-gold mb-6">
-              Registry
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl mb-10">
-              Gift Registry
-            </h2>
-            <div className="h-32 border border-gold/40 rounded-sm" />
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
+          <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
+            <div className="text-ivory max-w-xl w-full text-center md:text-left">
+              <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-gold mb-6">
+                Registry
+              </p>
+              <h2 className="font-display text-3xl md:text-5xl mb-6">
+                Gift Registry
+              </h2>
+              <p className="font-body text-base md:text-lg text-ivory/90 leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+              </p>
+            </div>
+            <div className="w-full flex justify-center">
+              <img
+                src="/photo1.png"
+                alt="Registry placeholder"
+                className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* RSVP */}
-      <section id="rsvp" className="min-h-[110vh] bg-forest flex items-center">
-        <div className="container mx-auto px-6">
-          <div className="max-w-xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="font-body text-sm tracking-[0.3em] uppercase text-wine mb-4">
-                Will You Join Us?
-              </p>
-              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-4">
+      <section id="rsvp" className="min-h-[600px] bg-forest flex items-center justify-center">
+        <div className="container mx-auto px-8 md:px-12 lg:px-16">
+          <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
+            <div className="max-w-md w-full text-ivory text-center md:text-left">
+              <p className="font-body text-sm tracking-[0.3em] uppercase mb-4">
                 RSVP
+              </p>
+              <h2 className="font-display text-3xl md:text-5xl mb-4">
+                Will You Join Us?
               </h2>
-              <p className="text-muted-foreground font-body">
-                Kindly respond by June 30, 2026
+              <p className="text-ivory/90 font-body">
+                Kindly respond by June 30, 2026 so we can plan the celebration with you in mind.
               </p>
             </div>
 
-            <div className="space-y-6 bg-background p-8 md:p-12 shadow-xl rounded-lg">
-              <div className="space-y-4">
-                <Input
-                  placeholder="Your Full Name"
-                  value={rsvpForm.name}
-                  onChange={(e) => setRsvpForm({ ...rsvpForm, name: e.target.value })}
-                  required
-                  disabled={isSubmitting}
-                />
-                <Input
-                  type="email"
-                  placeholder="Email Address"
-                  value={rsvpForm.email}
-                  onChange={(e) => setRsvpForm({ ...rsvpForm, email: e.target.value })}
-                  required
-                  disabled={isSubmitting}
-                />
-                
-                <div className="flex flex-col gap-2">
-                  <label className="font-body text-sm text-muted-foreground uppercase tracking-wide">
-                    Will you be attending?
-                  </label>
-                  <div className="flex gap-4">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="attending"
-                        value="yes"
-                        checked={rsvpForm.attending === "yes"}
-                        onChange={(e) => setRsvpForm({ ...rsvpForm, attending: e.target.value })}
-                        className="w-4 h-4 text-rose-800"
-                        required
-                        disabled={isSubmitting}
-                      />
-                      <span className="font-body">Accept</span>
+            <div className="max-w-xl w-full">
+              <div className="space-y-6 bg-background p-8 md:p-12 shadow-xl rounded-lg">
+                <div className="space-y-4">
+                  <Input
+                    placeholder="Your Full Name"
+                    value={rsvpForm.name}
+                    onChange={(e) => setRsvpForm({ ...rsvpForm, name: e.target.value })}
+                    required
+                    disabled={isSubmitting}
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Email Address"
+                    value={rsvpForm.email}
+                    onChange={(e) => setRsvpForm({ ...rsvpForm, email: e.target.value })}
+                    required
+                    disabled={isSubmitting}
+                  />
+                  
+                  <div className="flex flex-col gap-2">
+                    <label className="font-body text-sm text-muted-foreground uppercase tracking-wide">
+                      Will you be attending?
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="attending"
-                        value="no"
-                        checked={rsvpForm.attending === "no"}
-                        onChange={(e) => setRsvpForm({ ...rsvpForm, attending: e.target.value })}
-                        className="w-4 h-4 text-rose-800"
-                        disabled={isSubmitting}
-                      />
-                      <span className="font-body">Decline</span>
-                    </label>
+                    <div className="flex gap-4">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="attending"
+                          value="yes"
+                          checked={rsvpForm.attending === "yes"}
+                          onChange={(e) => setRsvpForm({ ...rsvpForm, attending: e.target.value })}
+                          className="w-4 h-4 text-rose-800"
+                          required
+                          disabled={isSubmitting}
+                        />
+                        <span className="font-body">Accept</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="attending"
+                          value="no"
+                          checked={rsvpForm.attending === "no"}
+                          onChange={(e) => setRsvpForm({ ...rsvpForm, attending: e.target.value })}
+                          className="w-4 h-4 text-rose-800"
+                          disabled={isSubmitting}
+                        />
+                        <span className="font-body">Decline</span>
+                      </label>
+                    </div>
                   </div>
+
+                  {rsvpForm.attending === "yes" && (
+                    <>
+                      <Input
+                        placeholder="Dietary Restrictions (if any)"
+                        value={rsvpForm.dietaryRestrictions}
+                        onChange={(e) => setRsvpForm({ ...rsvpForm, dietaryRestrictions: e.target.value })}
+                        disabled={isSubmitting}
+                      />
+                    </>
+                  )}
+
+                  <textarea
+                    placeholder="Leave us a message (optional)"
+                    value={rsvpForm.message}
+                    onChange={(e) => setRsvpForm({ ...rsvpForm, message: e.target.value })}
+                    rows={4}
+                    className="flex w-full rounded-md border border-input bg-background px-4 py-3 text-base font-body tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
+                    disabled={isSubmitting}
+                  />
                 </div>
 
-                {rsvpForm.attending === "yes" && (
-                  <>
-                    <Input
-                      placeholder="Dietary Restrictions (if any)"
-                      value={rsvpForm.dietaryRestrictions}
-                      onChange={(e) => setRsvpForm({ ...rsvpForm, dietaryRestrictions: e.target.value })}
-                      disabled={isSubmitting}
-                    />
-                  </>
-                )}
-
-                <textarea
-                  placeholder="Leave us a message (optional)"
-                  value={rsvpForm.message}
-                  onChange={(e) => setRsvpForm({ ...rsvpForm, message: e.target.value })}
-                  rows={4}
-                  className="flex w-full rounded-md border border-input bg-background px-4 py-3 text-base font-body tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
+                <Button 
+                  onClick={handleRsvpSubmit}
+                  size="lg" 
+                  className="w-full bg-rose-800 hover:bg-rose-900 text-white"
                   disabled={isSubmitting}
-                />
+                >
+                  {isSubmitting ? "Sending..." : "Send RSVP"}
+                </Button>
               </div>
-
-              <Button 
-                onClick={handleRsvpSubmit}
-                size="lg" 
-                className="w-full bg-rose-800 hover:bg-rose-900 text-white"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Send RSVP"}
-              </Button>
             </div>
           </div>
         </div>
