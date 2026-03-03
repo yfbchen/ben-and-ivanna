@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Heart, MapPin, Calendar, Clock, Gift, Mail, Menu, X } from "lucide-react";
-// import heroBotanical from "@/assets/hero-botanical.jpg";
+import { Heart, MapPin, Calendar, Clock, Gift, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { createClient } from '@supabase/supabase-js';
+import heroPhotoHorizontal from "../assets/gallery/photo1.png";
+import heroPhotoVertical from "../assets/gallery/photo1-copy.png";
+import calendarImage from "../assets/calendar.png";
 
 const supabaseUrl = 'https://fpcnecyggvzhcoigoegf.supabase.co';
 const supabaseAnonKey = 'sb_publishable_RaiMNVnnKyF6g1cqPaUinQ_KajPffxb';
@@ -12,7 +15,7 @@ const supabaseAnonKey = 'sb_publishable_RaiMNVnnKyF6g1cqPaUinQ_KajPffxb';
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const WeddingHome = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rsvpForm, setRsvpForm] = useState({
     name: "",
@@ -48,16 +51,18 @@ const WeddingHome = () => {
     };
 
     window.requestAnimationFrame(step);
-    setIsMenuOpen(false);
   };
 
-  const navItems: Array<{ label: string; sectionId: string }> = [
-    { label: "Our Wedding", sectionId: "our-wedding" },
-    { label: "Our Story", sectionId: "our-story" },
-    { label: "His Proposal", sectionId: "his-proposal" },
-    { label: "Gallery", sectionId: "gallery" },
-    { label: "Registry", sectionId: "gift" },
-  ];
+  // When navigating to /#section (e.g. from Layout nav), smooth-scroll to that section
+  useEffect(() => {
+    const id = location.hash.slice(1);
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) {
+        requestAnimationFrame(() => scrollToSection(id));
+      }
+    }
+  }, [location.pathname, location.hash]);
 
   const handleRsvpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,105 +103,35 @@ const WeddingHome = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-wine text-gold border-y border-gold/40">
-        <div className="container mx-auto px-6 h-14 flex items-center gap-6">
-          <button
-            onClick={() => scrollToSection("hero")}
-            className="shrink-0 font-navBrand text-xl sm:text-2xl leading-none tracking-[0.22em] uppercase text-gold hover:text-gold/90 transition-colors"
-            aria-label="Go to top navigation"
-          >
-            IVANNA & BEN
-          </button>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex flex-1 items-center justify-end gap-10 pr-6">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.sectionId)}
-                className="font-navLink text-[16px] lg:text-[17px] font-medium leading-none tracking-[0.08em] text-gold/90 hover:text-gold transition-colors"
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Desktop RSVP */}
-          <div className="hidden md:flex shrink-0">
-            <Button
-              type="button"
-              onClick={() => scrollToSection("rsvp")}
-              className="h-9 px-6 rounded-full bg-gold-light text-wine border border-gold/80 hover:bg-gold-light/90 shadow-soft font-navLink text-[16px] lg:text-[17px] font-medium leading-none tracking-[0.08em]"
-            >
-              RSVP
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden ml-auto p-2 text-gold"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-gold/30 bg-wine animate-fade-in">
-            <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
-              {navItems.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => scrollToSection(item.sectionId)}
-                  className="text-left font-navLink text-[16px] font-medium leading-none tracking-[0.08em] text-gold/90 hover:text-gold transition-colors py-3"
-                >
-                  {item.label}
-                </button>
-              ))}
-
-              <div className="pt-2 pb-1">
-                <Button
-                  type="button"
-                  onClick={() => scrollToSection("rsvp")}
-                  className="w-full h-10 rounded-full bg-gold-light text-wine border border-gold/80 hover:bg-gold-light/90 shadow-soft font-navLink text-[16px] font-medium leading-none tracking-[0.08em]"
-                >
-                  RSVP
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
-
+    <>
       {/* Hero: Ivanna & Ben */}
       <section
         id="hero"
-        className="min-h-[600px] bg-wine flex items-center justify-center pt-24"
+        className="min-h-[650px] bg-wine flex items-center justify-center pt-6 pb-6 overflow-hidden"
       >
-        <div className="container mx-auto px-8 md:px-12 lg:px-16">
-          <div className="relative max-w-5xl mx-auto">
-            <div className="grid gap-4 md:gap-8 md:grid-cols-2">
-              <img
-                src="/photo1.png"
-                alt="Ivanna and Ben"
-                className="aspect-[4/5] w-full object-cover border border-gold/40"
-              />
-              <img
-                src="/photo1.png"
-                alt="Ivanna and Ben"
-                className="aspect-[4/5] w-full object-cover border border-gold/40"
-              />
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-gold text-center leading-tight">
-                Ivanna &amp; Ben
-              </h1>
-            </div>
+        <div className="container relative mx-auto px-2 md:px-4 lg:px-6 min-h-[650px] max-w-6xl">
+          {/* Horizontal image: bottom-left, slightly higher */}
+          <div className="absolute left-0 md:left-4 bottom-6 md:bottom-10 w-[35%] max-w-xl h-50 md:h-55 lg:h-60 border border-gold/40 shadow-lg bg-wine overflow-hidden">
+            <img
+              src={heroPhotoHorizontal}
+              alt="Ivanna and Ben"
+              className="w-full h-full object-fill"
+            />
+          </div>
+          {/* Vertical image: right side */}
+          <div className="absolute right-0 md:right-4 top-15 md:top-20 bottom-6 md:bottom-10 w-32 md:w-44 lg:w-80 border border-gold/40 shadow-lg bg-wine overflow-hidden">
+            <img
+              src={heroPhotoVertical}
+              alt="Ivanna and Ben"
+              className="w-full h-full object-fill"
+            />
+          </div>
+          {/* Title overlay */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-gold text-center leading-tight">
+              <span>Ivanna</span><br />
+              <span>&amp; Ben</span>
+            </h1>
           </div>
         </div>
       </section>
@@ -204,7 +139,7 @@ const WeddingHome = () => {
       {/* Our Wedding */}
       <section
         id="our-wedding"
-        className="min-h-[600px] bg-butter flex items-center justify-center"
+        className="min-h-[650px] bg-butter flex items-center justify-center"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto">
@@ -214,7 +149,7 @@ const WeddingHome = () => {
             <div className="grid gap-8 md:gap-12 md:grid-cols-3 items-start">
               <div className="flex flex-col items-center text-center">
                 <img
-                  src="/calendar.png"
+                  src={calendarImage}
                   alt="Wedding date"
                   className="w-full max-w-[200px] object-contain mb-4"
                 />
@@ -224,7 +159,7 @@ const WeddingHome = () => {
               </div>
               <div className="flex flex-col items-center text-center">
                 <img
-                  src="/calendar.png"
+                  src={calendarImage}
                   alt="Wedding venue"
                   className="w-full max-w-[200px] object-contain mb-4"
                 />
@@ -234,7 +169,7 @@ const WeddingHome = () => {
               </div>
               <div className="flex flex-col items-center text-center">
                 <img
-                  src="/calendar.png"
+                  src={calendarImage}
                   alt="Wedding schedule"
                   className="w-full max-w-[200px] object-contain mb-4"
                 />
@@ -250,13 +185,13 @@ const WeddingHome = () => {
       {/* Our Story */}
       <section
         id="our-story"
-        className="min-h-[600px] bg-forest flex items-center justify-center"
+        className="min-h-[650px] bg-forest flex items-center justify-center"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
             <div className="w-full flex justify-center">
               <img
-                src="/photo1.png"
+                src={heroPhotoHorizontal}
                 alt="Our story placeholder"
                 className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
               />
@@ -287,7 +222,7 @@ const WeddingHome = () => {
       {/* His Proposal */}
       <section
         id="his-proposal"
-        className="min-h-[600px] bg-wine flex items-center justify-center"
+        className="min-h-[650px] bg-wine flex items-center justify-center"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
@@ -312,7 +247,7 @@ const WeddingHome = () => {
             </div>
             <div className="order-1 md:order-2 w-full flex justify-center">
               <img
-                src="/photo1.png"
+                src={heroPhotoHorizontal}
                 alt="Proposal placeholder"
                 className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
               />
@@ -324,32 +259,37 @@ const WeddingHome = () => {
       {/* Gallery */}
       <section
         id="gallery"
-        className="min-h-[600px] bg-butter flex items-center justify-center"
+        className="min-h-[650px] bg-butter flex items-center justify-center"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
-          <div className="max-w-5xl mx-auto w-full">
-            <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-wine mb-6 text-center">
-              Gallery
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl text-foreground mb-10 text-center">
-              Favorite Moments
-            </h2>
-            <div className="grid gap-4 md:grid-cols-3">
+          <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
+            {/* Left: single photo block */}
+            <div className="w-full flex justify-center">
               <img
-                src="/photo1.png"
+                src={heroPhotoHorizontal}
                 alt="Gallery placeholder"
-                className="aspect-[4/5] w-full object-cover border border-wine/30"
+                className="aspect-[4/5] w-full max-w-sm object-cover border border-wine/30"
               />
-              <img
-                src="/photo1.png"
-                alt="Gallery placeholder"
-                className="aspect-[4/5] w-full object-cover border border-wine/30"
-              />
-              <img
-                src="/photo1.png"
-                alt="Gallery placeholder"
-                className="aspect-[4/5] w-full object-cover border border-wine/30"
-              />
+            </div>
+
+            {/* Right: heading + copy */}
+            <div className="max-w-xl w-full text-center md:text-left">
+              <h2 className="font-body text-3xl md:text-3xl tracking-[0.3em] uppercase text-gold mb-6">
+                Gallery
+              </h2>
+              <p className="font-body text-base md:text-lg text-muted-foreground leading-relaxed">
+                There's no better way to capture the memories of our special day than through photos. You'll
+                find all of our favorite photos and moments from our engagement and wedding day on the gallery board!
+              </p>
+              <Button
+                variant="minimal"
+                className="mt-6 tracking-[0.2em] uppercase text-xs"
+                asChild
+              >
+                <Link to="/gallery">
+                  View Full Gallery
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -358,7 +298,7 @@ const WeddingHome = () => {
       {/* Registry */}
       <section
         id="gift"
-        className="min-h-[600px] bg-wine flex items-center justify-center"
+        className="min-h-[650px] bg-wine flex items-center justify-center"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
@@ -376,7 +316,7 @@ const WeddingHome = () => {
             </div>
             <div className="w-full flex justify-center">
               <img
-                src="/photo1.png"
+                src={heroPhotoHorizontal}
                 alt="Registry placeholder"
                 className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
               />
@@ -386,7 +326,7 @@ const WeddingHome = () => {
       </section>
 
       {/* RSVP */}
-      <section id="rsvp" className="min-h-[600px] bg-forest flex items-center justify-center">
+      <section id="rsvp" className="min-h-[650px] bg-forest flex items-center justify-center">
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
             <div className="max-w-md w-full text-ivory text-center md:text-left">
@@ -503,7 +443,7 @@ const WeddingHome = () => {
           </p>
         </div>
       </footer>
-    </div>
+    </>
   );
 };
 
