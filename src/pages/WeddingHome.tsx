@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,51 @@ const supabaseUrl = 'https://fpcnecyggvzhcoigoegf.supabase.co';
 const supabaseAnonKey = 'sb_publishable_RaiMNVnnKyF6g1cqPaUinQ_KajPffxb';
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+const ourStoryEvents = [
+  {
+    date: "2012",
+    text: "We started speaking to each other and became friends",
+    image: heroPhotoHorizontal,
+    alt: "When we met",
+    imageAbove: true,
+  },
+  {
+    date: "2013",
+    text: "Ben asked Ivanna to be his prom date...and swept her off her feet!",
+    image: heroPhotoVertical,
+    alt: "Asked to prom",
+    imageAbove: false,
+  },
+  {
+    date: "2014",
+    text: "Our \"first dance\" together, as Waldo finds his Walda. Still only best friends :)",
+    image: heroPhotoHorizontal,
+    alt: "Waldo and Walda",
+    imageAbove: true,
+  },
+  {
+    date: "10.11.2014",
+    text: "We started dating <3! Ben asked Ivanna out after taking her out on a very very long stroll at night.",
+    image: heroPhotoVertical,
+    alt: "dating",
+    imageAbove: false,
+  },
+  {
+    date: "2023",
+    text: "We move in together at NYC and start the next chapter of our lives!",
+    image: heroPhotoVertical,
+    alt: "move in",
+    imageAbove: true,
+  },
+  {
+    date: "04.03.2025",
+    text: "WE'RE ENGAGED!",
+    image: heroPhotoHorizontal,
+    alt: "Engagement",
+    imageAbove: false,
+  },
+];
 
 const WeddingHome = () => {
   const location = useLocation();
@@ -185,36 +230,136 @@ const WeddingHome = () => {
       {/* Our Story */}
       <section
         id="our-story"
-        className="min-h-[650px] bg-forest flex items-center justify-center"
+        className="min-h-[650px] bg-forest flex justify-center flex-col items-center"
       >
-        <div className="container mx-auto px-8 md:px-12 lg:px-16">
-          <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
-            <div className="w-full flex justify-center">
-              <img
-                src={heroPhotoHorizontal}
-                alt="Our story placeholder"
-                className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
-              />
+        <h2 className="font-script text-4xl md:text-5xl lg:text-6xl text-ivory/95 text-center mb-12 md:mb-16">
+          Our Story
+        </h2>
+
+        <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
+          {/* Timeline: grid with explicit center row so line and dots share the same axis */}
+          <div className="relative h-[420px] hidden md:block">
+            {/* Central line - at exactly 50% of container */}
+            <div
+              className="absolute inset-x-0 top-1/2 h-px bg-ivory/40 -translate-y-1/2"
+              aria-hidden
+            />
+
+            <div
+              className="grid h-full gap-x-2"
+              style={{
+                gridTemplateColumns: "repeat(5, 1fr)",
+                gridTemplateRows: "1fr 16px 1fr",
+              }}
+            >
+              {ourStoryEvents.map((event, i) => (
+                <Fragment key={i}>
+                  {/* Top row */}
+                  <div
+                    className="flex flex-col items-center justify-end pb-1 min-w-0"
+                    style={{ gridColumn: i + 1, gridRow: 1 }}
+                  >
+                    {event.imageAbove ? (
+                      <div className="relative z-20 w-32 h-32 overflow-hidden rounded-full border border-ivory/50 shrink-0 transition-transform duration-300 ease-out hover:scale-150">
+                        <img
+                          src={event.image}
+                          alt={event.alt}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <p className="font-body text-base text-ivory/90">{event.date}</p>
+                        <p className="font-body text-sm text-ivory/80 leading-snug max-w-[140px] mt-0.5">
+                          {event.text}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  {/* Center row - dot on the line (row 2 is exactly at 50%) */}
+                  <div
+                    key={`${i}-dot`}
+                    className="flex items-center justify-center"
+                    style={{ gridColumn: i + 1, gridRow: 2 }}
+                  >
+                    <div className="w-4 h-4 rounded-full bg-ivory/70 border-2 border-forest z-10 shrink-0" />
+                  </div>
+                  {/* Bottom row */}
+                  <div
+                    key={`${i}-bottom`}
+                    className="flex flex-col items-center justify-start pt-1 min-w-0"
+                    style={{ gridColumn: i + 1, gridRow: 3 }}
+                  >
+                    {event.imageAbove ? (
+                      <div className="text-center">
+                        <p className="font-body text-base text-ivory/90">{event.date}</p>
+                        <p className="font-body text-sm text-ivory/80 leading-snug max-w-[140px] mt-0.5">
+                          {event.text}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="relative z-20 w-32 h-32 overflow-hidden rounded-full border border-ivory/50 shrink-0 transition-transform duration-300 ease-out hover:scale-150">
+                        <img
+                          src={event.image}
+                          alt={event.alt}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </Fragment>
+              ))}
             </div>
-            <div className="max-w-xl w-full text-center md:text-left">
-              <h2 className="font-body text-3xl md:text-3xl tracking-[0.3em] uppercase text-wine mb-6">
-                Our Story
-              </h2>
-              <div className="space-y-4 font-body text-base md:text-lg text-ivory/90 leading-relaxed">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                  euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                </p>
-                <p>
-                  Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                  lobortis nisl ut aliquip ex ea commodo consequat.
-                </p>
-                <p>
-                  Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                  consequat, vel illum dolore eu feugiat nulla facilisis.
+          </div>
+
+          {/* Mobile: simple vertical timeline */}
+          <div className="flex flex-col gap-8 md:hidden">
+            {[
+              {
+                date: "10.07.2017",
+                text: "We met & fell in love",
+                image: heroPhotoHorizontal,
+                alt: "When we met",
+              },
+              {
+                date: "07.07.2018",
+                text: "We adventured...with a lot of fishing",
+                image: heroPhotoVertical,
+                alt: "Our adventures",
+              },
+              {
+                date: "12.21.2019",
+                text: "We proclaimed our love for the Lord together! Acts 22:16",
+                image: heroPhotoHorizontal,
+                alt: "Faith together",
+              },
+              {
+                date: "08.24.2020",
+                text: "We moved to AZ & adopted our Goosey",
+                image: heroPhotoVertical,
+                alt: "Moving to Arizona",
+              },
+              {
+                date: "01.24.2023",
+                text: "WE'RE ENGAGED!",
+                image: heroPhotoHorizontal,
+                alt: "Engagement",
+              },
+            ].map((event, i) => (
+              <div key={i} className="flex flex-col items-center text-center">
+                <div className="relative z-20 w-36 h-36 overflow-hidden rounded-full border border-ivory/50 mb-2 shrink-0 transition-transform duration-300 ease-out hover:scale-150">
+                  <img
+                    src={event.image}
+                    alt={event.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <p className="font-body text-lg text-ivory/90">{event.date}</p>
+                <p className="font-body text-base text-ivory/80 leading-snug max-w-[240px] mt-0.5">
+                  {event.text}
                 </p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
