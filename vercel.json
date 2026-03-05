@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/photos/(.*)", "destination": "/photos/$1" },
+    { "source": "/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/calendar.png", "destination": "/calendar.png" },
+    { "source": "/vite.svg", "destination": "/vite.svg" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
