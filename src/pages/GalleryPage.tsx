@@ -1,9 +1,10 @@
 const galleryImages = Object.values(
   import.meta.glob<string>("@/assets/gallery/*.{png,jpg,jpeg,webp}", {
     eager: true,
-    as: "url",
+    query: "?url",
+    import: "default",
   }),
-);
+).filter((src): src is string => typeof src === "string");
 
 const GalleryPage = () => {
   return (
