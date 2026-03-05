@@ -6,8 +6,8 @@ import { Heart, MapPin, Calendar, Clock, Gift, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { createClient } from '@supabase/supabase-js';
 // Use public folder paths - always loads correctly when deployed
-const heroPhotoHorizontal = "/gallery/photo1.png";
-const heroPhotoVertical = "/gallery/photo1-copy.png";
+const heroPhotoHorizontal = "/photos/photo1.png";
+const heroPhotoVertical = "/photos/photo1-copy.png";
 const calendarImage = "/calendar.png";
 
 const supabaseUrl = 'https://fpcnecyggvzhcoigoegf.supabase.co';
