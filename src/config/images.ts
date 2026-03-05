@@ -9,19 +9,19 @@ const url = (path: string) =>
   `${STORAGE_BASE}/${path.replace(/ /g, "%20")}`;
 
 export const images = {
-  heroHorizontal: url("photo1.png"),
-  heroVertical: url("photo1-copy.png"),
-  calendar: "/calendar.png", // still local
+  heroHorizontal: url("photo1.jpg"),
+  heroVertical: url("photo1-copy.jpg"),
+  calendar: "/calendar.jpg", // still local
   gallery: [
-    "IMG_1199 copy 2.png",
-    "IMG_1199 copy 3.png",
-    "IMG_1199 copy.png",
-    "IMG_1199.png",
-    "photo1 copy 2.png",
-    "photo1 copy 3.png",
-    "photo1 copy 4.png",
-    "photo1 copy 5.png",
-    "photo1-copy.png",
-    "photo1.png",
+    "IMG_1199 copy 2.jpg",
+    "IMG_1199 copy 3.jpg",
+    "IMG_1199 copy.jpg",
+    "IMG_1199.jpg",
+    "photo1 copy 2.jpg",
+    "photo1 copy 3.jpg",
+    "photo1 copy 4.jpg",
+    "photo1 copy 5.jpg",
+    "photo1-copy.jpg",
+    "photo1.jpg",
   ].map((f) => url(f)),
 };
