@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Heart, MapPin, Calendar, Clock, Gift, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { createClient } from '@supabase/supabase-js';
-import heroPhotoHorizontal from "../assets/gallery/photo1.png";
-import heroPhotoVertical from "../assets/gallery/photo1-copy.png";
-import calendarImage from "../assets/calendar.png";
+// Use public folder paths - always loads correctly when deployed
+const heroPhotoHorizontal = "/gallery/photo1.png";
+const heroPhotoVertical = "/gallery/photo1-copy.png";
+const calendarImage = "/calendar.png";
 
 const supabaseUrl = 'https://fpcnecyggvzhcoigoegf.supabase.co';
 const supabaseAnonKey = 'sb_publishable_RaiMNVnnKyF6g1cqPaUinQ_KajPffxb';
