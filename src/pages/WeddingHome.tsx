@@ -5,10 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Heart, MapPin, Calendar, Clock, Gift, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { createClient } from '@supabase/supabase-js';
-// Import images through Vite's asset pipeline - works across all browsers
-import heroPhotoHorizontal from "@/assets/photos/photo1.png";
-import heroPhotoVertical from "@/assets/photos/photo1-copy.png";
-const calendarImage = "/calendar.png";
+import { images } from "@/config/images";
+
+const heroPhotoHorizontal = images.heroHorizontal;
+const heroPhotoVertical = images.heroVertical;
+const calendarImage = images.calendar;
 
 const supabaseUrl = 'https://fpcnecyggvzhcoigoegf.supabase.co';
 const supabaseAnonKey = 'sb_publishable_RaiMNVnnKyF6g1cqPaUinQ_KajPffxb';

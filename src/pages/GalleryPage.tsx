@@ -1,12 +1,4 @@
-// Import through Vite's asset pipeline - works across all browsers
-const imageModules = import.meta.glob("@/assets/photos/*.{png,jpg,jpeg,webp}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-});
-const galleryImages = Object.entries(imageModules)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([, url]) => url as string);
+import { images } from "@/config/images";
 
 const GalleryPage = () => {
   return (
@@ -22,7 +14,7 @@ const GalleryPage = () => {
           </div>
 
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-            {galleryImages.map((src, index) => (
+            {images.gallery.map((src, index) => (
               <div key={index} className="break-inside-avoid overflow-hidden rounded-sm border border-border bg-background">
                 <img
                   src={src}
