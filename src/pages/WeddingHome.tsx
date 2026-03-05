@@ -5,9 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Heart, MapPin, Calendar, Clock, Gift, Mail } from "lucide-react";
 import { toast } from "sonner";
 import { createClient } from '@supabase/supabase-js';
-// Use public folder paths - always loads correctly when deployed
-const heroPhotoHorizontal = "/photos/photo1.png";
-const heroPhotoVertical = "/photos/photo1-copy.png";
+// Import images through Vite's asset pipeline - works across all browsers
+import heroPhotoHorizontal from "@/assets/photos/photo1.png";
+import heroPhotoVertical from "@/assets/photos/photo1-copy.png";
 const calendarImage = "/calendar.png";
 
 const supabaseUrl = 'https://fpcnecyggvzhcoigoegf.supabase.co';

@@ -1,4 +1,12 @@
-import { galleryImages } from "@/generated/gallery-images";
+// Import through Vite's asset pipeline - works across all browsers
+const imageModules = import.meta.glob("@/assets/photos/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+const galleryImages = Object.entries(imageModules)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, url]) => url as string);
 
 const GalleryPage = () => {
   return (
