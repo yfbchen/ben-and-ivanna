@@ -4,6 +4,8 @@
  */
 const STORAGE_BASE =
   "https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/images";
+const MISC_BASE =
+  "https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/misc";
 
 const url = (path: string) =>
   `${STORAGE_BASE}/${path.replace(/ /g, "%20")}`;
@@ -11,7 +13,7 @@ const url = (path: string) =>
 export const images = {
   heroHorizontal: url("photo1.jpg"),
   heroVertical: url("photo1-copy.jpg"),
-  calendar: "/calendar.jpg", // still local
+  calendar: `${MISC_BASE}/calendar.png`,
   gallery: [
     "IMG_1199 copy 2.jpg",
     "IMG_1199 copy 3.jpg",

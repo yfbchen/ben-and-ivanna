@@ -1,0 +1,170 @@
+/* BruceMorpho-style envelope - wine/red colors */
+.envelope-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  animation: envelope-overlay-fade-in 0.3s ease-out;
+}
+
+@keyframes envelope-overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.envelope-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 800px;
+}
+
+.envelope-container {
+  position: relative;
+  width: 340px;
+  height: 240px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.envelope-body {
+  position: relative;
+  width: 340px;
+  height: 240px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background-color: #722F37;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.envelope-front {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.envelope-container.open .envelope-front {
+  z-index: 1;
+}
+
+.envelope-flap {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: 0;
+  border-left: 170px solid transparent;
+  border-right: 170px solid transparent;
+  border-bottom: 100px solid transparent;
+  border-top: 124px solid #722F37;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  transition: transform 0.4s ease, z-index 0.6s;
+  z-index: 5;
+}
+
+.envelope-pocket {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0;
+  top: 0;
+  border-left: 170px solid #8B3A5C;
+  border-right: 170px solid #8B3A5C;
+  border-bottom: 110px solid #7A3345;
+  border-top: 110px solid transparent;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  z-index: 2;
+}
+
+/* Letter - inside envelope, matches BruceMorpho: 90% size, top 5% */
+.envelope-letter {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  width: 90%;
+  height: 90%;
+  background-color: #FAF9F6;
+  border-radius: 6px;
+  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+  transition: transform 0.4s ease, z-index 1s;
+}
+
+/* Closed - flap covers letter */
+.envelope-container.closed .envelope-flap {
+  transform: rotateX(0deg);
+  transition: transform 0.4s 0.6s ease, z-index 1s;
+  z-index: 5;
+}
+
+.envelope-container.closed .envelope-letter {
+  transform: translateY(0);
+  transition: transform 0.4s ease, z-index 1s;
+  z-index: 1;
+}
+
+/* Open - flap opens, letter peeks out (little slide up) */
+.envelope-container.open .envelope-flap {
+  transform: rotateX(180deg);
+  transition: transform 0.4s ease, z-index 0.6s;
+  z-index: 1;
+}
+
+.envelope-container.open .envelope-letter {
+  transform: translateY(-60px);
+  transition: transform 0.4s 0.6s ease, z-index 0.6s;
+  z-index: 2;
+}
+
+/* Envelope exits - whole envelope fades out before modal */
+.envelope-wrapper.exiting {
+  animation: envelope-exit 0.5s ease-out forwards;
+}
+
+@keyframes envelope-exit {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+/* Modal content - fades in after envelope transition */
+.envelope-modal-content {
+  animation: envelope-modal-fade-in 0.4s ease-out forwards;
+  max-width: 32rem;
+  width: 100%;
+  max-height: 70vh;
+  height: 70vh;
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes envelope-modal-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -2,10 +2,13 @@ import { useState, useEffect, Fragment } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Heart, MapPin, Calendar, Clock, Gift, Mail } from "lucide-react";
+import { Heart, MapPin, Calendar, Clock, Gift, Mail, Search, X } from "lucide-react";
 import { toast } from "sonner";
 import { createClient } from '@supabase/supabase-js';
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { images } from "@/config/images";
+import { EnvelopeModal } from "@/components/EnvelopeModal";
 
 const heroPhotoHorizontal = images.heroHorizontal;
 const heroPhotoVertical = images.heroVertical;
@@ -18,8 +21,8 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const ourStoryEvents = [
   {
-    date: "2012",
-    text: "We started speaking to each other and became friends",
+    date: "2010",
+    text: "\"I like your t-shirt\" - Ben's first compliment to Ivanna. That began our friendship.",
     image: heroPhotoHorizontal,
     alt: "When we met",
     imageAbove: true,
@@ -61,17 +64,30 @@ const ourStoryEvents = [
   },
 ];
 
+type Guest = {
+  id: string;
+  party_id: string;
+  firstname: string;
+  lastname: string;
+  email: string | null;
+  phone: string | null;
+  attending: string | null;
+  dietary_restrictions: string | null;
+  message: string | null;
+  updated_at: string;
+};
+
 const WeddingHome = () => {
   const location = useLocation();
+  const [searchFirstName, setSearchFirstName] = useState("");
+  const [searchLastName, setSearchLastName] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [foundPartyMembers, setFoundPartyMembers] = useState<Guest[]>([]);
+  const [rsvpModalOpen, setRsvpModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [rsvpForm, setRsvpForm] = useState({
-    name: "",
-    email: "",
-    attending: "",
-    guests: "1",
-    dietaryRestrictions: "",
-    message: "",
-  });
+  const [partyResponses, setPartyResponses] = useState<
+    Record<string, { attending: string; email: string; phone: string; dietaryRestrictions: string; message: string }>
+  >({});
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -111,39 +127,141 @@ const WeddingHome = () => {
     }
   }, [location.pathname, location.hash]);
 
+  // Update URL hash when user scrolls to a section (so refresh keeps them there)
+  useEffect(() => {
+    const sectionIds = ["hero", "our-wedding", "our-story", "his-proposal", "gallery", "gift", "rsvp"];
+    const navOffset = 72;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+
+    const updateHashFromScroll = () => {
+      const scrollY = window.scrollY + navOffset + 100;
+      let activeId = sectionIds[0];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+        if (scrollY >= top && scrollY < bottom) {
+          activeId = id;
+          break;
+        }
+        if (scrollY < top) break;
+        activeId = id;
+      }
+      const newHash = `#${activeId}`;
+      if (window.location.hash !== newHash) {
+        window.history.replaceState(null, "", `${window.location.pathname}${newHash}`);
+      }
+    };
+
+    const onScroll = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(updateHashFromScroll, 100);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateHashFromScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
+
+  const handleGuestSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const first = searchFirstName.trim();
+    const last = searchLastName.trim();
+    if (!first || !last) {
+      toast.error("Please enter both first and last name.");
+      return;
+    }
+    setIsSearching(true);
+    setFoundPartyMembers([]);
+    try {
+      // 1. Find guest by name to get their party_id
+      const { data: matchedGuest, error: searchError } = await supabase
+        .from("guests")
+        .select("party_id")
+        .ilike("firstname", first)
+        .ilike("lastname", last)
+        .limit(1)
+        .maybeSingle();
+
+      if (searchError) throw searchError;
+      if (!matchedGuest) {
+        toast.error("We couldn't find your invitation. Please check the spelling or contact us.");
+        return;
+      }
+
+      // 2. Fetch all guests in the same party
+      const { data: partyGuests, error: partyError } = await supabase
+        .from("guests")
+        .select("id, party_id, firstname, lastname, email, phone, attending, dietary_restrictions, message, updated_at")
+        .eq("party_id", matchedGuest.party_id)
+        .order("firstname");
+
+      if (partyError) throw partyError;
+      const guests = partyGuests ?? [];
+      setFoundPartyMembers(guests);
+      setPartyResponses(
+        Object.fromEntries(
+          guests.map((g) => [
+            g.id,
+            {
+              attending: g.attending === "yes" || g.attending === "no" ? g.attending : "",
+              email: "",
+              phone: "",
+              dietaryRestrictions: "",
+              message: "",
+            },
+          ])
+        )
+      );
+      setRsvpModalOpen(true);
+    } catch (error) {
+      console.error("Guest search error:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const updatePartyResponse = (guestId: string, field: string, value: string) => {
+    setPartyResponses((prev) => ({
+      ...prev,
+      [guestId]: {
+        ...(prev[guestId] ?? { attending: "", email: "", phone: "", dietaryRestrictions: "", message: "" }),
+        [field]: value,
+      },
+    }));
+  };
+
   const handleRsvpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      const { data, error } = await supabase
-        .from('rsvps')
-        .insert([
-          {
-            name: rsvpForm.name,
-            email: rsvpForm.email,
-            attending: rsvpForm.attending,
-            guests: parseInt(rsvpForm.guests),
-            dietary_restrictions: rsvpForm.dietaryRestrictions || null,
-            message: rsvpForm.message || null,
-          }
-        ]);
+      for (const guest of foundPartyMembers) {
+        const r = partyResponses[guest.id];
+        if (!r) continue;
+        const { error } = await supabase
+          .from("guests")
+          .update({
+            attending: r.attending || null,
+            email: r.email.trim() || null,
+            phone: r.phone.trim() || null,
+            dietary_restrictions: r.dietaryRestrictions.trim() || null,
+            message: r.message.trim() || null,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", guest.id);
 
-      if (error) throw error;
-
-      toast.success("Thank you for your RSVP! We can't wait to celebrate with you.");
-
-      setRsvpForm({
-        name: "",
-        email: "",
-        attending: "",
-        guests: "1",
-        dietaryRestrictions: "",
-        message: "",
-      });
+        if (error) throw error;
+      }
+      toast.success("Thank you! Your response has been saved.");
+      setRsvpModalOpen(false);
     } catch (error) {
-      console.error('Error submitting RSVP:', error);
-      toast.error("Oops! Something went wrong. Please try again or contact us directly.");
+      console.error("RSVP update error:", error);
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -158,7 +276,7 @@ const WeddingHome = () => {
       >
         <div className="container relative mx-auto px-2 md:px-4 lg:px-6 min-h-[650px] max-w-6xl">
           {/* Horizontal image: bottom-left, slightly higher */}
-          <div className="absolute left-0 md:left-4 bottom-6 md:bottom-10 w-[35%] max-w-xl h-50 md:h-55 lg:h-60 border border-gold/40 shadow-lg bg-wine overflow-hidden">
+          <div className="absolute left-0 md:left-4 bottom-6 md:bottom-10 w-[35%] max-w-xl h-50 md:h-55 lg:h-60 rounded-xl border border-gold/40 shadow-lg bg-wine overflow-hidden">
             <img
               src={heroPhotoHorizontal}
               alt="Ivanna and Ben"
@@ -166,7 +284,7 @@ const WeddingHome = () => {
             />
           </div>
           {/* Vertical image: right side */}
-          <div className="absolute right-0 md:right-4 top-15 md:top-20 bottom-6 md:bottom-10 w-32 md:w-44 lg:w-80 border border-gold/40 shadow-lg bg-wine overflow-hidden">
+          <div className="absolute right-0 md:right-4 top-15 md:top-20 bottom-6 md:bottom-10 w-32 md:w-44 lg:w-80 rounded-xl border border-gold/40 shadow-lg bg-wine overflow-hidden">
             <img
               src={heroPhotoVertical}
               alt="Ivanna and Ben"
@@ -186,7 +304,7 @@ const WeddingHome = () => {
       {/* Our Wedding */}
       <section
         id="our-wedding"
-        className="min-h-[650px] bg-butter flex items-center justify-center"
+        className="min-h-[650px] bg-butter flex items-center justify-center py-12 md:py-16"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto">
@@ -198,7 +316,7 @@ const WeddingHome = () => {
                 <img
                   src={calendarImage}
                   alt="Wedding date"
-                  className="w-full max-w-[200px] object-contain mb-4"
+                  className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
                 />
                 <p className="font-display text-xl md:text-2xl text-wine/90">
                   Saturday September 12, 2026
@@ -208,7 +326,7 @@ const WeddingHome = () => {
                 <img
                   src={calendarImage}
                   alt="Wedding venue"
-                  className="w-full max-w-[200px] object-contain mb-4"
+                  className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
                 />
                 <p className="font-body text-base md:text-lg text-charcoal">
                   Gufo &middot; 660 Cambridge St &middot; Cambridge, MA 02141
@@ -218,7 +336,7 @@ const WeddingHome = () => {
                 <img
                   src={calendarImage}
                   alt="Wedding schedule"
-                  className="w-full max-w-[200px] object-contain mb-4"
+                  className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
                 />
                 <p className="font-body text-base md:text-lg text-charcoal">
                   Doors Open: 5:00 PM &nbsp;&bull;&nbsp; Ceremony: 5:30 PM &nbsp;&bull;&nbsp; Reception: 7:00 PM
@@ -232,7 +350,7 @@ const WeddingHome = () => {
       {/* Our Story */}
       <section
         id="our-story"
-        className="min-h-[650px] bg-forest flex justify-center flex-col items-center"
+        className="min-h-[650px] bg-forest flex justify-center flex-col items-center py-12 md:py-16"
       >
         <h2 className="font-script text-4xl md:text-5xl lg:text-6xl text-ivory/95 text-center mb-12 md:mb-16">
           Our Story
@@ -316,38 +434,7 @@ const WeddingHome = () => {
 
           {/* Mobile: simple vertical timeline */}
           <div className="flex flex-col gap-8 md:hidden">
-            {[
-              {
-                date: "10.07.2017",
-                text: "We met & fell in love",
-                image: heroPhotoHorizontal,
-                alt: "When we met",
-              },
-              {
-                date: "07.07.2018",
-                text: "We adventured...with a lot of fishing",
-                image: heroPhotoVertical,
-                alt: "Our adventures",
-              },
-              {
-                date: "12.21.2019",
-                text: "We proclaimed our love for the Lord together! Acts 22:16",
-                image: heroPhotoHorizontal,
-                alt: "Faith together",
-              },
-              {
-                date: "08.24.2020",
-                text: "We moved to AZ & adopted our Goosey",
-                image: heroPhotoVertical,
-                alt: "Moving to Arizona",
-              },
-              {
-                date: "01.24.2023",
-                text: "WE'RE ENGAGED!",
-                image: heroPhotoHorizontal,
-                alt: "Engagement",
-              },
-            ].map((event, i) => (
+            {ourStoryEvents.map((event, i) => (
               <div key={i} className="flex flex-col items-center text-center">
                 <div className="relative z-20 w-36 h-36 overflow-hidden rounded-full border border-ivory/50 mb-2 shrink-0 transition-transform duration-300 ease-out hover:scale-150">
                   <img
@@ -369,7 +456,7 @@ const WeddingHome = () => {
       {/* His Proposal */}
       <section
         id="his-proposal"
-        className="min-h-[650px] bg-wine flex items-center justify-center"
+        className="min-h-[650px] bg-wine flex items-center justify-center py-12 md:py-16"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
@@ -396,7 +483,7 @@ const WeddingHome = () => {
               <img
                 src={heroPhotoHorizontal}
                 alt="Proposal placeholder"
-                className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
+                className="aspect-[4/5] w-full max-w-sm object-cover rounded-xl border border-gold/40"
               />
             </div>
           </div>
@@ -406,7 +493,7 @@ const WeddingHome = () => {
       {/* Gallery */}
       <section
         id="gallery"
-        className="min-h-[650px] bg-butter flex items-center justify-center"
+        className="min-h-[650px] bg-butter flex items-center justify-center py-12 md:py-16"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
@@ -415,7 +502,7 @@ const WeddingHome = () => {
               <img
                 src={heroPhotoHorizontal}
                 alt="Gallery placeholder"
-                className="aspect-[4/5] w-full max-w-sm object-cover border border-wine/30"
+                className="aspect-[4/5] w-full max-w-sm object-cover rounded-xl border border-wine/30"
               />
             </div>
 
@@ -445,7 +532,7 @@ const WeddingHome = () => {
       {/* Registry */}
       <section
         id="gift"
-        className="min-h-[650px] bg-wine flex items-center justify-center"
+        className="min-h-[650px] bg-wine flex items-center justify-center py-12 md:py-16"
       >
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
@@ -465,7 +552,7 @@ const WeddingHome = () => {
               <img
                 src={heroPhotoHorizontal}
                 alt="Registry placeholder"
-                className="aspect-[4/5] w-full max-w-sm object-cover border border-gold/40"
+                className="aspect-[4/5] w-full max-w-sm object-cover rounded-xl border border-gold/40"
               />
             </div>
           </div>
@@ -473,7 +560,7 @@ const WeddingHome = () => {
       </section>
 
       {/* RSVP */}
-      <section id="rsvp" className="min-h-[650px] bg-forest flex items-center justify-center">
+      <section id="rsvp" className="min-h-[650px] bg-forest flex items-center justify-center py-12 md:py-16">
         <div className="container mx-auto px-8 md:px-12 lg:px-16">
           <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
             <div className="max-w-md w-full text-ivory text-center md:text-left">
@@ -489,107 +576,172 @@ const WeddingHome = () => {
             </div>
 
             <div className="max-w-xl w-full">
-              <div className="space-y-6 bg-background p-8 md:p-12 shadow-xl rounded-lg">
-                <div className="space-y-4">
+              <form onSubmit={handleGuestSearch} className="space-y-6 bg-gold-light p-8 md:p-12 shadow-xl rounded-lg">
+                <p className="font-body text-sm text-muted-foreground uppercase tracking-wide">
+                  RSVP For:
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2">
                   <Input
-                    placeholder="Your Full Name"
-                    value={rsvpForm.name}
-                    onChange={(e) => setRsvpForm({ ...rsvpForm, name: e.target.value })}
-                    required
-                    disabled={isSubmitting}
+                    placeholder="First name"
+                    value={searchFirstName}
+                    onChange={(e) => setSearchFirstName(e.target.value)}
+                    disabled={isSearching}
+                    className="font-body bg-gold-light border-charcoal/20"
                   />
                   <Input
-                    type="email"
-                    placeholder="Email Address"
-                    value={rsvpForm.email}
-                    onChange={(e) => setRsvpForm({ ...rsvpForm, email: e.target.value })}
-                    required
-                    disabled={isSubmitting}
-                  />
-                  
-                  <div className="flex flex-col gap-2">
-                    <label className="font-body text-sm text-muted-foreground uppercase tracking-wide">
-                      Will you be attending?
-                    </label>
-                    <div className="flex gap-4">
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="attending"
-                          value="yes"
-                          checked={rsvpForm.attending === "yes"}
-                          onChange={(e) => setRsvpForm({ ...rsvpForm, attending: e.target.value })}
-                          className="w-4 h-4 text-rose-800"
-                          required
-                          disabled={isSubmitting}
-                        />
-                        <span className="font-body">Accept</span>
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="attending"
-                          value="no"
-                          checked={rsvpForm.attending === "no"}
-                          onChange={(e) => setRsvpForm({ ...rsvpForm, attending: e.target.value })}
-                          className="w-4 h-4 text-rose-800"
-                          disabled={isSubmitting}
-                        />
-                        <span className="font-body">Decline</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {rsvpForm.attending === "yes" && (
-                    <>
-                      <Input
-                        placeholder="Dietary Restrictions (if any)"
-                        value={rsvpForm.dietaryRestrictions}
-                        onChange={(e) => setRsvpForm({ ...rsvpForm, dietaryRestrictions: e.target.value })}
-                        disabled={isSubmitting}
-                      />
-                    </>
-                  )}
-
-                  <textarea
-                    placeholder="Leave us a message (optional)"
-                    value={rsvpForm.message}
-                    onChange={(e) => setRsvpForm({ ...rsvpForm, message: e.target.value })}
-                    rows={4}
-                    className="flex w-full rounded-md border border-input bg-background px-4 py-3 text-base font-body tracking-wide transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
-                    disabled={isSubmitting}
+                    placeholder="Last name"
+                    value={searchLastName}
+                    onChange={(e) => setSearchLastName(e.target.value)}
+                    disabled={isSearching}
+                    className="font-body bg-gold-light border-charcoal/20"
                   />
                 </div>
-
-                <Button 
-                  onClick={handleRsvpSubmit}
-                  size="lg" 
+                <Button
+                  type="submit"
+                  size="lg"
                   className="w-full bg-rose-800 hover:bg-rose-900 text-white"
-                  disabled={isSubmitting}
+                  disabled={isSearching}
                 >
-                  {isSubmitting ? "Sending..." : "Send RSVP"}
+                  {isSearching ? (
+                    "Searching..."
+                  ) : (
+                    <>
+                      <Search className="mr-2 h-4 w-4" />
+                      Search
+                    </>
+                  )}
                 </Button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 bg-cream border-t border-border">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-foreground mb-4">
-            Ivanna & Ben
-          </h2>
-          <p className="font-display text-xl text-gold italic mb-8">
-            September 12, 2026
-          </p>
-          <Heart className="w-6 h-6 text-wine mx-auto" />
-          <p className="text-muted-foreground font-body text-sm mt-8">
-            We can't wait to celebrate with you!
-          </p>
+      {/* RSVP modal - envelope opens, letter slides out, then modal transitions in */}
+      <EnvelopeModal isOpen={rsvpModalOpen} onClose={() => setRsvpModalOpen(false)}>
+        <div className="flex flex-col min-h-0 flex-1 overflow-hidden rounded-lg border border-stone-200 bg-[#FAF9F6] p-6 shadow-xl">
+          <div className="flex items-center justify-between shrink-0 mb-4">
+            <h2 className="font-display text-lg font-semibold">
+              {foundPartyMembers.length > 0
+                ? `RSVP for ${foundPartyMembers.map((g) => `${g.firstname} ${g.lastname}`).join(" & ")}`
+                : "RSVP"}
+            </h2>
+            <button
+              type="button"
+              onClick={() => setRsvpModalOpen(false)}
+              className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            >
+              <X className="h-4 w-4" />
+              <span className="sr-only">Close</span>
+            </button>
+          </div>
+          <form onSubmit={handleRsvpSubmit} className="flex flex-col min-h-0 flex-1 overflow-hidden">
+            <div className="py-4 space-y-6 overflow-y-auto min-h-0 flex-1 pr-2">
+                    {foundPartyMembers.map((guest) => {
+                      const r = partyResponses[guest.id] ?? {
+                        attending: "",
+                        email: "",
+                        phone: "",
+                        dietaryRestrictions: "",
+                        message: "",
+                      };
+                      return (
+                        <div
+                          key={guest.id}
+                          className="rounded-lg border border-border bg-muted/30 p-4 space-y-4"
+                        >
+                          <h4 className="font-display text-lg text-foreground">
+                            {guest.firstname} {guest.lastname}
+                          </h4>
+                          <div className="space-y-3">
+                            <div>
+                              <Label className="text-muted-foreground font-body text-sm uppercase tracking-wide">
+                                Attending
+                              </Label>
+                              <RadioGroup
+                                value={r.attending}
+                                onValueChange={(v) => updatePartyResponse(guest.id, "attending", v)}
+                                className="flex gap-6 pt-2"
+                              >
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                  <RadioGroupItem value="yes" id={`${guest.id}-yes`} />
+                                  <span className="font-body text-sm">Yes</span>
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                  <RadioGroupItem value="no" id={`${guest.id}-no`} />
+                                  <span className="font-body text-sm">No</span>
+                                </label>
+                              </RadioGroup>
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor={`${guest.id}-email`} className="text-muted-foreground font-body text-sm">
+                                Email
+                              </Label>
+                              <Input
+                                id={`${guest.id}-email`}
+                                type="email"
+                                placeholder="your@email.com"
+                                value={r.email}
+                                onChange={(e) => updatePartyResponse(guest.id, "email", e.target.value)}
+                                className="font-body"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor={`${guest.id}-phone`} className="text-muted-foreground font-body text-sm">
+                                Phone
+                              </Label>
+                              <Input
+                                id={`${guest.id}-phone`}
+                                type="tel"
+                                placeholder="(555) 123-4567"
+                                value={r.phone}
+                                onChange={(e) => updatePartyResponse(guest.id, "phone", e.target.value)}
+                                className="font-body"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor={`${guest.id}-dietary`} className="text-muted-foreground font-body text-sm">
+                                Dietary restrictions
+                              </Label>
+                              <Input
+                                id={`${guest.id}-dietary`}
+                                placeholder="Vegetarian, allergies, etc."
+                                value={r.dietaryRestrictions}
+                                onChange={(e) => updatePartyResponse(guest.id, "dietaryRestrictions", e.target.value)}
+                                className="font-body"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor={`${guest.id}-message`} className="text-muted-foreground font-body text-sm">
+                                Message (optional)
+                              </Label>
+                              <textarea
+                                id={`${guest.id}-message`}
+                                placeholder="Leave a note for the couple..."
+                                value={r.message}
+                                onChange={(e) => updatePartyResponse(guest.id, "message", e.target.value)}
+                                rows={3}
+                                className="flex w-full rounded-md border border-input bg-background px-4 py-3 text-sm font-body transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+            </div>
+            <div className="shrink-0 pt-4 border-t border-border mt-4">
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full bg-rose-800 hover:bg-rose-900 text-white"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Saving..." : "Update response"}
+              </Button>
+            </div>
+          </form>
         </div>
-      </footer>
+      </EnvelopeModal>
     </>
   );
 };
