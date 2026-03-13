@@ -1,4 +1,4 @@
-/* BruceMorpho-style envelope - wine/red colors */
+/* Exact BruceMorpho structure from https://brucemorpho.github.io/Envelope-open-Animation-/ - red colors */
 .envelope-modal-overlay {
   position: fixed;
   inset: 0;
@@ -11,12 +11,8 @@
 }
 
 @keyframes envelope-overlay-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .envelope-wrapper {
@@ -24,8 +20,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 520px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   perspective: 800px;
@@ -33,33 +29,24 @@
 
 .envelope-container {
   position: relative;
-  width: 340px;
-  height: 240px;
-  margin: 0 auto;
-  cursor: pointer;
-}
-
-.envelope-body {
-  position: relative;
-  width: 340px;
-  height: 240px;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  width: 420px;
+  height: 270px;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   background-color: #722F37;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .envelope-front {
   position: absolute;
   width: 0;
   height: 0;
+  z-index: 3;
   top: 0;
   left: 0;
-  z-index: 3;
-}
-
-.envelope-container.open .envelope-front {
-  z-index: 1;
 }
 
 .envelope-flap {
@@ -68,15 +55,12 @@
   height: 0;
   left: 0;
   top: 0;
-  border-left: 170px solid transparent;
-  border-right: 170px solid transparent;
-  border-bottom: 100px solid transparent;
-  border-top: 124px solid #722F37;
-  transform-origin: top center;
-  transform-style: preserve-3d;
+  border-left: 210px solid transparent;
+  border-right: 210px solid transparent;
+  border-bottom: 123px solid transparent;
+  border-top: 147px solid #722F37;
+  transform-origin: top;
   pointer-events: none;
-  transition: transform 0.4s ease, z-index 0.6s;
-  z-index: 5;
 }
 
 .envelope-pocket {
@@ -85,56 +69,42 @@
   height: 0;
   left: 0;
   top: 0;
-  border-left: 170px solid #8B3A5C;
-  border-right: 170px solid #8B3A5C;
-  border-bottom: 110px solid #7A3345;
-  border-top: 110px solid transparent;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  z-index: 2;
+  border-left: 210px solid #8B3A5C;
+  border-right: 210px solid #8B3A5C;
+  border-bottom: 135px solid #7A3345;
+  border-top: 135px solid transparent;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
-/* Letter - inside envelope, matches BruceMorpho: 90% size, top 5% */
 .envelope-letter {
-  position: absolute;
-  left: 5%;
-  top: 5%;
+  position: relative;
+  background-color: #fff;
   width: 90%;
+  margin-left: auto;
+  margin-right: auto;
   height: 90%;
-  background-color: #FAF9F6;
-  border-radius: 6px;
+  top: 5%;
+  border-radius: 10px;
   box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
   z-index: 1;
-  transition: transform 0.4s ease, z-index 1s;
 }
 
-/* Closed - flap covers letter */
+/* Closed state */
 .envelope-container.closed .envelope-flap {
   transform: rotateX(0deg);
   transition: transform 0.4s 0.6s ease, z-index 1s;
   z-index: 5;
 }
 
-.envelope-container.closed .envelope-letter {
-  transform: translateY(0);
-  transition: transform 0.4s ease, z-index 1s;
-  z-index: 1;
-}
-
-/* Open - flap opens, letter peeks out (little slide up) */
+/* Open state - flap opens, letter stays in place */
 .envelope-container.open .envelope-flap {
   transform: rotateX(180deg);
   transition: transform 0.4s ease, z-index 0.6s;
   z-index: 1;
 }
 
-.envelope-container.open .envelope-letter {
-  transform: translateY(-60px);
-  transition: transform 0.4s 0.6s ease, z-index 0.6s;
-  z-index: 2;
-}
-
-/* Envelope exits - whole envelope fades out before modal */
+/* Envelope exits - whole envelope fades out */
 .envelope-wrapper.exiting {
   animation: envelope-exit 0.5s ease-out forwards;
 }
@@ -146,7 +116,7 @@
   }
 }
 
-/* Modal content - fades in after envelope transition */
+/* Modal content - fades in after envelope */
 .envelope-modal-content {
   animation: envelope-modal-fade-in 0.4s ease-out forwards;
   max-width: 32rem;

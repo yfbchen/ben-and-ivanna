@@ -49,13 +49,11 @@ export function EnvelopeModal({ isOpen, onClose, children }: EnvelopeModalProps)
             className={`envelope-container ${isEnvelopeOpen ? "open" : "closed"}`}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="envelope-body">
-              <div className="envelope-letter" />
-              <div className="envelope-front">
-                <div className="envelope-flap" />
-                <div className="envelope-pocket" />
-              </div>
+            <div className="envelope-front">
+              <div className="envelope-flap" />
+              <div className="envelope-pocket" />
             </div>
+            <div className="envelope-letter" />
           </div>
         </div>
       )}
