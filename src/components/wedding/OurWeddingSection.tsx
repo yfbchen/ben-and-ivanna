@@ -1,4 +1,14 @@
+import { CalendarPlus } from "lucide-react";
+
 import { images } from "@/config/images";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { downloadIcsFile, getGoogleCalendarUrl } from "@/lib/calendar";
 
 export function OurWeddingSection() {
   return (
@@ -43,6 +53,37 @@ export function OurWeddingSection() {
                 &nbsp;&bull;&nbsp; Reception: 7:00 PM
               </p>
             </div>
+          </div>
+          <div className="flex justify-center mt-12 md:mt-16">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="elegant"
+                  size="sm"
+                  className="bg-wine text-gold-light hover:bg-wine/90 hover:text-gold-light border-0"
+                >
+                  <CalendarPlus className="h-4 w-4" />
+                  Add to Calendar
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="center"
+                className="bg-butter border-wine/20 text-charcoal"
+              >
+                <DropdownMenuItem asChild>
+                  <a
+                    href={getGoogleCalendarUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Google Calendar
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={downloadIcsFile}>
+                  Apple Calendar / Outlook
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>

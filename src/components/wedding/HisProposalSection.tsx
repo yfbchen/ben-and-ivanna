@@ -14,19 +14,24 @@ export function HisProposalSection() {
             </h2>
             <div className="space-y-4 font-body text-base md:text-lg text-ivory/90 leading-relaxed">
               <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                aliquam erat volutpat.
+                Ben planned a trip to Tokyo with Ivanna during cherry blossom
+                season, just like many of the other adventures they'd taken
+                together. To her, it was simply another trip. What she didn't
+                know was that Ben had been quietly planning a surprise the
+                entire time.
               </p>
               <p>
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                consequat.
+                With the help of a few close friends, he secretly filmed a video
+                of himself playing guitar and singing Nothing by Bruno Major. He
+                booked a private theater, filled it with candles and flowers,
+                and told Ivanna they were going to watch a movie.
               </p>
               <p>
-                Duis autem vel eum iriure dolor in hendrerit in vulputate velit
-                esse molestie consequat, vel illum dolore eu feugiat nulla
-                facilisis.
+                But the moment she walked into the theater, she had a feeling
+                something was going on. As the video played, there were tears, a
+                lot of laughter, and plenty of emotions. When it ended, Ben got
+                down on one knee and asked Ivanna to marry him. She said....
+                YES! 🌸💍
               </p>
             </div>
           </div>
