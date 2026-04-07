@@ -4,5 +4,6 @@ export { OurStorySection } from "./OurStorySection";
 export { HisProposalSection } from "./HisProposalSection";
 export { GallerySection } from "./GallerySection";
 export { RegistrySection } from "./RegistrySection";
+export { FaqSection } from "./FaqSection";
 export { RsvpSection } from "./RsvpSection";
 export { RsvpModalContent } from "./RsvpModalContent";

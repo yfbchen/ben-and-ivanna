@@ -22,11 +22,11 @@ export function HeroSection() {
           />
         </div>
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-gold text-center leading-tight">
-            <span>Ivanna</span>
-            <br />
-            <span>&amp; Ben</span>
-          </h1>
+          <img
+            src="https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/misc/Lockup.png"
+            alt="Ivanna and Ben"
+            className="w-[70%] max-w-[640px] md:w-[58%] lg:w-[52%] h-auto object-contain"
+          />
         </div>
       </div>
     </section>

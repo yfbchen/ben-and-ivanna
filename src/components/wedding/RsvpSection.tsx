@@ -27,7 +27,7 @@ export function RsvpSection({
       <div className="container mx-auto px-8 md:px-12 lg:px-16">
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
           <div className="max-w-md w-full text-ivory text-center md:text-left">
-            <p className="font-body text-sm tracking-[0.3em] uppercase mb-4">
+            <p className="font-body text-sm tracking-[0.3em] uppercase text-gold mb-4">
               RSVP
             </p>
             <h2 className="font-display text-3xl md:text-5xl mb-4">
@@ -42,9 +42,9 @@ export function RsvpSection({
           <div className="max-w-xl w-full">
             <form
               onSubmit={onSearch}
-              className="space-y-6 bg-gold-light p-8 md:p-12 shadow-xl rounded-lg"
+              className="space-y-6 bg-ivory/98 p-8 md:p-12 shadow-elegant rounded-lg border border-gold/45"
             >
-              <p className="font-body text-sm text-muted-foreground uppercase tracking-wide">
+              <p className="font-body text-sm text-charcoal/60 uppercase tracking-wide">
                 RSVP For:
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -53,20 +53,20 @@ export function RsvpSection({
                   value={searchFirstName}
                   onChange={(e) => setSearchFirstName(e.target.value)}
                   disabled={isSearching}
-                  className="font-body bg-gold-light border-charcoal/20"
+                  className="font-body bg-ivory border-forest/25 text-charcoal placeholder:text-charcoal/45 focus-visible:ring-forest/35"
                 />
                 <Input
                   placeholder="Last name"
                   value={searchLastName}
                   onChange={(e) => setSearchLastName(e.target.value)}
                   disabled={isSearching}
-                  className="font-body bg-gold-light border-charcoal/20"
+                  className="font-body bg-ivory border-forest/25 text-charcoal placeholder:text-charcoal/45 focus-visible:ring-forest/35"
                 />
               </div>
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-rose-800 hover:bg-rose-900 text-white"
+                className="w-full bg-gold text-wine hover:bg-gold-light font-semibold shadow-md"
                 disabled={isSearching}
               >
                 {isSearching ? (

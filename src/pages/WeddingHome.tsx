@@ -8,6 +8,7 @@ import {
   HisProposalSection,
   GallerySection,
   RegistrySection,
+  FaqSection,
   RsvpSection,
   RsvpModalContent,
 } from "@/components/wedding";
@@ -39,6 +40,7 @@ const WeddingHome = () => {
       <HisProposalSection />
       <GallerySection />
       <RegistrySection />
+      <FaqSection />
       <RsvpSection
         searchFirstName={searchFirstName}
         setSearchFirstName={setSearchFirstName}

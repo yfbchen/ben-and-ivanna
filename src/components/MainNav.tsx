@@ -34,7 +34,7 @@ const MainNav = ({
     brandOnClick ? (
       <button
         onClick={brandOnClick}
-        className="shrink-0 font-navBrand text-xl sm:text-2xl leading-none tracking-[0.22em] uppercase text-gold hover:text-gold/90 transition-colors"
+        className="shrink-0 font-navBrand font-[610] text-xl sm:text-2xl leading-none tracking-[0.05em] uppercase text-gold hover:text-gold/90 transition-colors"
         aria-label="Go to top navigation"
       >
         IVANNA &amp; BEN
@@ -42,7 +42,7 @@ const MainNav = ({
     ) : (
       <Link
         to={brandTo}
-        className="shrink-0 font-navBrand text-xl sm:text-2xl leading-none tracking-[0.22em] uppercase text-gold hover:text-gold/90 transition-colors"
+        className="shrink-0 font-navBrand font-[610] text-xl sm:text-2xl leading-none tracking-[0.05em] uppercase text-gold hover:text-gold/90 transition-colors"
         aria-label="Go to top navigation"
       >
         IVANNA &amp; BEN
@@ -51,7 +51,7 @@ const MainNav = ({
 
   const renderNavItem = (item: NavItemConfig, isMobile = false) => {
     const commonClasses =
-      "font-navLink text-[16px] lg:text-[17px] font-medium leading-none tracking-[0.08em] text-gold/90 hover:text-gold transition-colors";
+      "font-navLink text-[16px] lg:text-[17px] font-medium leading-none tracking-[0.02em] text-gold/90 hover:text-gold transition-colors";
 
     const handleClick = () => {
       if (item.onClick) {

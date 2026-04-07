@@ -14,10 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Cormorant Garamond', 'serif'],
-        body: ['Raleway', 'sans-serif'],
+        display: ['Instrument Serif', 'serif'],
+        body: ['Instrument Serif', 'serif'],
         navBrand: ['Barlow Condensed', 'sans-serif'],
-        navLink: ['FreightDispCmp Pro', 'Cormorant Garamond', 'serif'],
+        navLink: ['Instrument Serif', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;800&family=Instrument+Serif:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +16,7 @@
     --popover-foreground: 30 10% 15%;
 
     /* Primary: Dark Wine Red */
-    --primary: 345 45% 32%;
+    --primary: 5 68% 17%;
     --primary-foreground: 40 33% 98%;
 
     --secondary: 40 30% 93%;
@@ -34,24 +34,24 @@
 
     --border: 40 20% 88%;
     --input: 40 20% 88%;
-    --ring: 345 45% 32%;
+    --ring: 5 68% 17%;
 
     --radius: 0.25rem;
 
     --sidebar-background: 40 33% 98%;
     --sidebar-foreground: 30 10% 25%;
-    --sidebar-primary: 345 45% 32%;
+    --sidebar-primary: 5 68% 17%;
     --sidebar-primary-foreground: 40 33% 98%;
     --sidebar-accent: 40 30% 93%;
     --sidebar-accent-foreground: 30 10% 25%;
     --sidebar-border: 40 20% 88%;
-    --sidebar-ring: 345 45% 32%;
+    --sidebar-ring: 5 68% 17%;
 
     /* Custom wedding colors */
     --sage: 150 25% 40%;
     --sage-light: 150 20% 90%;
-    --wine: 346.8 54.3% 18.0%;
-    --wine-light: 345 30% 85%;
+    --wine: 5 68% 17%;
+    --wine-light: 5 30% 85%;
     --gold: 55.8 47.3% 47.6%;
     --gold-light: 42 50% 88%;
     --butter: 54.5 47.0% 77.1%;
@@ -61,12 +61,12 @@
     --charcoal: 30 10% 15%;
 
     /* Typography */
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Raleway', sans-serif;
+    --font-display: 'Instrument Serif', serif;
+    --font-body: 'Instrument Serif', serif;
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(345 45% 32% / 0.08);
-    --shadow-elegant: 0 8px 40px -8px hsl(345 45% 32% / 0.12);
+    --shadow-soft: 0 4px 20px -4px hsl(5 68% 17% / 0.08);
+    --shadow-elegant: 0 8px 40px -8px hsl(5 68% 17% / 0.12);
   }
 
   .dark {
@@ -79,7 +79,7 @@
     --popover: 30 10% 10%;
     --popover-foreground: 40 33% 95%;
 
-    --primary: 345 45% 45%;
+    --primary: 5 68% 35%;
     --primary-foreground: 30 10% 10%;
 
     --secondary: 30 10% 18%;
@@ -96,12 +96,12 @@
 
     --border: 30 10% 20%;
     --input: 30 10% 20%;
-    --ring: 345 45% 45%;
+    --ring: 5 68% 35%;
 
     --sage: 150 25% 50%;
     --sage-light: 150 15% 25%;
-    --wine: 346.8 54.3% 18.0%;
-    --wine-light: 345 30% 20%;
+    --wine: 5 68% 17%;
+    --wine-light: 5 30% 20%;
     --gold: 55.8 47.3% 47.6%;
     --gold-light: 42 30% 20%;
     --ivory: 30 10% 10%;
