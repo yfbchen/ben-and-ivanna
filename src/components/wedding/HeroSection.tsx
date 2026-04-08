@@ -1,33 +1,70 @@
 import { images } from "@/config/images";
 
-export function HeroSection() {
+export type WeddingTheme = "red" | "amber" | "green";
+
+const HERO_THEME_SWATCHES: Array<{ key: WeddingTheme; label: string; swatchClass: string }> = [
+  { key: "red", label: "Red", swatchClass: "bg-[#6b1111]" },
+  { key: "amber", label: "Amber", swatchClass: "bg-[#c3a14d]" },
+  { key: "green", label: "Green", swatchClass: "bg-[#355b31]" },
+];
+
+const HERO_THEME_IMAGES: Record<WeddingTheme, string> = {
+  red: "https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/misc/red-hero.jpeg",
+  amber: images.heroHorizontal,
+  green: images.heroHorizontal,
+};
+
+interface HeroSectionProps {
+  selectedTheme: WeddingTheme;
+  onThemeChange: (theme: WeddingTheme) => void;
+}
+
+export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="min-h-[650px] bg-wine flex items-center justify-center pt-6 pb-6 overflow-hidden"
+      className="relative overflow-hidden scroll-mt-20 md:scroll-mt-24"
     >
-      <div className="container relative mx-auto px-2 md:px-4 lg:px-6 min-h-[650px] max-w-6xl">
-        <div className="absolute left-0 md:left-4 bottom-6 md:bottom-10 w-[35%] max-w-xl h-50 md:h-55 lg:h-60 rounded-xl border border-gold/40 shadow-lg bg-wine overflow-hidden">
-          <img
-            src={images.heroHorizontal}
-            alt="Ivanna and Ben"
-            className="w-full h-full object-fill"
-          />
-        </div>
-        <div className="absolute right-0 md:right-4 top-15 md:top-20 bottom-6 md:bottom-10 w-32 md:w-44 lg:w-80 rounded-xl border border-gold/40 shadow-lg bg-wine overflow-hidden">
-          <img
-            src={images.heroVertical}
-            alt="Ivanna and Ben"
-            className="w-full h-full object-fill"
-          />
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="relative w-full">
+        <img
+          src={HERO_THEME_IMAGES[selectedTheme]}
+          alt="Ivanna and Ben on a tennis court"
+          className="block w-full h-auto"
+        />
+
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-6 md:px-10 lg:px-14">
           <img
             src="https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/misc/Lockup.png"
             alt="Ivanna and Ben"
-            className="w-[70%] max-w-[640px] md:w-[58%] lg:w-[52%] h-auto object-contain"
+            className="w-[78%] max-w-[700px] md:w-[60%] lg:w-[52%] h-auto object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.35)]"
           />
         </div>
+
+        <div className="absolute left-6 right-6 bottom-6 md:bottom-10 mx-auto max-w-[460px] rounded-full border border-gold/55 bg-ivory/92 px-6 py-3 text-center shadow-elegant">
+          <p className="font-body text-xs md:text-sm uppercase tracking-[0.22em] text-wedding-heading">
+            September 12, 2026 · Cambridge, MA
+          </p>
+        </div>
+      </div>
+
+      <div className="fixed left-4 md:left-6 top-20 md:top-24 z-40 flex flex-col items-center gap-2.5">
+        {HERO_THEME_SWATCHES.map(({ key, label, swatchClass }) => {
+          const isActive = selectedTheme === key;
+          return (
+            <button
+              key={key}
+              type="button"
+              aria-label={`Set hero theme to ${label}`}
+              aria-pressed={isActive}
+              onClick={() => onThemeChange(key)}
+              className={`h-7 w-7 md:h-8 md:w-8 rounded-sm border border-white/60 ${swatchClass} transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
+                isActive
+                  ? "scale-105 outline outline-2 outline-white outline-offset-2"
+                  : "scale-100"
+              }`}
+            />
+          );
+        })}
       </div>
     </section>
   );

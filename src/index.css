@@ -67,6 +67,14 @@
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(5 68% 17% / 0.08);
     --shadow-elegant: 0 8px 40px -8px hsl(5 68% 17% / 0.12);
+
+    /* Wedding page surfaces */
+    --wedding-page: 35 22% 95%;
+    --wedding-main-surface: 33 26% 91%;
+    --wedding-main-contrast: 40 33% 98%;
+    --wedding-rsvp-band: 5 68% 17%;
+    --wedding-heading: 5 68% 22%;
+    --wedding-body: 30 10% 20%;
   }
 
   .dark {
@@ -107,7 +115,83 @@
     --ivory: 30 10% 10%;
     --cream: 30 10% 12%;
     --charcoal: 40 33% 95%;
+
+    --wedding-page: 30 12% 12%;
+    --wedding-main-surface: 30 12% 16%;
+    --wedding-main-contrast: 30 11% 20%;
+    --wedding-rsvp-band: 5 68% 24%;
+    --wedding-heading: 42 65% 55%;
+    --wedding-body: 40 20% 88%;
   }
+}
+
+[data-wedding-theme="red"] {
+  --primary: 0 72% 24%;
+  --ring: 0 72% 24%;
+  --wine: 0 72% 24%;
+  --wine-light: 0 40% 86%;
+  --gold: 55.8 47.3% 47.6%;
+  --gold-light: 42 50% 88%;
+  --butter: 54.5 47.0% 77.1%;
+  --forest: 77.1 35.6% 23.1%;
+  --background: 40 33% 98%;
+  --card: 40 30% 96%;
+  --muted: 40 20% 92%;
+  --border: 40 20% 88%;
+
+  --wedding-page: 35 22% 95%;
+  --wedding-main-surface: 33 26% 91%;
+  --wedding-main-contrast: 40 33% 98%;
+  --wedding-rsvp-band: 0 72% 24%;
+  --wedding-heading: 6 72% 44%;
+  --wedding-body: 6 62% 40%;
+  --charcoal: 6 62% 40%;
+}
+
+[data-wedding-theme="amber"] {
+  --primary: 44 49% 53%;
+  --ring: 44 49% 53%;
+  --wine: 44 49% 53%;
+  --wine-light: 42 42% 90%;
+  --gold: 40 62% 50%;
+  --gold-light: 43 55% 90%;
+  --butter: 44 57% 79%;
+  --forest: 88 25% 27%;
+  --background: 42 30% 97%;
+  --card: 42 26% 94%;
+  --muted: 42 22% 91%;
+  --border: 38 24% 85%;
+
+  --wedding-page: 42 30% 95%;
+  --wedding-main-surface: 40 34% 90%;
+  --wedding-main-contrast: 42 34% 97%;
+  --wedding-rsvp-band: 44 49% 53%;
+  --wedding-heading: 35 78% 40%;
+  --wedding-body: 35 58% 36%;
+  --charcoal: 35 58% 36%;
+}
+
+[data-wedding-theme="green"] {
+  --primary: 114 30% 27%;
+  --ring: 114 30% 27%;
+  --wine: 114 30% 27%;
+  --wine-light: 115 24% 86%;
+  --gold: 45 45% 54%;
+  --gold-light: 46 40% 90%;
+  --butter: 70 26% 79%;
+  --forest: 114 30% 27%;
+  --background: 120 16% 97%;
+  --card: 118 14% 94%;
+  --muted: 115 12% 91%;
+  --border: 118 10% 84%;
+
+  --wedding-page: 120 14% 95%;
+  --wedding-main-surface: 114 16% 90%;
+  --wedding-main-contrast: 112 18% 97%;
+  --wedding-rsvp-band: 114 30% 27%;
+  --wedding-heading: 128 50% 36%;
+  --wedding-body: 128 34% 32%;
+  --charcoal: 128 34% 32%;
 }
 
 @layer base {
@@ -117,6 +201,10 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+  }
+
+  [data-wedding-theme] {
+    transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -135,6 +223,30 @@
 
   .break-inside-avoid {
     break-inside: avoid;
+  }
+
+  .bg-wedding-page {
+    background-color: hsl(var(--wedding-page));
+  }
+
+  .bg-wedding-main-surface {
+    background-color: hsl(var(--wedding-main-surface));
+  }
+
+  .bg-wedding-main-contrast {
+    background-color: hsl(var(--wedding-main-contrast));
+  }
+
+  .bg-wedding-rsvp-band {
+    background-color: hsl(var(--wedding-rsvp-band));
+  }
+
+  .text-wedding-heading {
+    color: hsl(var(--wedding-heading));
+  }
+
+  .text-wedding-body {
+    color: hsl(var(--wedding-body));
   }
 }
 

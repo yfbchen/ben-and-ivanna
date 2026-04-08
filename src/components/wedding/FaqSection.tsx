@@ -36,17 +36,17 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="bg-wine py-12 md:py-16 border-y border-forest/30"
+      className="py-16 md:py-24 border-y border-wine/15"
     >
-      <div className="container mx-auto w-full px-8 md:px-12 lg:px-16">
+      <div className="container mx-auto w-full px-6 md:px-10 lg:px-14">
         <div className="mb-8 md:mb-10 text-center md:text-left">
-          <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-gold mb-4">
+          <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-wedding-heading mb-4">
             For guests
           </p>
-          <h2 className="font-display text-3xl md:text-5xl text-ivory mb-3">
+          <h2 className="font-display text-3xl md:text-5xl text-wedding-heading mb-3">
             Frequently asked questions
           </h2>
-          <p className="font-body text-base md:text-lg text-ivory/85 max-w-2xl mx-auto md:mx-0">
+          <p className="font-body text-base md:text-lg text-wedding-body max-w-2xl mx-auto md:mx-0">
             Quick answers to common questions—swap in your real details anytime.
           </p>
         </div>
@@ -54,18 +54,18 @@ export function FaqSection() {
         <Accordion
           type="single"
           collapsible
-          className="w-full border-t border-b border-ivory/20"
+          className="w-full border-t border-b border-wine/20"
         >
           {faqItems.map((item) => (
             <AccordionItem
               key={item.value}
               value={item.value}
-              className="border-ivory/15 last:border-b-0"
+              className="border-wine/15 last:border-b-0"
             >
-              <AccordionTrigger className="font-body text-left text-base md:text-lg text-ivory hover:no-underline hover:text-gold py-5 md:py-6 pr-2 [&[data-state=open]]:text-gold">
+              <AccordionTrigger className="font-body text-left text-base md:text-lg text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
                 {item.title}
               </AccordionTrigger>
-              <AccordionContent className="font-body text-ivory/85 text-base leading-relaxed pr-8 md:pr-10">
+              <AccordionContent className="font-body text-wedding-body text-base leading-relaxed pr-8 md:pr-10">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

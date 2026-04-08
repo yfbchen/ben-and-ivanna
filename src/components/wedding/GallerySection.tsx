@@ -6,9 +6,9 @@ export function GallerySection() {
   return (
     <section
       id="gallery"
-      className="min-h-[650px] bg-butter flex items-center justify-center py-12 md:py-16"
+      className="w-full flex items-center justify-center py-16 md:py-24"
     >
-      <div className="container mx-auto px-8 md:px-12 lg:px-16">
+      <div className="container mx-auto px-6 md:px-10 lg:px-14">
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
           <div className="w-full flex justify-center">
             <img
@@ -18,10 +18,10 @@ export function GallerySection() {
             />
           </div>
           <div className="max-w-xl w-full text-center md:text-left">
-            <h2 className="font-body text-3xl md:text-3xl tracking-[0.3em] uppercase text-gold mb-6">
+            <h2 className="font-body text-3xl md:text-3xl tracking-[0.3em] uppercase text-wedding-heading mb-6">
               Gallery
             </h2>
-            <p className="font-body text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="font-body text-base md:text-lg text-wedding-body leading-relaxed">
               There's no better way to capture the memories of our special day
               than through photos. You'll find all of our favorite photos and
               moments from our engagement and wedding day on the gallery board!

@@ -22,9 +22,9 @@ export function RsvpSection({
   return (
     <section
       id="rsvp"
-      className="min-h-[650px] bg-forest flex items-center justify-center py-12 md:py-16"
+      className="w-full flex items-center justify-center py-16 md:py-24"
     >
-      <div className="container mx-auto px-8 md:px-12 lg:px-16">
+      <div className="container mx-auto px-6 md:px-10 lg:px-14">
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
           <div className="max-w-md w-full text-ivory text-center md:text-left">
             <p className="font-body text-sm tracking-[0.3em] uppercase text-gold mb-4">

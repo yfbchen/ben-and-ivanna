@@ -210,8 +210,8 @@ const MainNav = ({
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-wine text-gold border-y border-gold/40">
-      <div className="container mx-auto px-6 h-14 flex items-center gap-6">
+    <nav className="sticky top-0 left-0 right-0 z-50 bg-wine/95 backdrop-blur-md supports-[backdrop-filter]:bg-wine/90 text-gold border-b border-gold/35 shadow-[0_6px_24px_hsl(var(--wine)/0.32)]">
+      <div className="container mx-auto px-6 h-16 flex items-center gap-6">
         <Brand />
 
         {/* Desktop Menu */}
