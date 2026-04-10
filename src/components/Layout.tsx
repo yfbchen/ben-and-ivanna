@@ -11,10 +11,11 @@ const navItems: NavItemConfig[] = [
     children: [{ label: "All Photos", to: "/gallery" }],
   },
   { label: "Registry", to: "/#gift" },
+  { label: "FAQ", to: "/#faq" },
 ];
 
 const rightCtaClassName =
-  "h-9 px-6 rounded-full bg-gold-light text-wine border border-gold/80 hover:bg-gold-light/90 shadow-soft font-navLink text-[16px] lg:text-[17px] font-medium leading-none tracking-[0.08em]";
+  "h-9 px-6 rounded-full bg-theme-button text-theme-button-text border border-white/25 hover:brightness-110 shadow-soft font-wedding-button-rsvp text-[16px] lg:text-[17px] leading-none tracking-brand";
 
 const Layout = () => {
   return (

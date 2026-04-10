@@ -27,13 +27,13 @@ export function RsvpSection({
       <div className="container mx-auto px-6 md:px-10 lg:px-14">
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
           <div className="max-w-md w-full text-ivory text-center md:text-left">
-            <p className="font-body text-sm tracking-[0.3em] uppercase text-gold mb-4">
+            <p className="font-wedding-section-heading text-sm tracking-brand uppercase text-gold mb-4">
               RSVP
             </p>
-            <h2 className="font-display text-3xl md:text-5xl mb-4">
+            <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand mb-4">
               Will You Join Us?
             </h2>
-            <p className="text-ivory/90 font-body">
+            <p className="text-ivory/90 font-wedding-content tracking-brand">
               Kindly respond by June 30, 2026 so we can plan the celebration
               with you in mind.
             </p>
@@ -44,7 +44,7 @@ export function RsvpSection({
               onSubmit={onSearch}
               className="space-y-6 bg-ivory/98 p-8 md:p-12 shadow-elegant rounded-lg border border-gold/45"
             >
-              <p className="font-body text-sm text-charcoal/60 uppercase tracking-wide">
+              <p className="font-wedding-content text-sm text-charcoal/60 uppercase tracking-brand">
                 RSVP For:
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -53,20 +53,20 @@ export function RsvpSection({
                   value={searchFirstName}
                   onChange={(e) => setSearchFirstName(e.target.value)}
                   disabled={isSearching}
-                  className="font-body bg-ivory border-forest/25 text-charcoal placeholder:text-charcoal/45 focus-visible:ring-forest/35"
+                  className="font-wedding-content bg-ivory border-forest/25 text-charcoal placeholder:text-charcoal/45 focus-visible:ring-forest/35"
                 />
                 <Input
                   placeholder="Last name"
                   value={searchLastName}
                   onChange={(e) => setSearchLastName(e.target.value)}
                   disabled={isSearching}
-                  className="font-body bg-ivory border-forest/25 text-charcoal placeholder:text-charcoal/45 focus-visible:ring-forest/35"
+                  className="font-wedding-content bg-ivory border-forest/25 text-charcoal placeholder:text-charcoal/45 focus-visible:ring-forest/35"
                 />
               </div>
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-gold text-wine hover:bg-gold-light font-semibold shadow-md"
+                className="w-full bg-gold text-wine hover:bg-gold-light font-semibold shadow-md tracking-brand font-wedding-button-rsvp"
                 disabled={isSearching}
               >
                 {isSearching ? (

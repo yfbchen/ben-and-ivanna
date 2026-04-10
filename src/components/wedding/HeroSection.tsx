@@ -1,17 +1,25 @@
-import { images } from "@/config/images";
+import type { WeddingTheme } from "@/config/weddingThemeTokens";
 
-export type WeddingTheme = "red" | "amber" | "green";
+const SUPABASE_MISC =
+  "https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/misc";
 
 const HERO_THEME_SWATCHES: Array<{ key: WeddingTheme; label: string; swatchClass: string }> = [
   { key: "red", label: "Red", swatchClass: "bg-[#6b1111]" },
-  { key: "amber", label: "Amber", swatchClass: "bg-[#c3a14d]" },
+  { key: "orange", label: "Orange", swatchClass: "bg-[#c3a14d]" },
   { key: "green", label: "Green", swatchClass: "bg-[#355b31]" },
 ];
 
+const redHero = `${SUPABASE_MISC}/red-hero.jpeg`;
+const orangeHero = `${SUPABASE_MISC}/orange-hero.jpeg`;
+const greenHero = `${SUPABASE_MISC}/green-hero.jpeg`;
+
+/** All wedding hero backgrounds — preload these so theme swaps don’t wait on the network. */
+export const WEDDING_HERO_IMAGE_URLS = [redHero, orangeHero, greenHero] as const;
+
 const HERO_THEME_IMAGES: Record<WeddingTheme, string> = {
-  red: "https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/misc/red-hero.jpeg",
-  amber: images.heroHorizontal,
-  green: images.heroHorizontal,
+  red: redHero,
+  orange: orangeHero,
+  green: greenHero,
 };
 
 interface HeroSectionProps {
@@ -29,6 +37,8 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
         <img
           src={HERO_THEME_IMAGES[selectedTheme]}
           alt="Ivanna and Ben on a tennis court"
+          fetchPriority="high"
+          decoding="async"
           className="block w-full h-auto"
         />
 
@@ -41,7 +51,7 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
         </div>
 
         <div className="absolute left-6 right-6 bottom-6 md:bottom-10 mx-auto max-w-[460px] rounded-full border border-gold/55 bg-ivory/92 px-6 py-3 text-center shadow-elegant">
-          <p className="font-body text-xs md:text-sm uppercase tracking-[0.22em] text-wedding-heading">
+          <p className="font-wedding-content text-xs md:text-sm uppercase tracking-brand text-wedding-heading">
             September 12, 2026 · Cambridge, MA
           </p>
         </div>

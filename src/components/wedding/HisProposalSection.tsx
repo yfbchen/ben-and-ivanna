@@ -9,10 +9,10 @@ export function HisProposalSection() {
       <div className="container mx-auto px-6 md:px-10 lg:px-14">
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
           <div className="order-2 md:order-1 max-w-xl w-full text-center md:text-left">
-            <h2 className="font-body text-3xl md:text-3xl tracking-[0.3em] uppercase text-wedding-heading mb-6">
+            <h2 className="font-wedding-section-heading text-3xl md:text-3xl tracking-brand uppercase text-wedding-heading mb-6">
               His Proposal
             </h2>
-            <div className="space-y-4 font-body text-base md:text-lg text-wedding-body leading-relaxed">
+            <div className="space-y-4 font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
               <p>
                 Ben planned a trip to Tokyo with Ivanna during cherry blossom
                 season, just like many of the other adventures they'd taken

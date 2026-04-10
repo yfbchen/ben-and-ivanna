@@ -18,17 +18,17 @@ export function GallerySection() {
             />
           </div>
           <div className="max-w-xl w-full text-center md:text-left">
-            <h2 className="font-body text-3xl md:text-3xl tracking-[0.3em] uppercase text-wedding-heading mb-6">
+            <h2 className="font-wedding-section-heading text-3xl md:text-3xl tracking-brand uppercase text-wedding-heading mb-6">
               Gallery
             </h2>
-            <p className="font-body text-base md:text-lg text-wedding-body leading-relaxed">
+            <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
               There's no better way to capture the memories of our special day
               than through photos. You'll find all of our favorite photos and
               moments from our engagement and wedding day on the gallery board!
             </p>
             <Button
               variant="minimal"
-              className="mt-6 tracking-[0.2em] uppercase text-xs"
+              className="mt-6 tracking-brand uppercase text-xs"
               asChild
             >
               <Link to="/gallery">View Full Gallery</Link>

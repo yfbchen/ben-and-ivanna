@@ -8,6 +8,7 @@ const SECTION_IDS = [
   "his-proposal",
   "gallery",
   "gift",
+  "faq",
   "rsvp",
 ];
 const NAV_OFFSET = 72;

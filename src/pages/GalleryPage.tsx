@@ -5,10 +5,10 @@ const GalleryPage = () => {
     <main className="min-h-screen pt-24 pb-16 bg-butter">
         <section className="container mx-auto px-6 md:px-10 lg:px-16">
           <div className="max-w-4xl mx-auto text-center mb-10">
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-4">
+            <h1 className="font-wedding-section-heading text-4xl md:text-5xl lg:text-6xl tracking-brand text-foreground mb-4">
               Our Captured Memories
             </h1>
-            <p className="font-body text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="font-wedding-content text-sm md:text-base tracking-brand text-muted-foreground max-w-2xl mx-auto">
               A collection of our favorite photos from our engagement and wedding celebrations.
             </p>
           </div>

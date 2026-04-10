@@ -7,7 +7,7 @@ export function OurStorySection() {
       id="our-story"
       className="w-full flex justify-center flex-col items-center py-16 md:py-24"
     >
-      <h2 className="font-display text-4xl md:text-5xl text-wedding-heading text-center mb-12 md:mb-16">
+      <h2 className="font-wedding-section-heading text-4xl md:text-5xl tracking-brand text-wedding-heading text-center mb-12 md:mb-16">
         Our Story
       </h2>
 
@@ -41,10 +41,10 @@ export function OurStorySection() {
                     </div>
                   ) : (
                     <div className="text-center">
-                      <p className="font-body text-base text-wedding-body">
+                      <p className="font-wedding-content text-base tracking-brand text-wedding-body">
                         {event.date}
                       </p>
-                      <p className="font-body text-sm text-wedding-body leading-snug max-w-[140px] mt-0.5">
+                      <p className="font-wedding-content text-sm tracking-brand text-wedding-body leading-snug max-w-[140px] mt-0.5">
                         {event.text}
                       </p>
                     </div>
@@ -54,7 +54,7 @@ export function OurStorySection() {
                   className="flex items-center justify-center"
                   style={{ gridColumn: i + 1, gridRow: 2 }}
                 >
-                  <div className="w-4 h-4 rounded-full bg-gold/80 border-2 border-[hsl(var(--wedding-main-surface))] z-10 shrink-0" />
+                  <div className="w-4 h-4 rounded-full bg-gold/80 border-2 border-[var(--wedding-surface-neutral)] z-10 shrink-0" />
                 </div>
                 <div
                   className="flex flex-col items-center justify-start pt-1 min-w-0"
@@ -62,10 +62,10 @@ export function OurStorySection() {
                 >
                   {event.imageAbove ? (
                     <div className="text-center">
-                      <p className="font-body text-base text-wedding-body">
+                      <p className="font-wedding-content text-base tracking-brand text-wedding-body">
                         {event.date}
                       </p>
-                      <p className="font-body text-sm text-wedding-body leading-snug max-w-[140px] mt-0.5">
+                      <p className="font-wedding-content text-sm tracking-brand text-wedding-body leading-snug max-w-[140px] mt-0.5">
                         {event.text}
                       </p>
                     </div>
@@ -95,8 +95,8 @@ export function OurStorySection() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="font-body text-lg text-wedding-body">{event.date}</p>
-              <p className="font-body text-base text-wedding-body leading-snug max-w-[240px] mt-0.5">
+              <p className="font-wedding-content text-lg tracking-brand text-wedding-body">{event.date}</p>
+              <p className="font-wedding-content text-base tracking-brand text-wedding-body leading-snug max-w-[240px] mt-0.5">
                 {event.text}
               </p>
             </div>

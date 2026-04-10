@@ -1,8 +1,14 @@
 import { useRsvp } from "@/hooks/useRsvp";
-import { useScrollToSection } from "@/hooks/useScrollToSection";
+import { scrollToSection, useScrollToSection } from "@/hooks/useScrollToSection";
+import { useHeroImagesReady } from "@/hooks/useHeroImagesReady";
 import { EnvelopeModal } from "@/components/EnvelopeModal";
 import { useEffect, useState } from "react";
-import type { WeddingTheme } from "@/components/wedding/HeroSection";
+import {
+  applyWeddingThemeCssVars,
+  clearWeddingThemeCssVars,
+  type WeddingTheme,
+} from "@/config/weddingThemeTokens";
+import { WEDDING_HERO_IMAGE_URLS } from "@/components/wedding/HeroSection";
 import {
   HeroSection,
   OurWeddingSection,
@@ -17,14 +23,40 @@ import {
 
 const WeddingHome = () => {
   useScrollToSection();
+  const heroImagesReady = useHeroImagesReady(WEDDING_HERO_IMAGE_URLS);
   const [selectedTheme, setSelectedTheme] = useState<WeddingTheme>("red");
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-wedding-theme", selectedTheme);
-    return () => {
-      document.documentElement.removeAttribute("data-wedding-theme");
-    };
+    const root = document.documentElement;
+    root.setAttribute("data-wedding-theme", selectedTheme);
+    applyWeddingThemeCssVars(root, selectedTheme);
   }, [selectedTheme]);
+
+  useEffect(() => {
+    return () => {
+      const root = document.documentElement;
+      root.removeAttribute("data-wedding-theme");
+      clearWeddingThemeCssVars(root);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!heroImagesReady) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [heroImagesReady]);
+
+  useEffect(() => {
+    if (!heroImagesReady) return;
+    const id = window.location.hash.slice(1);
+    if (id) {
+      requestAnimationFrame(() => scrollToSection(id));
+    }
+  }, [heroImagesReady]);
 
   const {
     searchFirstName,
@@ -41,6 +73,16 @@ const WeddingHome = () => {
     closeRsvpModal,
     isSubmitting,
   } = useRsvp();
+
+  if (!heroImagesReady) {
+    return (
+      <div
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-wedding-page"
+        aria-busy="true"
+        aria-label="Loading wedding page"
+      />
+    );
+  }
 
   return (
     <div className="bg-wedding-page text-charcoal">

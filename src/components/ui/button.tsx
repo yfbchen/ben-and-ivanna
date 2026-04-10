@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 font-body tracking-wide",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 font-wedding-button tracking-brand",
   {
     variants: {
       variant: {
@@ -15,10 +15,10 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        elegant: "bg-wine text-primary-foreground hover:bg-wine/90 shadow-soft hover:shadow-elegant uppercase tracking-widest text-xs",
+        elegant: "bg-theme-button text-theme-button-text hover:brightness-95 shadow-soft hover:shadow-elegant uppercase tracking-brand text-xs",
         gold: "bg-gold text-foreground hover:bg-gold/80 shadow-soft hover:shadow-elegant",
-        sage: "bg-sage text-primary-foreground hover:bg-sage/90 shadow-soft hover:shadow-elegant uppercase tracking-widest text-xs",
-        minimal: "border border-foreground/20 bg-transparent text-foreground hover:border-foreground/40 hover:bg-foreground/5 uppercase tracking-widest text-xs",
+        sage: "bg-sage text-primary-foreground hover:bg-sage/90 shadow-soft hover:shadow-elegant uppercase tracking-brand text-xs",
+        minimal: "border border-foreground/20 bg-transparent text-foreground hover:border-foreground/40 hover:bg-foreground/5 uppercase tracking-brand text-xs",
       },
       size: {
         default: "h-10 px-4 py-2",

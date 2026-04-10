@@ -15,9 +15,15 @@ export default {
     extend: {
       fontFamily: {
         display: ['Instrument Serif', 'serif'],
-        body: ['Instrument Serif', 'serif'],
+        body: ['var(--font-wedding-content)'],
         navBrand: ['Barlow Condensed', 'sans-serif'],
         navLink: ['Instrument Serif', 'serif'],
+        'wedding-nav-brand': 'var(--font-wedding-nav-brand)',
+        'wedding-nav-link': 'var(--font-wedding-nav-link)',
+        'wedding-section-heading': 'var(--font-wedding-section-heading)',
+        'wedding-button': 'var(--font-wedding-button)',
+        'wedding-button-rsvp': 'var(--font-wedding-button-rsvp)',
+        'wedding-content': 'var(--font-wedding-content)',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -70,6 +76,13 @@ export default {
         ivory: "hsl(var(--ivory))",
         cream: "hsl(var(--cream))",
         charcoal: "hsl(var(--charcoal))",
+        "theme-main": "var(--theme-main-background)",
+        "theme-navbar": "var(--theme-navbar-text)",
+        "theme-button": "var(--theme-button)",
+        "theme-heading": "var(--theme-heading)",
+        "theme-content": "var(--theme-content)",
+        "theme-button-text": "var(--theme-button-text)",
+        "wedding-main-surface": "var(--wedding-surface-neutral)",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -80,6 +93,10 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      letterSpacing: {
+        /** Source: `--tracking-brand` in `src/index.css` :root */
+        brand: "var(--tracking-brand)",
       },
       borderRadius: {
         lg: "var(--radius)",

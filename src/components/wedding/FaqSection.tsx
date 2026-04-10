@@ -40,13 +40,13 @@ export function FaqSection() {
     >
       <div className="container mx-auto w-full px-6 md:px-10 lg:px-14">
         <div className="mb-8 md:mb-10 text-center md:text-left">
-          <p className="font-body text-xs md:text-sm tracking-[0.3em] uppercase text-wedding-heading mb-4">
+          <p className="font-wedding-section-heading text-xs md:text-sm tracking-brand uppercase text-wedding-heading mb-4">
             For guests
           </p>
-          <h2 className="font-display text-3xl md:text-5xl text-wedding-heading mb-3">
+          <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading mb-3">
             Frequently asked questions
           </h2>
-          <p className="font-body text-base md:text-lg text-wedding-body max-w-2xl mx-auto md:mx-0">
+          <p className="font-body text-base md:text-lg tracking-brand text-wedding-body max-w-2xl mx-auto md:mx-0">
             Quick answers to common questions—swap in your real details anytime.
           </p>
         </div>
@@ -62,10 +62,10 @@ export function FaqSection() {
               value={item.value}
               className="border-wine/15 last:border-b-0"
             >
-              <AccordionTrigger className="font-body text-left text-base md:text-lg text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
+              <AccordionTrigger className="font-wedding-content text-left text-base md:text-lg tracking-brand text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
                 {item.title}
               </AccordionTrigger>
-              <AccordionContent className="font-body text-wedding-body text-base leading-relaxed pr-8 md:pr-10">
+              <AccordionContent className="font-wedding-content text-wedding-body text-base leading-relaxed tracking-brand pr-8 md:pr-10">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

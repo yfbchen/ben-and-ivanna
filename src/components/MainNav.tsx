@@ -34,7 +34,7 @@ const MainNav = ({
     brandOnClick ? (
       <button
         onClick={brandOnClick}
-        className="shrink-0 font-navBrand font-[610] text-xl sm:text-2xl leading-none tracking-[0.05em] uppercase text-gold hover:text-gold/90 transition-colors"
+        className="shrink-0 font-wedding-nav-brand font-[610] text-xl sm:text-2xl leading-none tracking-brand uppercase text-theme-navbar hover:opacity-90 transition-opacity"
         aria-label="Go to top navigation"
       >
         IVANNA &amp; BEN
@@ -42,7 +42,7 @@ const MainNav = ({
     ) : (
       <Link
         to={brandTo}
-        className="shrink-0 font-navBrand font-[610] text-xl sm:text-2xl leading-none tracking-[0.05em] uppercase text-gold hover:text-gold/90 transition-colors"
+        className="shrink-0 font-wedding-nav-brand font-[610] text-xl sm:text-2xl leading-none tracking-brand uppercase text-theme-navbar hover:opacity-90 transition-opacity"
         aria-label="Go to top navigation"
       >
         IVANNA &amp; BEN
@@ -51,7 +51,7 @@ const MainNav = ({
 
   const renderNavItem = (item: NavItemConfig, isMobile = false) => {
     const commonClasses =
-      "font-navLink text-[16px] lg:text-[17px] font-medium leading-none tracking-[0.02em] text-gold/90 hover:text-gold transition-colors";
+      "font-wedding-nav-link font-medium text-[16px] lg:text-[17px] leading-none tracking-brand text-theme-navbar hover:opacity-90 transition-opacity";
 
     const handleClick = () => {
       if (item.onClick) {
@@ -94,7 +94,7 @@ const MainNav = ({
               key={`${item.label}-${child.label}`}
               to={child.to}
               onClick={() => setIsMenuOpen(false)}
-              className="pl-4 font-navLink text-[14px] leading-none tracking-[0.06em] text-gold/80 hover:text-gold transition-colors py-2 text-left"
+              className="pl-4 font-wedding-nav-link text-[14px] leading-none tracking-brand text-theme-navbar hover:opacity-90 transition-opacity py-2 text-left"
             >
               {child.label}
             </Link>,
@@ -124,14 +124,14 @@ const MainNav = ({
           ) : (
             <span className={commonClasses}>{item.label}</span>
           )}
-          <div className="absolute left-0 mt-2 min-w-[10rem] translate-y-1 rounded-sm border border-gold/30 bg-wine opacity-0 invisible shadow-soft transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible">
+          <div className="absolute left-0 mt-2 min-w-[10rem] translate-y-1 rounded-sm border border-white/20 bg-theme-main opacity-0 invisible shadow-soft transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible">
             <div className="py-2">
               {item.children.map((child) => (
                 <Link
                   key={child.label}
                   to={child.to}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block px-4 py-2 font-navLink text-[14px] leading-none tracking-[0.06em] text-gold/90 hover:text-gold hover:bg-gold/10"
+                  className="block px-4 py-2 font-wedding-nav-link text-[14px] leading-none tracking-brand text-theme-navbar hover:opacity-95 hover:bg-white/10"
                 >
                   {child.label}
                 </Link>
@@ -210,7 +210,7 @@ const MainNav = ({
   };
 
   return (
-    <nav className="sticky top-0 left-0 right-0 z-50 bg-wine/95 backdrop-blur-md supports-[backdrop-filter]:bg-wine/90 text-gold border-b border-gold/35 shadow-[0_6px_24px_hsl(var(--wine)/0.32)]">
+    <nav className="sticky top-0 left-0 right-0 z-50 wedding-nav-bar backdrop-blur-md text-theme-navbar">
       <div className="container mx-auto px-6 h-16 flex items-center gap-6">
         <Brand />
 
@@ -227,7 +227,7 @@ const MainNav = ({
         {/* Mobile Menu Button */}
         {navItems.length > 0 && (
           <button
-            className="md:hidden ml-auto p-2 text-gold"
+            className="md:hidden ml-auto p-2 text-theme-navbar"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
@@ -239,7 +239,7 @@ const MainNav = ({
 
       {/* Mobile Menu */}
       {isMenuOpen && navItems.length > 0 && (
-        <div className="md:hidden border-t border-gold/30 bg-wine animate-fade-in">
+        <div className="md:hidden border-t border-white/20 bg-theme-main animate-fade-in">
           <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
             {navItems.map((item) => renderNavItem(item, true))}
             {renderRightCta("mobile")}
