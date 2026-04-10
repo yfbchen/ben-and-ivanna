@@ -3,9 +3,9 @@
  */
 const WEDDING_EVENT = {
   title: "Ivanna & Ben's Wedding",
-  start: "2024-12-21T12:00:00", // Noon Pacific (Hotel San Francisco)
-  end: "2024-12-21T18:00:00",
-  location: "Hotel San Francisco, San Francisco",
+  start: "2026-09-12T17:30:00", // Ceremony — Eastern (Cambridge, MA)
+  end: "2026-09-12T23:00:00",
+  location: "Gufo, 660 Cambridge St., Cambridge, MA",
   description:
     "Dress code: Semi-formal attire. No white, please! See FAQ for more info.",
 } as const;
@@ -17,7 +17,7 @@ export function getGoogleCalendarUrl(): string {
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: WEDDING_EVENT.title,
-    dates: "20241221T200000Z/20241222T020000Z", // UTC: noon–6pm PST (San Francisco)
+    dates: "20260912T213000Z/20260913T030000Z", // UTC: 5:30pm–11pm EDT (Cambridge, MA)
     location: WEDDING_EVENT.location,
     details: WEDDING_EVENT.description,
   });
@@ -35,8 +35,8 @@ export function downloadIcsFile(): void {
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
-    `DTSTART;TZID=America/Los_Angeles:${WEDDING_EVENT.start.replace(/[-:]/g, "").slice(0, 15)}`,
-    `DTEND;TZID=America/Los_Angeles:${WEDDING_EVENT.end.replace(/[-:]/g, "").slice(0, 15)}`,
+    `DTSTART;TZID=America/New_York:${WEDDING_EVENT.start.replace(/[-:]/g, "").slice(0, 15)}`,
+    `DTEND;TZID=America/New_York:${WEDDING_EVENT.end.replace(/[-:]/g, "").slice(0, 15)}`,
     `SUMMARY:${WEDDING_EVENT.title}`,
     `LOCATION:${WEDDING_EVENT.location}`,
     `DESCRIPTION:${WEDDING_EVENT.description.replace(/\n/g, "\\n")}`,

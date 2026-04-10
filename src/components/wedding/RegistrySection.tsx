@@ -14,10 +14,10 @@ export function RegistrySection() {
               Registry
             </h2>
             <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
-              Your presence at our wedding is the greatest gift we could ask for.
-              If you&apos;d like to give us a gift, we&apos;ve set up a few
-              registries at the stores below. Thank you so much for your love
-              and support!
+              Your presence at our wedding means everything to us. If you&apos;d
+              like to help us celebrate, we&apos;d be so grateful for a
+              contribution to our honeymoon and the adventures ahead. A card box
+              will be available at the wedding as well.
             </p>
           </div>
 

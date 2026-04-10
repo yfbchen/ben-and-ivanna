@@ -31,7 +31,7 @@ export function RsvpSection({
               RSVP
             </h2>
             <p className="font-wedding-content tracking-brand">
-              Please respond by June 1st, 2024 so we can plan our celebration
+              Please respond by June 1st, 2026 so we can plan our celebration
               and your arrival.
             </p>
           </div>

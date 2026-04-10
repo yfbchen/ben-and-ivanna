@@ -19,8 +19,8 @@ export function OurWeddingSection() {
             Our Wedding
           </h2>
           <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body text-center max-w-3xl mx-auto mb-10 md:mb-12">
-            Eat, drink, laugh, and dance the night away! We are so excited to
-            celebrate with you.
+            Let&apos;s eat, laugh, and dance the night away! We&apos;re so excited to celebrate
+            with you.
           </p>
           <div className="flex justify-center mb-12 md:mb-16">
             <DropdownMenu>
@@ -60,9 +60,10 @@ export function OurWeddingSection() {
                 alt="Wedding date"
                 className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
               />
-              <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body">
-                Saturday, 21 December 2024
-              </p>
+              <div className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body space-y-0.5">
+                <p>Saturday</p>
+                <p>September 12, 2026</p>
+              </div>
             </div>
             <div className="flex flex-col items-center text-center">
               <img
@@ -70,20 +71,23 @@ export function OurWeddingSection() {
                 alt="Wedding venue"
                 className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
               />
-              <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body">
-                12:00, Hotel San Francisco, San Francisco
-              </p>
+              <div className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body space-y-0.5 max-w-[260px]">
+                <p>Gufo</p>
+                <p>660 Cambridge St., Cambridge</p>
+              </div>
             </div>
             <div className="flex flex-col items-center text-center">
               <img
                 src={images.calendar}
-                alt="Dress code"
+                alt="Wedding day schedule"
                 className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
               />
-              <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body">
-                Dress Code: Semi-formal attire. No white, please! Check the FAQ
-                for more info.
-              </p>
+              <div className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body space-y-0.5">
+                <p>Door Opens: 5PM</p>
+                <p>Ceremony: 5:30PM</p>
+                <p>Cocktail Hour: 6PM</p>
+                <p>Reception: 7PM</p>
+              </div>
             </div>
           </div>
         </div>

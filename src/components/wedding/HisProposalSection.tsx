@@ -14,12 +14,15 @@ export function HisProposalSection() {
             </h2>
             <div className="space-y-4 font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
               <p>
-                In April 2023, when we were visiting our favorite city in the
-                world, something amazing happened. It was a beautiful, sunny day,
-                and we were taking a stroll through the park. Then, Ben
-                surprised me and got down on one knee and asked me to be his
-                wife. It was the happiest day of our lives, and we can&apos;t
-                wait to start our forever together.
+                In April 2025, what seemed like just another trip to Japan became
+                something unforgettable. Ben secretly planned a proposal,
+                enlisting a few close friends to help him book a private theater
+                in Tokyo. There, he surprised Ivanna with a heartfelt video
+                capturing the past decade of their lives together.
+              </p>
+              <p>
+                Through tears and laughter, he asked the question—and she said
+                yes!
               </p>
             </div>
           </div>

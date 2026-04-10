@@ -23,9 +23,9 @@ export function GallerySection() {
               Gallery
             </h2>
             <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
-              We can&apos;t wait to share photos from our wedding day with all
-              of you. In the meantime, check out some of our favorite photos
-              from our engagement session!
+              We can&apos;t wait to share photos from our wedding with you in the
+              future! In the meantime, you can browse our engagement and
+              pre-wedding shoots here.
             </p>
             <Button
               variant="elegant"
