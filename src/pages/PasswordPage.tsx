@@ -40,7 +40,7 @@ const PasswordPage = () => {
               <h1 className="font-display text-4xl text-[#f8ede4] sm:text-5xl">
                 Ben &amp; Ivanna
               </h1>
-              <p className="mt-2 font-serif text-xl tracking-wide text-[#ead5c8] sm:text-2xl">
+              <p className="mt-2 font-serif text-xl text-[#ead5c8] sm:text-2xl">
                 Our Wedding
               </p>
 
@@ -102,7 +102,7 @@ const PasswordPage = () => {
               </div>
             </div>
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 sm:static sm:left-auto sm:bottom-auto sm:translate-x-0 flex w-16 justify-center sm:w-4 sm:items-center sm:justify-start">
-              <span className="text-[10px] tracking-[0.12em] text-[#f8ede4] sm:text-xs sm:-ml-1 sm:[writing-mode:vertical-rl]">
+              <span className="text-[10px] text-[#f8ede4] sm:text-xs sm:-ml-1 sm:[writing-mode:vertical-rl]">
                 091226
               </span>
             </div>

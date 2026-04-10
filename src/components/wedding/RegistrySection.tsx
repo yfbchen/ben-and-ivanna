@@ -10,17 +10,14 @@ export function RegistrySection() {
       <div className="container mx-auto px-6 md:px-10 lg:px-14">
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-wedding-body max-w-2xl mx-auto">
-            <p className="font-wedding-section-heading text-xs md:text-sm tracking-brand uppercase text-wedding-heading mb-6">
-              Registry
-            </p>
             <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand mb-6 text-wedding-heading">
-              Gift Registry
+              Registry
             </h2>
             <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
-              Your presence at our wedding is the greatest gift. If you would
-              like to celebrate with us further, we would be so grateful for a
-              contribution to our honeymoon fund and future adventures
-              together.
+              Your presence at our wedding is the greatest gift we could ask for.
+              If you&apos;d like to give us a gift, we&apos;ve set up a few
+              registries at the stores below. Thank you so much for your love
+              and support!
             </p>
           </div>
 

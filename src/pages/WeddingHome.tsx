@@ -85,7 +85,7 @@ const WeddingHome = () => {
   }
 
   return (
-    <div className="bg-wedding-page text-charcoal">
+    <div className="bg-wedding-page text-theme-navbar">
       <HeroSection selectedTheme={selectedTheme} onThemeChange={setSelectedTheme} />
       <main className="bg-wedding-main-surface">
         <OurWeddingSection />

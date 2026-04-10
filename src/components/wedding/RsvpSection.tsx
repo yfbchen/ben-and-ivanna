@@ -26,16 +26,13 @@ export function RsvpSection({
     >
       <div className="container mx-auto px-6 md:px-10 lg:px-14">
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
-          <div className="max-w-md w-full text-ivory text-center md:text-left">
-            <p className="font-wedding-section-heading text-sm tracking-brand uppercase text-gold mb-4">
-              RSVP
-            </p>
+          <div className="max-w-md w-full text-theme-navbar text-center md:text-left">
             <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand mb-4">
-              Will You Join Us?
+              RSVP
             </h2>
-            <p className="text-ivory/90 font-wedding-content tracking-brand">
-              Kindly respond by June 30, 2026 so we can plan the celebration
-              with you in mind.
+            <p className="font-wedding-content tracking-brand">
+              Please respond by June 1st, 2024 so we can plan our celebration
+              and your arrival.
             </p>
           </div>
 
@@ -44,23 +41,23 @@ export function RsvpSection({
               onSubmit={onSearch}
               className="space-y-6 bg-ivory/98 p-8 md:p-12 shadow-elegant rounded-lg border border-gold/45"
             >
-              <p className="font-wedding-content text-sm text-charcoal/60 uppercase tracking-brand">
-                RSVP For:
+              <p className="font-wedding-content text-base text-theme-navbar tracking-brand">
+                Will you be joining us? *
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Input
-                  placeholder="First name"
+                  placeholder="First Name"
                   value={searchFirstName}
                   onChange={(e) => setSearchFirstName(e.target.value)}
                   disabled={isSearching}
-                  className="font-wedding-content bg-ivory border-forest/25 text-charcoal placeholder:text-charcoal/45 focus-visible:ring-forest/35"
+                  className="font-wedding-content bg-ivory border-forest/25 text-theme-navbar placeholder:text-theme-navbar/45 focus-visible:ring-forest/35"
                 />
                 <Input
-                  placeholder="Last name"
+                  placeholder="Last Name"
                   value={searchLastName}
                   onChange={(e) => setSearchLastName(e.target.value)}
                   disabled={isSearching}
-                  className="font-wedding-content bg-ivory border-forest/25 text-charcoal placeholder:text-charcoal/45 focus-visible:ring-forest/35"
+                  className="font-wedding-content bg-ivory border-forest/25 text-theme-navbar placeholder:text-theme-navbar/45 focus-visible:ring-forest/35"
                 />
               </div>
               <Button

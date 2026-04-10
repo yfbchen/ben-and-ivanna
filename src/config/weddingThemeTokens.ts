@@ -17,14 +17,23 @@ export type WeddingThemeTokens = {
 /** Red wine matches the red hero swatch (`#6b1111` in HeroSection). */
 const RED_WINE = "#6b1111";
 
-/** Shared palette: red wine, bright red, … | all themes match this for now. */
+/** Bright red: navbar + all main content text (headings and body) for every theme. */
+const BRIGHT_RED = "#d81b3c";
+
+/** Primary CTA fill (Add to calendar, elegant buttons, nav RSVP) — warm yellow. */
+const YELLOW = "#e4c35a";
+
+/** Dark label on yellow buttons for contrast. */
+const BUTTON_TEXT_ON_YELLOW = "#5c1010";
+
+/** Shared palette | all themes match this for now. */
 const BASE_TOKENS: WeddingThemeTokens = {
   mainBackground: RED_WINE,
-  navbarTextColor: "#d81b3c",
-  buttonColor: "#d81b3c",
-  headingColor: RED_WINE,
-  contentColor: RED_WINE,
-  buttonTextColor: "#ffffff",
+  navbarTextColor: BRIGHT_RED,
+  buttonColor: YELLOW,
+  headingColor: BRIGHT_RED,
+  contentColor: BRIGHT_RED,
+  buttonTextColor: BUTTON_TEXT_ON_YELLOW,
 };
 
 export const WEDDING_THEME_TOKENS: Record<WeddingTheme, WeddingThemeTokens> = {

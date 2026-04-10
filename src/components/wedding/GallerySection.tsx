@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Images } from "lucide-react";
 import { images } from "@/config/images";
 import { Button } from "@/components/ui/button";
 
@@ -18,20 +19,24 @@ export function GallerySection() {
             />
           </div>
           <div className="max-w-xl w-full text-center md:text-left">
-            <h2 className="font-wedding-section-heading text-3xl md:text-3xl tracking-brand uppercase text-wedding-heading mb-6">
+            <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading mb-6">
               Gallery
             </h2>
             <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
-              There's no better way to capture the memories of our special day
-              than through photos. You'll find all of our favorite photos and
-              moments from our engagement and wedding day on the gallery board!
+              We can&apos;t wait to share photos from our wedding day with all
+              of you. In the meantime, check out some of our favorite photos
+              from our engagement session!
             </p>
             <Button
-              variant="minimal"
-              className="mt-6 tracking-brand uppercase text-xs"
+              variant="elegant"
+              size="lg"
+              className="mt-6 border-0 h-14 min-w-[220px] rounded-full px-10 text-sm sm:text-base normal-case"
               asChild
             >
-              <Link to="/gallery">View Full Gallery</Link>
+              <Link to="/gallery">
+                <Images className="h-5 w-5 shrink-0" />
+                See Gallery
+              </Link>
             </Button>
           </div>
         </div>

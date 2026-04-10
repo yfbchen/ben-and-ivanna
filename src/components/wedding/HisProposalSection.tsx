@@ -9,29 +9,17 @@ export function HisProposalSection() {
       <div className="container mx-auto px-6 md:px-10 lg:px-14">
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
           <div className="order-2 md:order-1 max-w-xl w-full text-center md:text-left">
-            <h2 className="font-wedding-section-heading text-3xl md:text-3xl tracking-brand uppercase text-wedding-heading mb-6">
+            <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading mb-6">
               His Proposal
             </h2>
             <div className="space-y-4 font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
               <p>
-                Ben planned a trip to Tokyo with Ivanna during cherry blossom
-                season, just like many of the other adventures they'd taken
-                together. To her, it was simply another trip. What she didn't
-                know was that Ben had been quietly planning a surprise the
-                entire time.
-              </p>
-              <p>
-                With the help of a few close friends, he secretly filmed a video
-                of himself playing guitar and singing Nothing by Bruno Major. He
-                booked a private theater, filled it with candles and flowers,
-                and told Ivanna they were going to watch a movie.
-              </p>
-              <p>
-                But the moment she walked into the theater, she had a feeling
-                something was going on. As the video played, there were tears, a
-                lot of laughter, and plenty of emotions. When it ended, Ben got
-                down on one knee and asked Ivanna to marry him. She said....
-                YES! 🌸💍
+                In April 2023, when we were visiting our favorite city in the
+                world, something amazing happened. It was a beautiful, sunny day,
+                and we were taking a stroll through the park. Then, Ben
+                surprised me and got down on one knee and asked me to be his
+                wife. It was the happiest day of our lives, and we can&apos;t
+                wait to start our forever together.
               </p>
             </div>
           </div>

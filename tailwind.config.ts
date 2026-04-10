@@ -95,7 +95,7 @@ export default {
         },
       },
       letterSpacing: {
-        /** Source: `--tracking-brand` in `src/index.css` :root */
+        /** Source: `--tracking-brand` in `src/index.css` (`normal` = browser default) */
         brand: "var(--tracking-brand)",
       },
       borderRadius: {

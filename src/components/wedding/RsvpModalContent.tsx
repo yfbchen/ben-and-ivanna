@@ -28,7 +28,7 @@ export function RsvpModalContent({
   return (
     <div className="flex flex-col min-h-0 flex-1 overflow-hidden rounded-lg border border-stone-200 bg-[#FAF9F6] p-6 shadow-xl">
       <div className="flex items-center justify-between shrink-0 mb-4">
-        <h2 className="font-wedding-section-heading text-lg font-semibold">
+        <h2 className="font-wedding-section-heading text-lg text-theme-navbar">
           {foundPartyMembers.length > 0
             ? `RSVP for ${foundPartyMembers
                 .map((g) => `${g.firstname} ${g.lastname}`)
@@ -63,12 +63,12 @@ export function RsvpModalContent({
                 key={guest.id}
                 className="rounded-lg border border-border bg-muted/30 p-4 space-y-4"
               >
-                <h4 className="font-wedding-content text-lg text-foreground">
+                <h4 className="font-wedding-content text-lg text-theme-navbar">
                   {guest.firstname} {guest.lastname}
                 </h4>
                 <div className="space-y-3">
                   <div>
-                    <Label className="text-muted-foreground font-wedding-content text-sm uppercase tracking-brand">
+                    <Label className="text-theme-navbar font-wedding-content text-sm uppercase tracking-brand">
                       Attending
                     </Label>
                     <RadioGroup
@@ -80,18 +80,22 @@ export function RsvpModalContent({
                     >
                       <label className="flex items-center gap-2 cursor-pointer">
                         <RadioGroupItem value="yes" id={`${guest.id}-yes`} />
-                        <span className="font-wedding-content text-sm">Yes</span>
+                        <span className="font-wedding-content text-sm text-theme-navbar">
+                          Yes
+                        </span>
                       </label>
                       <label className="flex items-center gap-2 cursor-pointer">
                         <RadioGroupItem value="no" id={`${guest.id}-no`} />
-                        <span className="font-wedding-content text-sm">No</span>
+                        <span className="font-wedding-content text-sm text-theme-navbar">
+                          No
+                        </span>
                       </label>
                     </RadioGroup>
                   </div>
                   <div className="space-y-2">
                     <Label
                       htmlFor={`${guest.id}-email`}
-                      className="text-muted-foreground font-wedding-content text-sm"
+                      className="text-theme-navbar font-wedding-content text-sm"
                     >
                       Email
                     </Label>
@@ -103,13 +107,13 @@ export function RsvpModalContent({
                       onChange={(e) =>
                         updatePartyResponse(guest.id, "email", e.target.value)
                       }
-                      className="font-wedding-content"
+                      className="font-wedding-content text-theme-navbar placeholder:text-theme-navbar/45"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label
                       htmlFor={`${guest.id}-phone`}
-                      className="text-muted-foreground font-wedding-content text-sm"
+                      className="text-theme-navbar font-wedding-content text-sm"
                     >
                       Phone
                     </Label>
@@ -121,13 +125,13 @@ export function RsvpModalContent({
                       onChange={(e) =>
                         updatePartyResponse(guest.id, "phone", e.target.value)
                       }
-                      className="font-wedding-content"
+                      className="font-wedding-content text-theme-navbar placeholder:text-theme-navbar/45"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label
                       htmlFor={`${guest.id}-dietary`}
-                      className="text-muted-foreground font-wedding-content text-sm"
+                      className="text-theme-navbar font-wedding-content text-sm"
                     >
                       Dietary restrictions
                     </Label>
@@ -142,13 +146,13 @@ export function RsvpModalContent({
                           e.target.value
                         )
                       }
-                      className="font-wedding-content"
+                      className="font-wedding-content text-theme-navbar placeholder:text-theme-navbar/45"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label
                       htmlFor={`${guest.id}-message`}
-                      className="text-muted-foreground font-wedding-content text-sm"
+                      className="text-theme-navbar font-wedding-content text-sm"
                     >
                       Message (optional)
                     </Label>
@@ -160,7 +164,7 @@ export function RsvpModalContent({
                         updatePartyResponse(guest.id, "message", e.target.value)
                       }
                       rows={3}
-                      className="flex w-full rounded-md border border-input bg-background px-4 py-3 text-sm font-wedding-content transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
+                      className="flex w-full rounded-md border border-input bg-background px-4 py-3 text-sm font-wedding-content text-theme-navbar placeholder:text-theme-navbar/45 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
                     />
                   </div>
                 </div>

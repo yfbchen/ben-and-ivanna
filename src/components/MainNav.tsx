@@ -210,7 +210,7 @@ const MainNav = ({
   };
 
   return (
-    <nav className="sticky top-0 left-0 right-0 z-50 wedding-nav-bar backdrop-blur-md text-theme-navbar">
+    <nav className="sticky top-0 left-0 right-0 z-50 wedding-nav-bar text-theme-navbar">
       <div className="container mx-auto px-6 h-16 flex items-center gap-6">
         <Brand />
 
