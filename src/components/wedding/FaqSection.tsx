@@ -16,7 +16,7 @@ const faqItems = [
     value: "dress-code",
     title: "What is the dress code?",
     answer:
-      "Formal attire with a tropical garden flair. Ladies, feel free to wear vibrant colors—just avoid white and green to not clash with bride and bridal party shine. Gentlemen, please avoid brown to complement the groom’s suit.",
+      "Formal attire with a tropical garden flair. Ladies, feel free to wear vibrant colors—just avoid white and green to not clash with bride and bridal party. Gentlemen, please avoid brown to complement the groom’s suit.",
   },
   {
     value: "plus-ones",

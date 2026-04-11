@@ -243,6 +243,7 @@ const MainNav = ({
     return (
       <Button
         type="button"
+        size="sm"
         className={rightCta.className}
         asChild={!!rightCta.to}
         onClick={

@@ -6,8 +6,32 @@ export const weddingSectionClassName = "w-full py-16 md:py-24";
 export const weddingSectionContainerClassName =
   "container mx-auto px-6 md:px-10 lg:px-14";
 
-/** Default space below section `h2` titles (when not paired with a subtitle). */
-export const weddingSectionTitleMarginClassName = "mb-6 md:mb-8";
+/**
+ * Barlow Condensed: slight top offset so titles don’t read flush to the section edge.
+ */
+export const weddingSectionTitleCapOffsetClassName = "pt-1 md:pt-1.5";
+
+/**
+ * Space between section `h2` and the following content (Registry is the reference).
+ */
+export const weddingSectionTitleToContentSpacingClassName = "mb-6 md:mb-8";
+
+/**
+ * Default section `h2` margin: cap offset + space to content below.
+ * Use on every wedding section title (same rhythm as Registry).
+ */
+export const weddingSectionTitleMarginClassName = `${weddingSectionTitleCapOffsetClassName} ${weddingSectionTitleToContentSpacingClassName}`;
+
+/**
+ * RSVP band: same cap offset, less space under the title than cream sections — the dark band
+ * and large `text-5xl` headline make the default `mb-6`/`mb-8` read as too loose next to the blurb.
+ */
+export const weddingSectionTitleMarginClassNameRsvp = `${weddingSectionTitleCapOffsetClassName} mb-3 md:mb-4`;
+
+/**
+ * Our Story: no margin under the title — timeline is nudged up with negative margin on its wrapper.
+ */
+export const weddingSectionTitleMarginClassNameOurStory = `${weddingSectionTitleCapOffsetClassName} mb-0`;
 
 /**
  * Main cream-surface body copy (same as His Proposal paragraphs).

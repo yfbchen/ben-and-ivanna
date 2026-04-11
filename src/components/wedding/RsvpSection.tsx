@@ -3,7 +3,7 @@ import {
   weddingRsvpBodyCopyClassName,
   weddingSectionClassName,
   weddingSectionContainerClassName,
-  weddingSectionTitleMarginClassName,
+  weddingSectionTitleMarginClassNameRsvp,
 } from "@/config/weddingSectionLayout";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,7 @@ export function RsvpSection({
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
           <div className="max-w-md w-full text-center md:text-left">
             <h2
-              className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-rsvp-heading ${weddingSectionTitleMarginClassName}`}
+              className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-rsvp-heading leading-tight ${weddingSectionTitleMarginClassNameRsvp}`}
             >
               RSVP
             </h2>

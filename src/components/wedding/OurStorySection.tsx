@@ -2,27 +2,34 @@ import { Fragment } from "react";
 import {
   weddingBodyCopyClassName,
   weddingSectionClassName,
-  weddingSectionTitleMarginClassName,
+  weddingSectionTitleMarginClassNameOurStory,
 } from "@/config/weddingSectionLayout";
+import { ourStoryTimelineAccentHex } from "@/config/weddingThemeTokens";
+import { useWeddingThemeFromDocument } from "@/hooks/useWeddingThemeFromDocument";
 import { ourStoryEvents } from "@/data/wedding";
 
 export function OurStorySection() {
+  const weddingTheme = useWeddingThemeFromDocument();
+  const timelineAccent = ourStoryTimelineAccentHex(weddingTheme);
+  const timelineLineColor = `color-mix(in srgb, ${timelineAccent} 55%, transparent)`;
+
   return (
     <section
       id="our-story"
       className={`${weddingSectionClassName} flex justify-center flex-col items-center`}
     >
       <h2
-        className={`font-wedding-section-heading text-4xl md:text-5xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
+        className={`font-wedding-section-heading text-4xl md:text-5xl tracking-brand text-wedding-heading text-center leading-tight ${weddingSectionTitleMarginClassNameOurStory}`}
       >
         Our Story
       </h2>
 
-      <div className="w-full max-w-[min(100%,84rem)] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+      <div className="-mt-3 md:-mt-6 w-full max-w-[min(100%,84rem)] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
         {/* Desktop: grid timeline */}
         <div className="relative h-[500px] hidden md:block">
           <div
-            className="absolute inset-x-0 top-1/2 h-px bg-wine/25 -translate-y-1/2"
+            className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2"
+            style={{ backgroundColor: timelineLineColor }}
             aria-hidden
           />
           <div
@@ -61,7 +68,10 @@ export function OurStorySection() {
                   className="flex items-center justify-center"
                   style={{ gridColumn: i + 1, gridRow: 2 }}
                 >
-                  <div className="w-4 h-4 rounded-full bg-gold/80 border-2 border-[var(--wedding-surface-neutral)] z-10 shrink-0" />
+                  <div
+                    className="w-4 h-4 rounded-full border-2 border-[var(--wedding-surface-neutral)] z-10 shrink-0"
+                    style={{ backgroundColor: timelineAccent }}
+                  />
                 </div>
                 <div
                   className="flex flex-col items-center justify-start pt-1 min-w-0"

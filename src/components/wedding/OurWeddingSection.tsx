@@ -69,37 +69,6 @@ export function OurWeddingSection() {
             Let&apos;s eat, laugh, and dance the night away! We&apos;re so excited to celebrate
             with you.
           </p>
-          <div className="flex justify-center mb-6 md:mb-8">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="elegant"
-                  size="lg"
-                  className={weddingElegantCtaButtonClassName}
-                >
-                  <CalendarPlus className="h-5 w-5 shrink-0" />
-                  Add To Calendar
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="center"
-                className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-[var(--radix-dropdown-menu-trigger-width)] bg-wedding-main-contrast border border-theme-content-subtle text-theme-navbar"
-              >
-                <DropdownMenuItem asChild>
-                  <a
-                    href={getGoogleCalendarUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Google Calendar
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={downloadIcsFile}>
-                  Apple Calendar / Outlook
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
           <div className="grid gap-1.5 md:gap-2 md:grid-cols-3 md:items-start">
             <div className="flex flex-col items-center text-center">
               <div className={ourWeddingCalendarIconSlotClassName}>
@@ -173,6 +142,37 @@ export function OurWeddingSection() {
                 <p>Ceremony Starts: 5:30PM</p>
               </div>
             </div>
+          </div>
+          <div className="flex justify-center mt-10 md:mt-12">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="elegant"
+                  size="lg"
+                  className={weddingElegantCtaButtonClassName}
+                >
+                  <CalendarPlus className="h-5 w-5 shrink-0" />
+                  Add To Calendar
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="center"
+                className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-[var(--radix-dropdown-menu-trigger-width)] bg-wedding-main-contrast border border-theme-content-subtle text-theme-navbar"
+              >
+                <DropdownMenuItem asChild>
+                  <a
+                    href={getGoogleCalendarUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Google Calendar
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={downloadIcsFile}>
+                  Apple Calendar / Outlook
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>

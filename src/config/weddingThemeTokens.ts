@@ -88,6 +88,23 @@ export const WEDDING_THEME_TOKENS: Record<WeddingTheme, WeddingThemeTokens> = {
   green: GREEN_THEME_TOKENS,
 };
 
+/**
+ * Our Story horizontal timeline: line + dots use a contrasting accent per hero theme.
+ * Red → orange, Green → bright red, Orange → green.
+ */
+export function ourStoryTimelineAccentHex(theme: WeddingTheme): string {
+  switch (theme) {
+    case "red":
+      return WEDDING_PALETTE.orange;
+    case "green":
+      return WEDDING_PALETTE.brightRed;
+    case "orange":
+      return WEDDING_PALETTE.green;
+    default:
+      return WEDDING_PALETTE.orange;
+  }
+}
+
 /** Font stacks (CSS `font-family` values). One object per theme so you can diverge later. */
 export type WeddingThemeTypography = {
   /** Top-left “Ivanna & Ben” wordmark */

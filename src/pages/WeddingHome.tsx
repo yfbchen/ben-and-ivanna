@@ -135,7 +135,7 @@ const WeddingHome = () => {
         role="contentinfo"
         className="bg-wedding-rsvp-band border-b border-gold/25 px-6 py-4 md:px-10 lg:px-14"
       >
-        <p className="font-wedding-content text-center text-sm tracking-brand text-white/95 md:text-left md:text-[15px]">
+        <p className="font-wedding-content text-center text-xs tracking-brand text-white/95 md:text-sm">
           © Ivanna &amp; Ben
         </p>
       </footer>
