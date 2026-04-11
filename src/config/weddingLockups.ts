@@ -11,26 +11,20 @@ const miscAsset = (filename: string) =>
 
 /**
  * Decorative icons in “Our Wedding” (left → right: date, venue, schedule).
- * Edit per theme when you add `calendar_red.png` / `pasta_green.png`, etc.
+ * Supabase `misc`: `calendar_{red|orange|green}.png`, same for `pasta_*` and `rings_*`.
  */
 export type WeddingOurWeddingIcons = readonly [string, string, string];
 
+const ourWeddingIcons = (color: "red" | "orange" | "green"): WeddingOurWeddingIcons => [
+  miscAsset(`calendar_${color}.png`),
+  miscAsset(`pasta_${color}.png`),
+  miscAsset(`rings_${color}.png`),
+];
+
 export const WEDDING_OUR_WEDDING_ICONS: Record<WeddingTheme, WeddingOurWeddingIcons> = {
-  red: [
-    miscAsset("calendar_orange.png"),
-    miscAsset("pasta_orange.png"),
-    miscAsset("rings_orange.png"),
-  ],
-  orange: [
-    miscAsset("calendar_orange.png"),
-    miscAsset("pasta_orange.png"),
-    miscAsset("rings_orange.png"),
-  ],
-  green: [
-    miscAsset("calendar_orange.png"),
-    miscAsset("pasta_orange.png"),
-    miscAsset("rings_orange.png"),
-  ],
+  red: ourWeddingIcons("red"),
+  orange: ourWeddingIcons("orange"),
+  green: ourWeddingIcons("green"),
 };
 
 /** Hero wordmark — orange uses orange asset; green uses yellow. */
@@ -40,11 +34,18 @@ export const WEDDING_HERO_LOCKUP_URLS: Record<WeddingTheme, string> = {
   green: lockup("yellow"),
 };
 
-/** Navbar wordmark — orange uses red asset; green uses yellow (same as hero). */
+/** Navbar wordmark — orange uses wine asset; green uses yellow (same as hero). */
 export const WEDDING_NAV_LOCKUP_URLS: Record<WeddingTheme, string> = {
   red: lockup("red"),
-  orange: lockup("red"),
+  orange: lockup("wine"),
   green: lockup("yellow"),
+};
+
+/** His Proposal section still image — `proposal_frame_{red|orange|green}.png` on `misc`. */
+export const WEDDING_PROPOSAL_FRAME_URLS: Record<WeddingTheme, string> = {
+  red: miscAsset("proposal_frame_red.png"),
+  orange: miscAsset("proposal_frame_orange.png"),
+  green: miscAsset("proposal_frame_green.png"),
 };
 
 export function weddingThemeFromDataAttr(value: string | null): WeddingTheme {

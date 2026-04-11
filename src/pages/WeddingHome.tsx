@@ -2,7 +2,8 @@ import { useRsvp } from "@/hooks/useRsvp";
 import { scrollToSection, useScrollToSection } from "@/hooks/useScrollToSection";
 import { useHeroImagesReady } from "@/hooks/useHeroImagesReady";
 import { EnvelopeModal } from "@/components/EnvelopeModal";
-import { useEffect, useState } from "react";
+import { flushSync } from "react-dom";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import {
   applyWeddingThemeCssVars,
   clearWeddingThemeCssVars,
@@ -26,11 +27,34 @@ const WeddingHome = () => {
   const heroImagesReady = useHeroImagesReady(WEDDING_HERO_IMAGE_URLS);
   const [selectedTheme, setSelectedTheme] = useState<WeddingTheme>("red");
 
-  useEffect(() => {
+  /** Layout so CSS vars + `data-wedding-theme` apply before paint — needed for View Transitions’ “after” snapshot. */
+  useLayoutEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-wedding-theme", selectedTheme);
     applyWeddingThemeCssVars(root, selectedTheme);
   }, [selectedTheme]);
+
+  const handleThemeChange = useCallback(
+    (theme: WeddingTheme) => {
+      if (theme === selectedTheme) return;
+      const prefersReducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (
+        prefersReducedMotion ||
+        typeof document.startViewTransition !== "function"
+      ) {
+        setSelectedTheme(theme);
+        return;
+      }
+      document.startViewTransition(() => {
+        flushSync(() => {
+          setSelectedTheme(theme);
+        });
+      });
+    },
+    [selectedTheme],
+  );
 
   useEffect(() => {
     return () => {
@@ -86,7 +110,7 @@ const WeddingHome = () => {
 
   return (
     <div className="bg-wedding-page text-wedding-body">
-      <HeroSection selectedTheme={selectedTheme} onThemeChange={setSelectedTheme} />
+      <HeroSection selectedTheme={selectedTheme} onThemeChange={handleThemeChange} />
       <main className="bg-wedding-main-surface">
         <OurWeddingSection />
         <OurStorySection />

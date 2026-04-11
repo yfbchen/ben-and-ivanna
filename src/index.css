@@ -362,3 +362,17 @@
   animation-delay: 500ms;
 }
 
+/* View Transitions API — full-page cross-fade on wedding theme change (see WeddingHome) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.55s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 1ms;
+  }
+}
+

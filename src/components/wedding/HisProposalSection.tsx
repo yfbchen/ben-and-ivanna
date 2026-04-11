@@ -1,11 +1,16 @@
 import { images } from "@/config/images";
+import { WEDDING_PROPOSAL_FRAME_URLS } from "@/config/weddingLockups";
 import {
   weddingBodyCopyClassName,
   weddingSectionClassName,
   weddingSectionContainerClassName,
 } from "@/config/weddingSectionLayout";
+import { useWeddingThemeFromDocument } from "@/hooks/useWeddingThemeFromDocument";
 
 export function HisProposalSection() {
+  const weddingTheme = useWeddingThemeFromDocument();
+  const proposalFrameSrc = WEDDING_PROPOSAL_FRAME_URLS[weddingTheme];
+
   return (
     <section
       id="his-proposal"
@@ -43,7 +48,7 @@ export function HisProposalSection() {
               decoding="async"
             />
             <img
-              src={images.proposalFrame}
+              src={proposalFrameSrc}
               alt="Ben and Ivanna — proposal"
               className="h-auto w-full rounded-xl"
               loading="lazy"

@@ -12,7 +12,6 @@ const url = (path: string) =>
   `${STORAGE_BASE}/${path.replace(/ /g, "%20")}`;
 
 export const images = {
-  proposalFrame: `${MISC_BASE}/proposal_frame.png`,
   proposalGif: `${MISC_BASE}/proposal-gif.gif`,
   galleryFrame: `${MISC_BASE}/gallery_frame.png`,
   heroHorizontal: url("photo1.jpg"),
