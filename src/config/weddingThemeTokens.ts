@@ -22,42 +22,70 @@ export type WeddingThemeTokens = {
   rsvpButtonText: string;
 };
 
-/** Red wine matches the red hero swatch (`#6b1111` in HeroSection). */
-const RED_WINE = "#6b1111";
+/** Official hex palette (see `index.css` `--wedding-palette-*`). */
+export const WEDDING_PALETTE = {
+  green: "#445026",
+  yellow: "#cebf3a",
+  wineRed: "#3a0e0e",
+  brightRed: "#d10c02",
+  orange: "#e26933",
+  whiteBackground: "#dddad3",
+} as const;
 
-/** Bright red: navbar + all main content text (headings and body) for every theme. */
-const BRIGHT_RED = "#d81b3c";
-
-/** Primary CTA fill (Add to calendar, elegant buttons, nav RSVP) — warm yellow. */
-const YELLOW = "#e4c35a";
-
-/** Dark label on yellow buttons for contrast. */
-const BUTTON_TEXT_ON_YELLOW = "#5c1010";
-
-/** RSVP band: bright accent (heading + form CTA) */
-const RSVP_ACCENT = "#d93f21";
-
-/** RSVP band: body copy on dark wine */
+/** RSVP band: body copy on dark wine (light, not the cream page background). */
 const RSVP_BODY_LIGHT = "#e8e4dd";
 
-/** Shared palette | all themes match this for now. */
-const BASE_TOKENS: WeddingThemeTokens = {
-  mainBackground: RED_WINE,
-  navbarTextColor: BRIGHT_RED,
-  buttonColor: YELLOW,
-  headingColor: BRIGHT_RED,
-  contentColor: BRIGHT_RED,
-  buttonTextColor: BUTTON_TEXT_ON_YELLOW,
-  rsvpHeadingColor: RSVP_ACCENT,
+/** Red theme — official palette mapping. */
+const RED_THEME_TOKENS: WeddingThemeTokens = {
+  mainBackground: WEDDING_PALETTE.wineRed,
+  navbarTextColor: WEDDING_PALETTE.brightRed,
+  buttonColor: WEDDING_PALETTE.orange,
+  headingColor: WEDDING_PALETTE.wineRed,
+  contentColor: WEDDING_PALETTE.wineRed,
+  buttonTextColor: WEDDING_PALETTE.whiteBackground,
+  /** RSVP accent (orange) */
+  rsvpHeadingColor: WEDDING_PALETTE.orange,
   rsvpBodyColor: RSVP_BODY_LIGHT,
-  rsvpButtonBackground: RSVP_ACCENT,
-  rsvpButtonText: "#ffffff",
+  rsvpButtonBackground: WEDDING_PALETTE.orange,
+  rsvpButtonText: WEDDING_PALETTE.whiteBackground,
+};
+
+/**
+ * Orange theme — RSVP accent uses wine red so headings + CTA read on orange bands.
+ */
+const ORANGE_THEME_TOKENS: WeddingThemeTokens = {
+  mainBackground: WEDDING_PALETTE.orange,
+  navbarTextColor: WEDDING_PALETTE.wineRed,
+  buttonColor: WEDDING_PALETTE.green,
+  headingColor: WEDDING_PALETTE.orange,
+  contentColor: WEDDING_PALETTE.orange,
+  buttonTextColor: WEDDING_PALETTE.whiteBackground,
+  rsvpHeadingColor: WEDDING_PALETTE.wineRed,
+  rsvpBodyColor: RSVP_BODY_LIGHT,
+  rsvpButtonBackground: WEDDING_PALETTE.wineRed,
+  rsvpButtonText: WEDDING_PALETTE.whiteBackground,
+};
+
+/**
+ * Green theme — RSVP accent uses bright red so headings + CTA pop on green bands.
+ */
+const GREEN_THEME_TOKENS: WeddingThemeTokens = {
+  mainBackground: WEDDING_PALETTE.green,
+  navbarTextColor: WEDDING_PALETTE.yellow,
+  buttonColor: WEDDING_PALETTE.brightRed,
+  headingColor: WEDDING_PALETTE.green,
+  contentColor: WEDDING_PALETTE.green,
+  buttonTextColor: WEDDING_PALETTE.whiteBackground,
+  rsvpHeadingColor: WEDDING_PALETTE.brightRed,
+  rsvpBodyColor: RSVP_BODY_LIGHT,
+  rsvpButtonBackground: WEDDING_PALETTE.brightRed,
+  rsvpButtonText: WEDDING_PALETTE.whiteBackground,
 };
 
 export const WEDDING_THEME_TOKENS: Record<WeddingTheme, WeddingThemeTokens> = {
-  red: { ...BASE_TOKENS },
-  orange: { ...BASE_TOKENS },
-  green: { ...BASE_TOKENS },
+  red: RED_THEME_TOKENS,
+  orange: ORANGE_THEME_TOKENS,
+  green: GREEN_THEME_TOKENS,
 };
 
 /** Font stacks (CSS `font-family` values). One object per theme so you can diverge later. */

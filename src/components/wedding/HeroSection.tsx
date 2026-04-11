@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import type { WeddingTheme } from "@/config/weddingThemeTokens";
+import { SUPABASE_MISC_WEDDING_ASSETS, WEDDING_LOCKUP_URLS } from "@/config/weddingLockups";
 
-const SUPABASE_MISC =
-  "https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/misc";
+const SUPABASE_MISC = SUPABASE_MISC_WEDDING_ASSETS;
 
 const HERO_THEME_SWATCHES: Array<{ key: WeddingTheme; label: string; swatchClass: string }> = [
-  { key: "red", label: "Red", swatchClass: "bg-[#6b1111]" },
-  { key: "orange", label: "Orange", swatchClass: "bg-[#c3a14d]" },
-  { key: "green", label: "Green", swatchClass: "bg-[#355b31]" },
+  { key: "red", label: "Red", swatchClass: "bg-[#3a0e0e]" },
+  { key: "orange", label: "Orange", swatchClass: "bg-[#d85f2a]" },
+  { key: "green", label: "Green", swatchClass: "bg-[#445026]" },
 ];
 
 const redHero = `${SUPABASE_MISC}/red-hero.jpeg`;
@@ -42,34 +43,44 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
           className="block w-full h-auto"
         />
 
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-6 md:px-10 lg:px-14">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 md:gap-6 pointer-events-none px-6 md:px-10 lg:px-14">
           <img
-            src="https://fpcnecyggvzhcoigoegf.supabase.co/storage/v1/object/public/misc/Lockup.png"
+            src={WEDDING_LOCKUP_URLS[selectedTheme]}
             alt="Ivanna and Ben"
             className="w-[78%] max-w-[700px] md:w-[60%] lg:w-[52%] h-auto object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.35)]"
           />
+          <Link
+            to="/#rsvp"
+            className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-theme-button-text/20 bg-theme-button px-10 py-2.5 text-[17px] font-wedding-button-rsvp leading-none tracking-brand text-theme-button-text shadow-soft transition-opacity hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:px-12 md:py-3 md:text-[18px]"
+          >
+            RSVP
+          </Link>
         </div>
 
       </div>
 
-      <div className="fixed left-4 md:left-6 top-20 md:top-24 z-40 flex flex-col items-center gap-2.5">
-        {HERO_THEME_SWATCHES.map(({ key, label, swatchClass }) => {
-          const isActive = selectedTheme === key;
-          return (
-            <button
-              key={key}
-              type="button"
-              aria-label={`Set hero theme to ${label}`}
-              aria-pressed={isActive}
-              onClick={() => onThemeChange(key)}
-              className={`h-7 w-7 md:h-8 md:w-8 rounded-sm border border-white/60 ${swatchClass} transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                isActive
-                  ? "scale-105 outline outline-2 outline-white outline-offset-2"
-                  : "scale-100"
-              }`}
-            />
-          );
-        })}
+      <div className="fixed inset-x-0 top-20 md:top-24 z-40 pointer-events-none">
+        <div className="container mx-auto px-3 flex justify-start">
+          <div className="flex flex-col items-center gap-2.5 pointer-events-auto">
+            {HERO_THEME_SWATCHES.map(({ key, label, swatchClass }) => {
+              const isActive = selectedTheme === key;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  aria-label={`Set hero theme to ${label}`}
+                  aria-pressed={isActive}
+                  onClick={() => onThemeChange(key)}
+                  className={`h-7 w-7 md:h-8 md:w-8 rounded-sm border border-white/60 ${swatchClass} transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
+                    isActive
+                      ? "scale-105 outline outline-2 outline-white outline-offset-2"
+                      : "scale-100"
+                  }`}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

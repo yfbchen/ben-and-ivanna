@@ -60,6 +60,18 @@
     --cream: 40 30% 96%;
     --charcoal: 30 10% 15%;
 
+    /**
+     * Official wedding palette (hex). Use these as the source of truth when
+     * mapping themes and surfaces; existing tokens can be migrated to these.
+     */
+    --wedding-palette-green: #445026;
+    --wedding-palette-yellow: #cebf3a;
+    --wedding-palette-wine-red: #3a0e0e;
+    --wedding-palette-bright-red: #d10c02;
+    --wedding-palette-orange: #e26933;
+    /** Same value as `--wedding-surface-neutral` today. */
+    --wedding-palette-white-background: #dddad3;
+
     /* Typography (defaults; wedding page may override via theme tokens) */
     --font-wedding-nav-brand: 'Barlow Condensed', sans-serif;
     --font-wedding-nav-link: 'Instrument Serif', serif;
@@ -82,17 +94,17 @@
     --wedding-heading: 5 68% 22%;
     --wedding-body: 30 10% 20%;
 
-    /* Wedding theme tokens (overridden per theme on the wedding page) */
-    --theme-main-background: #6b1111;
-    --theme-navbar-text: #d81b3c;
-    --theme-button: #e4c35a;
-    --theme-heading: #d81b3c;
-    --theme-content: #d81b3c;
-    --theme-button-text: #5c1010;
-    --theme-rsvp-heading: #d93f21;
+    /* Wedding theme tokens (overridden per theme on the wedding page; defaults = red theme) */
+    --theme-main-background: var(--wedding-palette-wine-red);
+    --theme-navbar-text: var(--wedding-palette-bright-red);
+    --theme-button: var(--wedding-palette-orange);
+    --theme-heading: var(--wedding-palette-wine-red);
+    --theme-content: var(--wedding-palette-wine-red);
+    --theme-button-text: var(--wedding-palette-white-background);
+    --theme-rsvp-heading: var(--wedding-palette-orange);
     --theme-rsvp-body: #e8e4dd;
-    --theme-rsvp-button: #d93f21;
-    --theme-rsvp-button-text: #ffffff;
+    --theme-rsvp-button: var(--wedding-palette-orange);
+    --theme-rsvp-button-text: var(--wedding-palette-white-background);
   }
 
   .dark {
@@ -252,13 +264,13 @@
     background-color: var(--theme-main-background);
   }
 
-  /** Section titles + body copy: same bright red as the navbar for all themes. */
+  /** Section titles + body copy — `--theme-heading` / `--theme-content` (often wine red on red theme). */
   .text-wedding-heading {
-    color: var(--theme-navbar-text);
+    color: var(--theme-heading);
   }
 
   .text-wedding-body {
-    color: var(--theme-navbar-text);
+    color: var(--theme-content);
   }
 
   /** Navbar: solid `--theme-main-background` (RSVP band / swatches). */

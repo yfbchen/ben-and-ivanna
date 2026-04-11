@@ -85,7 +85,7 @@ const WeddingHome = () => {
   }
 
   return (
-    <div className="bg-wedding-page text-theme-navbar">
+    <div className="bg-wedding-page text-wedding-body">
       <HeroSection selectedTheme={selectedTheme} onThemeChange={setSelectedTheme} />
       <main className="bg-wedding-main-surface">
         <OurWeddingSection />
@@ -112,7 +112,7 @@ const WeddingHome = () => {
         className="bg-wedding-rsvp-band border-b border-gold/25 px-6 py-4 md:px-10 lg:px-14"
       >
         <p className="font-wedding-content text-left text-sm md:text-[15px] tracking-brand text-white/95">
-          (c) Ivanna &amp; Ben
+          © Ivanna &amp; Ben
         </p>
       </footer>
 

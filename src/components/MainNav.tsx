@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WEDDING_LOCKUP_URLS } from "@/config/weddingLockups";
+import { useWeddingThemeFromDocument } from "@/hooks/useWeddingThemeFromDocument";
 
 type NavChildConfig = {
   label: string;
@@ -29,29 +31,41 @@ const MainNav = ({
   rightCta,
 }: MainNavProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const weddingTheme = useWeddingThemeFromDocument();
+  const lockupSrc = WEDDING_LOCKUP_URLS[weddingTheme];
+
+  const brandLogo = (
+    <img
+      src={lockupSrc}
+      alt=""
+      className="h-5 sm:h-6 w-auto max-w-[min(8rem,34vw)] object-contain object-left"
+      decoding="async"
+    />
+  );
 
   const Brand = () =>
     brandOnClick ? (
       <button
+        type="button"
         onClick={brandOnClick}
-        className="shrink-0 font-wedding-nav-brand font-[610] text-xl sm:text-2xl leading-none tracking-brand uppercase text-theme-navbar hover:opacity-90 transition-opacity"
-        aria-label="Go to top navigation"
+        className="shrink-0 hover:opacity-90 transition-opacity flex items-center"
+        aria-label="Ivanna & Ben — go to top navigation"
       >
-        IVANNA &amp; BEN
+        {brandLogo}
       </button>
     ) : (
       <Link
         to={brandTo}
-        className="shrink-0 font-wedding-nav-brand font-[610] text-xl sm:text-2xl leading-none tracking-brand uppercase text-theme-navbar hover:opacity-90 transition-opacity"
-        aria-label="Go to top navigation"
+        className="shrink-0 hover:opacity-90 transition-opacity flex items-center"
+        aria-label="Ivanna & Ben — go to top navigation"
       >
-        IVANNA &amp; BEN
+        {brandLogo}
       </Link>
     );
 
   const renderNavItem = (item: NavItemConfig, isMobile = false) => {
     const commonClasses =
-      "font-wedding-nav-link font-medium text-[16px] lg:text-[17px] leading-none tracking-brand text-theme-navbar hover:opacity-90 transition-opacity";
+      "font-wedding-nav-link font-semibold text-[17px] lg:text-[18px] leading-none tracking-brand text-theme-navbar hover:opacity-90 transition-opacity";
 
     const handleClick = () => {
       if (item.onClick) {
@@ -94,7 +108,7 @@ const MainNav = ({
               key={`${item.label}-${child.label}`}
               to={child.to}
               onClick={() => setIsMenuOpen(false)}
-              className="pl-4 font-wedding-nav-link text-[14px] leading-none tracking-brand text-theme-navbar hover:opacity-90 transition-opacity py-2 text-left"
+              className="pl-4 font-wedding-nav-link font-semibold text-[14px] leading-none tracking-brand text-theme-navbar hover:opacity-90 transition-opacity py-2 text-left"
             >
               {child.label}
             </Link>,
@@ -131,7 +145,7 @@ const MainNav = ({
                   key={child.label}
                   to={child.to}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block px-4 py-2 font-wedding-nav-link text-[14px] leading-none tracking-brand text-theme-navbar hover:opacity-95 hover:bg-white/10"
+                  className="block px-4 py-2 font-wedding-nav-link font-semibold text-[14px] leading-none tracking-brand text-theme-navbar hover:opacity-95 hover:bg-white/10"
                 >
                   {child.label}
                 </Link>
@@ -211,7 +225,7 @@ const MainNav = ({
 
   return (
     <nav className="sticky top-0 left-0 right-0 z-50 wedding-nav-bar text-theme-navbar">
-      <div className="container mx-auto px-6 h-16 flex items-center gap-6">
+      <div className="container mx-auto px-3 h-16 flex items-center gap-6">
         <Brand />
 
         {/* Desktop Menu */}
@@ -240,7 +254,7 @@ const MainNav = ({
       {/* Mobile Menu */}
       {isMenuOpen && navItems.length > 0 && (
         <div className="md:hidden border-t border-white/20 bg-theme-main animate-fade-in">
-          <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
+          <div className="container mx-auto px-3 py-4 flex flex-col gap-2">
             {navItems.map((item) => renderNavItem(item, true))}
             {renderRightCta("mobile")}
           </div>
