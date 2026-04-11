@@ -57,7 +57,7 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
           />
           <Link
             to="/#rsvp"
-            className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-theme-button px-10 py-2.5 text-[17px] font-wedding-button-rsvp leading-none tracking-brand text-theme-button-text shadow-soft transition-opacity hover:brightness-110 focus-visible:outline-none focus-visible:ring-0 md:px-12 md:py-3 md:text-[18px]"
+            className="pointer-events-auto hidden md:inline-flex items-center justify-center rounded-full bg-theme-button px-10 py-2.5 text-[17px] font-wedding-button-rsvp leading-none tracking-brand text-theme-button-text shadow-soft transition-opacity wedding-cta-hover-bright focus-visible:outline-none focus-visible:ring-0 md:px-12 md:py-3 md:text-[18px]"
           >
             RSVP
           </Link>

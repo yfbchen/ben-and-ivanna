@@ -276,6 +276,23 @@
   /** Navbar: solid `--theme-main-background` (RSVP band / swatches). */
   .wedding-nav-bar {
     background-color: var(--theme-main-background);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /**
+   * Use instead of `hover:brightness-*` on primary CTAs.
+   * Touch UAs often keep `:hover` after tap, so a plain hover filter looks like a stuck color change.
+   */
+  .wedding-cta-hover-bright {
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        filter: brightness(1.1);
+      }
+    }
+    /** Pressed state: drop hover filter so color doesn’t shift with :active + :hover stacked. */
+    &:active {
+      filter: brightness(1);
+    }
   }
 
   .border-theme-content-subtle {

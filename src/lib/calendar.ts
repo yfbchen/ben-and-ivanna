@@ -7,7 +7,7 @@ const WEDDING_EVENT = {
   end: "2026-09-12T23:00:00",
   location: "Gufo, 660 Cambridge St., Cambridge, MA",
   description:
-    "Dress code: Semi-formal attire. No white, please! See FAQ for more info.",
+    "Dress code: Formal attire with a tropical garden flair. See FAQ for full details.",
 } as const;
 
 /**

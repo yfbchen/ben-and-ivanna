@@ -49,7 +49,7 @@ export function RsvpSection({
               onSubmit={onSearch}
               className="space-y-6 bg-black/8 p-8 md:p-12 shadow-elegant rounded-2xl border border-white/45"
             >
-              <h3 className="font-wedding-section-heading font-bold text-xl md:text-2xl tracking-brand text-white leading-tight">
+              <h3 className="font-wedding-section-heading font-bold text-xl md:text-2xl tracking-brand text-wedding-main-surface leading-tight">
                 Will you be joining us?
               </h3>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -58,14 +58,14 @@ export function RsvpSection({
                   value={searchFirstName}
                   onChange={(e) => setSearchFirstName(e.target.value)}
                   disabled={isSearching}
-                  className="h-12 rounded-full px-5 font-wedding-content bg-ivory border-forest/25 text-theme-navbar placeholder:text-theme-navbar/45 focus-visible:ring-forest/35"
+                  className="h-12 rounded-full px-5 font-wedding-content bg-wedding-main-surface border-forest/25 text-black placeholder:text-black/45 focus-visible:ring-forest/35 focus-visible:ring-offset-wedding-main-surface"
                 />
                 <Input
                   placeholder="Last Name"
                   value={searchLastName}
                   onChange={(e) => setSearchLastName(e.target.value)}
                   disabled={isSearching}
-                  className="h-12 rounded-full px-5 font-wedding-content bg-ivory border-forest/25 text-theme-navbar placeholder:text-theme-navbar/45 focus-visible:ring-forest/35"
+                  className="h-12 rounded-full px-5 font-wedding-content bg-wedding-main-surface border-forest/25 text-black placeholder:text-black/45 focus-visible:ring-forest/35 focus-visible:ring-offset-wedding-main-surface"
                 />
               </div>
               <Button

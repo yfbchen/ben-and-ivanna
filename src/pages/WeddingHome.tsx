@@ -1,5 +1,5 @@
 import { useRsvp } from "@/hooks/useRsvp";
-import { scrollToSection, useScrollToSection } from "@/hooks/useScrollToSection";
+import { scrollToSectionWithRetry, useScrollToSection } from "@/hooks/useScrollToSection";
 import { useHeroImagesReady } from "@/hooks/useHeroImagesReady";
 import { EnvelopeModal } from "@/components/EnvelopeModal";
 import { flushSync } from "react-dom";
@@ -23,8 +23,8 @@ import {
 } from "@/components/wedding";
 
 const WeddingHome = () => {
-  useScrollToSection();
   const heroImagesReady = useHeroImagesReady(WEDDING_HERO_IMAGE_URLS);
+  useScrollToSection(heroImagesReady);
   const [selectedTheme, setSelectedTheme] = useState<WeddingTheme>("red");
 
   /** Layout so CSS vars + `data-wedding-theme` apply before paint — needed for View Transitions’ “after” snapshot. */
@@ -78,7 +78,7 @@ const WeddingHome = () => {
     if (!heroImagesReady) return;
     const id = window.location.hash.slice(1);
     if (id) {
-      requestAnimationFrame(() => scrollToSection(id));
+      scrollToSectionWithRetry(id, { maxAttempts: 80, intervalMs: 40 });
     }
   }, [heroImagesReady]);
 

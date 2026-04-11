@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WEDDING_NAV_LOCKUP_URLS } from "@/config/weddingLockups";
 import { useWeddingThemeFromDocument } from "@/hooks/useWeddingThemeFromDocument";
+import { scrollToSectionWithRetry } from "@/hooks/useScrollToSection";
 
 type NavChildConfig = {
   label: string;
@@ -31,7 +32,34 @@ const MainNav = ({
   rightCta,
 }: MainNavProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   const weddingTheme = useWeddingThemeFromDocument();
+
+  /** Hash links: avoid native jump + React Router hash desync; re-scroll when hash unchanged. */
+  const handleNavHashLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    to: string | undefined,
+  ): boolean => {
+    if (!to?.includes("#")) return false;
+    const sectionId = to.split("#")[1];
+    if (!sectionId) return false;
+
+    e.preventDefault();
+    setIsMenuOpen(false);
+
+    if (location.pathname !== "/") {
+      navigate({ pathname: "/", hash: sectionId });
+      scrollToSectionWithRetry(sectionId, { maxAttempts: 120, intervalMs: 40 });
+      return true;
+    }
+
+    if (location.hash !== `#${sectionId}`) {
+      navigate({ pathname: "/", hash: sectionId });
+    }
+    scrollToSectionWithRetry(sectionId);
+    return true;
+  };
   const lockupSrc = WEDDING_NAV_LOCKUP_URLS[weddingTheme];
 
   const brandLogo = (
@@ -86,7 +114,10 @@ const MainNav = ({
           <Link
             key={item.label}
             to={item.to}
-            onClick={handleClick}
+            onClick={(e) => {
+              if (handleNavHashLinkClick(e, item.to)) return;
+              handleClick();
+            }}
             className={`${commonClasses} block w-full py-3 text-center`}
           >
             {item.label}
@@ -110,7 +141,10 @@ const MainNav = ({
             <Link
               key={`${item.label}-${child.label}`}
               to={child.to}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(e) => {
+                if (handleNavHashLinkClick(e, child.to)) return;
+                setIsMenuOpen(false);
+              }}
               className="block w-full py-2 text-center font-wedding-nav-link font-semibold text-[14px] leading-none tracking-brand text-theme-navbar/90 hover:opacity-90 transition-opacity"
             >
               {child.label}
@@ -137,7 +171,14 @@ const MainNav = ({
         <div key={item.label} className="relative group">
           {hasClick ? (
             item.to ? (
-              <Link to={item.to} onClick={handleClick} className={commonClasses}>
+              <Link
+                to={item.to}
+                onClick={(e) => {
+                  if (handleNavHashLinkClick(e, item.to)) return;
+                  handleClick();
+                }}
+                className={commonClasses}
+              >
                 {item.label}
               </Link>
             ) : (
@@ -154,7 +195,10 @@ const MainNav = ({
                 <Link
                   key={child.label}
                   to={child.to}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    if (handleNavHashLinkClick(e, child.to)) return;
+                    setIsMenuOpen(false);
+                  }}
                   className="block px-4 py-2 font-wedding-nav-link font-semibold text-[14px] leading-none tracking-brand text-theme-navbar hover:opacity-95 hover:bg-white/10"
                 >
                   {child.label}
@@ -171,7 +215,10 @@ const MainNav = ({
         <Link
           key={item.label}
           to={item.to}
-          onClick={handleClick}
+          onClick={(e) => {
+            if (handleNavHashLinkClick(e, item.to)) return;
+            handleClick();
+          }}
           className={commonClasses}
         >
           {item.label}
@@ -190,10 +237,9 @@ const MainNav = ({
     );
   };
 
-  const renderRightCta = (placement: "desktop" | "mobile") => {
+  const renderRightCtaButton = () => {
     if (!rightCta) return null;
-
-    const baseButton = (
+    return (
       <Button
         type="button"
         className={rightCta.className}
@@ -210,7 +256,8 @@ const MainNav = ({
         {rightCta.to ? (
           <Link
             to={rightCta.to}
-            onClick={() => {
+            onClick={(e) => {
+              if (handleNavHashLinkClick(e, rightCta.to)) return;
               setIsMenuOpen(false);
             }}
           >
@@ -220,16 +267,6 @@ const MainNav = ({
           <span>{rightCta.label}</span>
         )}
       </Button>
-    );
-
-    if (placement === "desktop") {
-      return <div className="hidden shrink-0 lg:flex">{baseButton}</div>;
-    }
-
-    return (
-      <div className="flex w-full justify-center pt-2 pb-1 lg:hidden">
-        {baseButton}
-      </div>
     );
   };
 
@@ -246,7 +283,11 @@ const MainNav = ({
         </div>
       </div>
 
-      <div className="container relative mx-auto flex h-16 items-center justify-end gap-6 px-3 lg:justify-start">
+      <div className="container relative mx-auto flex h-16 w-full max-w-full items-center justify-between gap-6 px-4 md:px-8 lg:justify-start lg:px-12">
+        {rightCta && (
+          <div className="relative z-20 shrink-0 lg:hidden">{renderRightCtaButton()}</div>
+        )}
+
         <div className="hidden shrink-0 lg:block">
           <Brand />
         </div>
@@ -258,28 +299,28 @@ const MainNav = ({
           </div>
         )}
 
-        {/* Desktop Right CTA */}
-        {renderRightCta("desktop")}
+        {rightCta && (
+          <div className="hidden shrink-0 lg:flex">{renderRightCtaButton()}</div>
+        )}
 
         {navItems.length > 0 && (
           <button
             type="button"
-            className="relative z-20 flex h-10 w-10 shrink-0 items-center justify-center p-2 text-theme-navbar lg:hidden"
+            className="relative z-20 flex h-10 min-h-10 min-w-10 shrink-0 items-center justify-end p-0 text-theme-navbar lg:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? <X className="h-6 w-6 shrink-0" /> : <Menu className="h-6 w-6 shrink-0" />}
           </button>
         )}
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — nav links only; RSVP stays in the top bar */}
       {isMenuOpen && navItems.length > 0 && (
         <div className="border-t border-white/20 bg-theme-main animate-fade-in lg:hidden">
-          <div className="container mx-auto flex flex-col items-center gap-2 px-3 py-4">
+          <div className="container mx-auto flex w-full max-w-full flex-col items-center gap-2 px-4 py-4 md:px-8 lg:px-12">
             {navItems.map((item) => renderNavItem(item, true))}
-            {renderRightCta("mobile")}
           </div>
         </div>
       )}

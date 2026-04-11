@@ -10,8 +10,9 @@ const navItems: NavItemConfig[] = [
   { label: "FAQ", to: "/#faq" },
 ];
 
+/** Overrides default Button variant `hover:bg-primary/90` so theme orange stays on hover/tap. */
 const rightCtaClassName =
-  "h-9 px-6 rounded-full bg-theme-button text-theme-button-text hover:brightness-110 shadow-soft font-wedding-button-rsvp text-[16px] lg:text-[17px] leading-none tracking-brand focus-visible:ring-0 focus-visible:ring-offset-0";
+  "h-8 min-h-0 px-4 rounded-full bg-theme-button text-theme-button-text wedding-cta-hover-bright shadow-soft font-wedding-button-rsvp text-[14px] leading-none tracking-brand hover:bg-theme-button hover:text-theme-button-text active:bg-theme-button active:text-theme-button-text active:brightness-100 focus-visible:ring-0 focus-visible:ring-offset-0 lg:h-9 lg:px-6 lg:text-[17px]";
 
 const Layout = () => {
   return (

@@ -16,13 +16,13 @@ const faqItems = [
     value: "dress-code",
     title: "What is the dress code?",
     answer:
-      "Semi-formal attire, garden party vibe. No white, please. The groom will also be wearing a deep brown suit, so avoid the same color for males. We’ll add more detail here before the wedding.",
+      "Formal attire with a tropical garden flair. Ladies, feel free to wear vibrant colors—just avoid white and green to not clash with bride and bridal party shine. Gentlemen, please avoid brown to complement the groom’s suit.",
   },
   {
     value: "plus-ones",
     title: "Can I bring a plus one?",
     answer:
-      "Our venue is intimate, so we apologize that we are not able to accommodate any plus ones.",
+      "Due to our intimate restaurant-style wedding and limited space, we are only able to invite the guests named on the invitation. We truly appreciate your understanding.",
   },
   {
     value: "parking",
