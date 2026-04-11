@@ -1,25 +1,32 @@
 import { Fragment } from "react";
+import {
+  weddingBodyCopyClassName,
+  weddingSectionClassName,
+  weddingSectionTitleMarginClassName,
+} from "@/config/weddingSectionLayout";
 import { ourStoryEvents } from "@/data/wedding";
 
 export function OurStorySection() {
   return (
     <section
       id="our-story"
-      className="w-full flex justify-center flex-col items-center py-16 md:py-24"
+      className={`${weddingSectionClassName} flex justify-center flex-col items-center`}
     >
-      <h2 className="font-wedding-section-heading text-4xl md:text-5xl tracking-brand text-wedding-heading text-center mb-12 md:mb-16">
+      <h2
+        className={`font-wedding-section-heading text-4xl md:text-5xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
+      >
         Our Story
       </h2>
 
-      <div className="w-full max-w-6xl mx-auto px-6 md:px-10">
+      <div className="w-full max-w-[min(100%,84rem)] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
         {/* Desktop: grid timeline */}
-        <div className="relative h-[420px] hidden md:block">
+        <div className="relative h-[500px] hidden md:block">
           <div
             className="absolute inset-x-0 top-1/2 h-px bg-wine/25 -translate-y-1/2"
             aria-hidden
           />
           <div
-            className="grid h-full gap-x-2"
+            className="grid h-full gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-10"
             style={{
               gridTemplateColumns: "repeat(6, 1fr)",
               gridTemplateRows: "1fr 16px 1fr",
@@ -32,7 +39,7 @@ export function OurStorySection() {
                   style={{ gridColumn: i + 1, gridRow: 1 }}
                 >
                   {event.imageAbove ? (
-                    <div className="relative z-20 w-32 h-32 overflow-hidden rounded-full border border-wine/35 shrink-0 transition-transform duration-300 ease-out hover:scale-150">
+                    <div className="relative z-20 w-32 h-32 overflow-hidden rounded-full border border-wine/35 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.85]">
                       <img
                         src={event.image}
                         alt={event.alt}
@@ -41,10 +48,10 @@ export function OurStorySection() {
                     </div>
                   ) : (
                     <div className="text-center">
-                      <p className="font-wedding-content text-base tracking-brand text-wedding-body">
-                        {event.date}
-                      </p>
-                      <p className="font-wedding-content text-sm tracking-brand text-wedding-body leading-snug max-w-[140px] mt-0.5">
+                      <p className={weddingBodyCopyClassName}>{event.date}</p>
+                      <p
+                        className={`${weddingBodyCopyClassName} max-w-[min(100%,12rem)] mt-0.5`}
+                      >
                         {event.text}
                       </p>
                     </div>
@@ -62,15 +69,15 @@ export function OurStorySection() {
                 >
                   {event.imageAbove ? (
                     <div className="text-center">
-                      <p className="font-wedding-content text-base tracking-brand text-wedding-body">
-                        {event.date}
-                      </p>
-                      <p className="font-wedding-content text-sm tracking-brand text-wedding-body leading-snug max-w-[140px] mt-0.5">
+                      <p className={weddingBodyCopyClassName}>{event.date}</p>
+                      <p
+                        className={`${weddingBodyCopyClassName} max-w-[min(100%,12rem)] mt-0.5`}
+                      >
                         {event.text}
                       </p>
                     </div>
                   ) : (
-                    <div className="relative z-20 w-32 h-32 overflow-hidden rounded-full border border-wine/35 shrink-0 transition-transform duration-300 ease-out hover:scale-150">
+                    <div className="relative z-20 w-32 h-32 overflow-hidden rounded-full border border-wine/35 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.85]">
                       <img
                         src={event.image}
                         alt={event.alt}
@@ -88,15 +95,15 @@ export function OurStorySection() {
         <div className="flex flex-col gap-8 md:hidden">
           {ourStoryEvents.map((event, i) => (
             <div key={i} className="flex flex-col items-center text-center">
-              <div className="relative z-20 w-36 h-36 overflow-hidden rounded-full border border-wine/35 mb-2 shrink-0 transition-transform duration-300 ease-out hover:scale-150">
+              <div className="relative z-20 w-36 h-36 overflow-hidden rounded-full border border-wine/35 mb-2 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.85]">
                 <img
                   src={event.image}
                   alt={event.alt}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="font-wedding-content text-lg tracking-brand text-wedding-body">{event.date}</p>
-              <p className="font-wedding-content text-base tracking-brand text-wedding-body leading-snug max-w-[240px] mt-0.5">
+              <p className={weddingBodyCopyClassName}>{event.date}</p>
+              <p className={`${weddingBodyCopyClassName} max-w-[240px] mt-0.5`}>
                 {event.text}
               </p>
             </div>

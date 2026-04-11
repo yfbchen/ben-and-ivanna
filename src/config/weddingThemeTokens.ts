@@ -51,7 +51,7 @@ const RED_THEME_TOKENS: WeddingThemeTokens = {
 };
 
 /**
- * Orange theme — RSVP accent uses wine red so headings + CTA read on orange bands.
+ * Orange theme — RSVP band matches hero orange; RSVP title + Search CTA use green.
  */
 const ORANGE_THEME_TOKENS: WeddingThemeTokens = {
   mainBackground: WEDDING_PALETTE.orange,
@@ -60,9 +60,9 @@ const ORANGE_THEME_TOKENS: WeddingThemeTokens = {
   headingColor: WEDDING_PALETTE.orange,
   contentColor: WEDDING_PALETTE.orange,
   buttonTextColor: WEDDING_PALETTE.whiteBackground,
-  rsvpHeadingColor: WEDDING_PALETTE.wineRed,
+  rsvpHeadingColor: WEDDING_PALETTE.green,
   rsvpBodyColor: RSVP_BODY_LIGHT,
-  rsvpButtonBackground: WEDDING_PALETTE.wineRed,
+  rsvpButtonBackground: WEDDING_PALETTE.green,
   rsvpButtonText: WEDDING_PALETTE.whiteBackground,
 };
 

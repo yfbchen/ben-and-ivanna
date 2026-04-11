@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { WEDDING_LOCKUP_URLS } from "@/config/weddingLockups";
+import { WEDDING_NAV_LOCKUP_URLS } from "@/config/weddingLockups";
 import { useWeddingThemeFromDocument } from "@/hooks/useWeddingThemeFromDocument";
 
 type NavChildConfig = {
@@ -32,7 +32,7 @@ const MainNav = ({
 }: MainNavProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const weddingTheme = useWeddingThemeFromDocument();
-  const lockupSrc = WEDDING_LOCKUP_URLS[weddingTheme];
+  const lockupSrc = WEDDING_NAV_LOCKUP_URLS[weddingTheme];
 
   const brandLogo = (
     <img

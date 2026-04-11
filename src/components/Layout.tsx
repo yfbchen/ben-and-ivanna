@@ -11,7 +11,7 @@ const navItems: NavItemConfig[] = [
 ];
 
 const rightCtaClassName =
-  "h-9 px-6 rounded-full bg-theme-button text-theme-button-text border border-theme-button-text/20 hover:brightness-110 shadow-soft font-wedding-button-rsvp text-[16px] lg:text-[17px] leading-none tracking-brand";
+  "h-9 px-6 rounded-full bg-theme-button text-theme-button-text hover:brightness-110 shadow-soft font-wedding-button-rsvp text-[16px] lg:text-[17px] leading-none tracking-brand focus-visible:ring-0 focus-visible:ring-offset-0";
 
 const Layout = () => {
   return (

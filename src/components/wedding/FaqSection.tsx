@@ -1,4 +1,10 @@
 import {
+  weddingBodyCopyClassName,
+  weddingSectionClassName,
+  weddingSectionContainerClassName,
+  weddingSectionTitleMarginClassName,
+} from "@/config/weddingSectionLayout";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -30,14 +36,14 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="py-16 md:py-24 border-b border-wine/15"
+      className={`${weddingSectionClassName} border-b border-wine/15`}
     >
-      <div className="container mx-auto w-full px-6 md:px-10 lg:px-14">
-        <div className="mb-8 md:mb-10 text-center">
-          <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading mb-3">
-            FAQ
-          </h2>
-        </div>
+      <div className={weddingSectionContainerClassName}>
+        <h2
+          className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
+        >
+          FAQ
+        </h2>
 
         <Accordion
           type="single"
@@ -53,7 +59,7 @@ export function FaqSection() {
               <AccordionTrigger className="font-wedding-content text-left text-base md:text-lg tracking-brand text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
                 {item.title}
               </AccordionTrigger>
-              <AccordionContent className="font-wedding-content text-wedding-body text-base leading-relaxed tracking-brand pr-8 md:pr-10">
+              <AccordionContent className={`${weddingBodyCopyClassName} pr-8 md:pr-10`}>
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

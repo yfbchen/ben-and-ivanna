@@ -1,6 +1,14 @@
 import { CalendarPlus } from "lucide-react";
 
-import { images } from "@/config/images";
+import { WEDDING_OUR_WEDDING_ICONS } from "@/config/weddingLockups";
+import {
+  weddingBodyCopyClassName,
+  weddingElegantCtaButtonClassName,
+  weddingSectionClassName,
+  weddingSectionContainerClassName,
+  weddingSectionTitleMarginClassName,
+} from "@/config/weddingSectionLayout";
+import { useWeddingThemeFromDocument } from "@/hooks/useWeddingThemeFromDocument";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,28 +18,42 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { downloadIcsFile, getGoogleCalendarUrl } from "@/lib/calendar";
 
+/** Large decorative icons; grid column width caps them in the 3-up layout. */
+const ourWeddingIconClassName =
+  "w-full max-w-[520px] object-contain mb-0 rounded-xl mx-auto";
+
+/** Pull captions up toward the art (line-height + PNG padding leave a gap). */
+const ourWeddingCaptionClassName = `${weddingBodyCopyClassName} space-y-0.5 -mt-1.5`;
+
 export function OurWeddingSection() {
+  const weddingTheme = useWeddingThemeFromDocument();
+  const [iconDate, iconVenue, iconSchedule] = WEDDING_OUR_WEDDING_ICONS[weddingTheme];
+
   return (
-    <section id="our-wedding" className="w-full py-16 md:py-24">
-      <div className="container mx-auto px-6 md:px-10 lg:px-14">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-wedding-section-heading text-3xl md:text-4xl tracking-brand text-wedding-heading mb-6 md:mb-8 text-center">
+    <section id="our-wedding" className={weddingSectionClassName}>
+      <div className={weddingSectionContainerClassName}>
+        <div className="max-w-7xl mx-auto">
+          <h2
+            className={`font-wedding-section-heading text-3xl md:text-4xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
+          >
             Our Wedding
           </h2>
-          <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body text-center max-w-3xl mx-auto mb-10 md:mb-12">
+          <p
+            className={`${weddingBodyCopyClassName} text-center max-w-3xl mx-auto mb-10 md:mb-12`}
+          >
             Let&apos;s eat, laugh, and dance the night away! We&apos;re so excited to celebrate
             with you.
           </p>
-          <div className="flex justify-center mb-12 md:mb-16">
+          <div className="flex justify-center mb-6 md:mb-8">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="elegant"
                   size="lg"
-                  className="border-0 h-14 min-w-[220px] rounded-full px-10 text-sm sm:text-base normal-case"
+                  className={weddingElegantCtaButtonClassName}
                 >
                   <CalendarPlus className="h-5 w-5 shrink-0" />
-                  Add to calendar.
+                  Add To Calendar
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -56,33 +78,33 @@ export function OurWeddingSection() {
           <div className="grid gap-8 md:gap-12 md:grid-cols-3 items-start">
             <div className="flex flex-col items-center text-center">
               <img
-                src={images.calendar}
+                src={iconDate}
                 alt="Wedding date"
-                className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
+                className={ourWeddingIconClassName}
               />
-              <div className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body space-y-0.5">
+              <div className={ourWeddingCaptionClassName}>
                 <p>Saturday</p>
                 <p>September 12, 2026</p>
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
               <img
-                src={images.calendar}
+                src={iconVenue}
                 alt="Wedding venue"
-                className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
+                className={ourWeddingIconClassName}
               />
-              <div className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body space-y-0.5 max-w-[260px]">
+              <div className={`${ourWeddingCaptionClassName} max-w-[260px]`}>
                 <p>Gufo</p>
                 <p>660 Cambridge St., Cambridge</p>
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
               <img
-                src={images.calendar}
+                src={iconSchedule}
                 alt="Wedding day schedule"
-                className="w-full max-w-[200px] object-contain mb-4 rounded-xl"
+                className={ourWeddingIconClassName}
               />
-              <div className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body space-y-0.5">
+              <div className={ourWeddingCaptionClassName}>
                 <p>Door Opens: 5PM</p>
                 <p>Ceremony: 5:30PM</p>
                 <p>Cocktail Hour: 6PM</p>

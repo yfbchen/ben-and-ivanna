@@ -1,3 +1,10 @@
+import {
+  weddingBodyCopyClassName,
+  weddingSectionClassName,
+  weddingSectionContainerClassName,
+  weddingSectionTitleMarginClassName,
+} from "@/config/weddingSectionLayout";
+
 export function RegistrySection() {
   const paypalUrl = "https://paypal.me/your-profile";
   const venmoUrl = "https://venmo.com/your-profile";
@@ -5,15 +12,17 @@ export function RegistrySection() {
   return (
     <section
       id="gift"
-      className="w-full flex items-center justify-center py-16 md:py-24"
+      className={`${weddingSectionClassName} flex items-center justify-center`}
     >
-      <div className="container mx-auto px-6 md:px-10 lg:px-14">
+      <div className={weddingSectionContainerClassName}>
         <div className="max-w-4xl mx-auto text-center">
           <div className="text-wedding-body max-w-2xl mx-auto">
-            <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand mb-6 text-wedding-heading">
+            <h2
+              className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading ${weddingSectionTitleMarginClassName}`}
+            >
               Registry
             </h2>
-            <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
+            <p className={weddingBodyCopyClassName}>
               Your presence at our wedding means everything to us. If you&apos;d
               like to help us celebrate, we&apos;d be so grateful for a
               contribution to our honeymoon and the adventures ahead. A card box

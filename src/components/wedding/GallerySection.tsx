@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
 import { Images } from "lucide-react";
 import { images } from "@/config/images";
+import {
+  weddingBodyCopyClassName,
+  weddingElegantCtaButtonClassName,
+  weddingSectionClassName,
+  weddingSectionContainerClassName,
+  weddingSectionTitleMarginClassName,
+} from "@/config/weddingSectionLayout";
 import { Button } from "@/components/ui/button";
 
 export function GallerySection() {
   return (
     <section
       id="gallery"
-      className="w-full flex items-center justify-center py-16 md:py-24"
+      className={`${weddingSectionClassName} flex items-center justify-center`}
     >
-      <div className="container mx-auto px-6 md:px-10 lg:px-14">
+      <div className={weddingSectionContainerClassName}>
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
           <div className="w-full flex justify-center">
             <img
@@ -19,10 +26,12 @@ export function GallerySection() {
             />
           </div>
           <div className="max-w-xl w-full text-center md:text-left">
-            <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading mb-6">
+            <h2
+              className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading ${weddingSectionTitleMarginClassName}`}
+            >
               Gallery
             </h2>
-            <p className="font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
+            <p className={weddingBodyCopyClassName}>
               We can&apos;t wait to share photos from our wedding with you in the
               future! In the meantime, you can browse our engagement and
               pre-wedding shoots here.
@@ -30,7 +39,7 @@ export function GallerySection() {
             <Button
               variant="elegant"
               size="lg"
-              className="mt-6 border-0 h-14 min-w-[220px] rounded-full px-10 text-sm sm:text-base normal-case"
+              className={`mt-6 ${weddingElegantCtaButtonClassName}`}
               asChild
             >
               <Link to="/gallery">

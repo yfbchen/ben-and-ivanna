@@ -1,18 +1,26 @@
 import { images } from "@/config/images";
+import {
+  weddingBodyCopyClassName,
+  weddingSectionClassName,
+  weddingSectionContainerClassName,
+  weddingSectionTitleMarginClassName,
+} from "@/config/weddingSectionLayout";
 
 export function HisProposalSection() {
   return (
     <section
       id="his-proposal"
-      className="w-full flex items-center justify-center py-16 md:py-24"
+      className={`${weddingSectionClassName} flex items-center justify-center`}
     >
-      <div className="container mx-auto px-6 md:px-10 lg:px-14">
+      <div className={weddingSectionContainerClassName}>
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
           <div className="order-2 md:order-1 max-w-xl w-full text-center md:text-left">
-            <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading mb-6">
+            <h2
+              className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading ${weddingSectionTitleMarginClassName}`}
+            >
               His Proposal
             </h2>
-            <div className="space-y-4 font-wedding-content text-base md:text-lg tracking-brand text-wedding-body leading-relaxed">
+            <div className={`space-y-4 ${weddingBodyCopyClassName}`}>
               <p>
                 In April 2025, what seemed like just another trip to Japan became
                 something unforgettable. Ben secretly planned a proposal,

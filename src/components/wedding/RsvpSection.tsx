@@ -1,3 +1,9 @@
+import {
+  weddingRsvpBodyCopyClassName,
+  weddingSectionClassName,
+  weddingSectionContainerClassName,
+  weddingSectionTitleMarginClassName,
+} from "@/config/weddingSectionLayout";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
@@ -22,15 +28,17 @@ export function RsvpSection({
   return (
     <section
       id="rsvp"
-      className="w-full flex items-center justify-center py-16 md:py-24"
+      className={`${weddingSectionClassName} flex items-center justify-center`}
     >
-      <div className="container mx-auto px-6 md:px-10 lg:px-14">
+      <div className={weddingSectionContainerClassName}>
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-[1.1fr,1.2fr] items-center justify-items-center">
           <div className="max-w-md w-full text-center md:text-left">
-            <h2 className="font-wedding-section-heading text-3xl md:text-5xl tracking-brand mb-4 text-wedding-rsvp-heading">
+            <h2
+              className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-rsvp-heading ${weddingSectionTitleMarginClassName}`}
+            >
               RSVP
             </h2>
-            <p className="max-w-[46ch] mx-auto md:mx-0 font-wedding-content text-xl md:text-2xl leading-snug tracking-brand text-wedding-rsvp-body">
+            <p className={`max-w-[46ch] mx-auto md:mx-0 ${weddingRsvpBodyCopyClassName}`}>
               Kindly respond by June 30, 2026 so we can plan the celebration
               with you in mind.
             </p>

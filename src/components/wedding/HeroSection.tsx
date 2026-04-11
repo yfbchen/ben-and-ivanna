@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
-import type { WeddingTheme } from "@/config/weddingThemeTokens";
-import { SUPABASE_MISC_WEDDING_ASSETS, WEDDING_LOCKUP_URLS } from "@/config/weddingLockups";
+import { WEDDING_PALETTE, type WeddingTheme } from "@/config/weddingThemeTokens";
+import { SUPABASE_MISC_WEDDING_ASSETS, WEDDING_HERO_LOCKUP_URLS } from "@/config/weddingLockups";
 
 const SUPABASE_MISC = SUPABASE_MISC_WEDDING_ASSETS;
 
-const HERO_THEME_SWATCHES: Array<{ key: WeddingTheme; label: string; swatchClass: string }> = [
-  { key: "red", label: "Red", swatchClass: "bg-[#3a0e0e]" },
-  { key: "orange", label: "Orange", swatchClass: "bg-[#d85f2a]" },
-  { key: "green", label: "Green", swatchClass: "bg-[#445026]" },
+/** Inline fill colors — Tailwind cannot JIT `bg-[${var}]`; palette stays the source of truth. */
+const HERO_THEME_SWATCHES: Array<{
+  key: WeddingTheme;
+  label: string;
+  swatchColor: string;
+}> = [
+  { key: "red", label: "Red", swatchColor: WEDDING_PALETTE.wineRed },
+  { key: "green", label: "Green", swatchColor: WEDDING_PALETTE.green },
+  { key: "orange", label: "Orange", swatchColor: WEDDING_PALETTE.orange },
 ];
 
 const redHero = `${SUPABASE_MISC}/red-hero.jpeg`;
@@ -45,13 +50,13 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
 
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 md:gap-6 pointer-events-none px-6 md:px-10 lg:px-14">
           <img
-            src={WEDDING_LOCKUP_URLS[selectedTheme]}
+            src={WEDDING_HERO_LOCKUP_URLS[selectedTheme]}
             alt="Ivanna and Ben"
-            className="w-[78%] max-w-[700px] md:w-[60%] lg:w-[52%] h-auto object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.35)]"
+            className="w-[78%] max-w-[700px] md:w-[60%] lg:w-[52%] h-auto object-contain"
           />
           <Link
             to="/#rsvp"
-            className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-theme-button-text/20 bg-theme-button px-10 py-2.5 text-[17px] font-wedding-button-rsvp leading-none tracking-brand text-theme-button-text shadow-soft transition-opacity hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent md:px-12 md:py-3 md:text-[18px]"
+            className="pointer-events-auto inline-flex items-center justify-center rounded-full bg-theme-button px-10 py-2.5 text-[17px] font-wedding-button-rsvp leading-none tracking-brand text-theme-button-text shadow-soft transition-opacity hover:brightness-110 focus-visible:outline-none focus-visible:ring-0 md:px-12 md:py-3 md:text-[18px]"
           >
             RSVP
           </Link>
@@ -62,7 +67,7 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
       <div className="fixed inset-x-0 top-20 md:top-24 z-40 pointer-events-none">
         <div className="container mx-auto px-3 flex justify-start">
           <div className="flex flex-col items-center gap-2.5 pointer-events-auto">
-            {HERO_THEME_SWATCHES.map(({ key, label, swatchClass }) => {
+            {HERO_THEME_SWATCHES.map(({ key, label, swatchColor }) => {
               const isActive = selectedTheme === key;
               return (
                 <button
@@ -71,7 +76,8 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
                   aria-label={`Set hero theme to ${label}`}
                   aria-pressed={isActive}
                   onClick={() => onThemeChange(key)}
-                  className={`h-7 w-7 md:h-8 md:w-8 rounded-sm border border-white/60 ${swatchClass} transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
+                  style={{ backgroundColor: swatchColor }}
+                  className={`h-7 w-7 md:h-8 md:w-8 rounded-sm border border-white/60 transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
                     isActive
                       ? "scale-105 outline outline-2 outline-white outline-offset-2"
                       : "scale-100"
