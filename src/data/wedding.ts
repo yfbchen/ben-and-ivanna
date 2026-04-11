@@ -31,7 +31,7 @@ export const ourStoryEvents = [
   },
   {
     date: "2010",
-    text: "In 8th grade, Ben finally said hello by complimenting Ivanna's t-shirt in math class.",
+    text: "In 8th grade, Ben officially said hello by complimenting Ivanna's t-shirt in math class.",
     image: images.heroVertical,
     alt: "Eighth grade math class",
     imageAbove: false,
