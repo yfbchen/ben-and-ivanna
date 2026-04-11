@@ -5,6 +5,20 @@
 @tailwind utilities;
 
 @layer base {
+  /**
+   * Hide native scrollbars while keeping scroll (wheel, trackpad, keyboard).
+   * Firefox / IE legacy / WebKit use different properties.
+   */
+  html,
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
   :root {
     --background: 40 33% 98%;
     --foreground: 30 10% 15%;

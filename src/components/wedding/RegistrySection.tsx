@@ -1,5 +1,6 @@
 import {
   weddingBodyCopyClassName,
+  weddingNavLinkButtonTypographyClassName,
   weddingSectionClassName,
   weddingSectionContainerClassName,
   weddingSectionTitleMarginClassName,
@@ -35,18 +36,18 @@ export function RegistrySection() {
               href={paypalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 min-w-[230px] items-center justify-center rounded-full bg-[#FFC439] px-7 font-wedding-button text-[17px] font-semibold text-[#003087] shadow-md transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC439] focus-visible:ring-offset-2 focus-visible:ring-offset-wedding-main-surface"
+              className={`inline-flex h-12 min-w-[230px] items-center justify-center rounded-full bg-[#FFC439] px-7 ${weddingNavLinkButtonTypographyClassName} text-[#003087] shadow-md transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC439] focus-visible:ring-offset-2 focus-visible:ring-offset-wedding-main-surface`}
             >
-              <span className="font-bold tracking-brand">PayPal</span>
+              PayPal
             </a>
 
             <a
               href={venmoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 min-w-[230px] items-center justify-center rounded-full bg-[#008CFF] px-7 font-wedding-button text-[17px] font-semibold text-white shadow-md transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008CFF] focus-visible:ring-offset-2 focus-visible:ring-offset-wedding-main-surface"
+              className={`inline-flex h-12 min-w-[230px] items-center justify-center rounded-full bg-[#008CFF] px-7 ${weddingNavLinkButtonTypographyClassName} text-white shadow-md transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008CFF] focus-visible:ring-offset-2 focus-visible:ring-offset-wedding-main-surface`}
             >
-              <span className="font-bold tracking-brand">Venmo</span>
+              Venmo
             </a>
           </div>
         </div>

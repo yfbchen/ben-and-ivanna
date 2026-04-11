@@ -17,13 +17,38 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { downloadIcsFile, getGoogleCalendarUrl } from "@/lib/calendar";
+import { cn } from "@/lib/utils";
 
-/** Large decorative icons; grid column width caps them in the 3-up layout. */
+/**
+ * Shared “artboard” for venue + schedule PNGs (original scale; see calendar slot for date).
+ */
+const ourWeddingIconSlotClassName =
+  "flex h-[210px] w-full max-w-[520px] flex-col items-center justify-end px-2 pb-0.5 sm:h-[225px] md:h-[248px] md:px-3";
+
+/**
+ * Calendar column: taller slot for `mt-6 md:mt-7` on the art — keeps PNG scale logic separate.
+ */
+const ourWeddingCalendarIconSlotClassName =
+  "flex h-[234px] w-full max-w-[520px] flex-col items-center justify-start px-2 pb-0.5 sm:h-[249px] md:h-[276px] md:px-3";
+
 const ourWeddingIconClassName =
-  "w-full max-w-[520px] object-contain mb-0 rounded-xl mx-auto";
+  "max-h-full w-full object-contain object-bottom rounded-xl";
 
-/** Pull captions up toward the art (line-height + PNG padding leave a gap). */
-const ourWeddingCaptionClassName = `${weddingBodyCopyClassName} space-y-0.5 -mt-1.5`;
+/** Space below the aligned icon block (replaces old negative margin now that slots are fixed). */
+const ourWeddingCaptionClassName = `${weddingBodyCopyClassName} space-y-0.5 mt-2`;
+
+/** Text-only frame under each illustration — border only, no fill. */
+const ourWeddingCaptionPanelClassName =
+  "w-full rounded-xl border border-wine/20 bg-transparent px-3 py-2.5";
+
+/** Same width for all three caption frames (matches pasta / venue column). */
+const ourWeddingCaptionPanelMaxWidthClassName = "max-w-[260px]";
+
+/**
+ * Offsets venue + schedule icon rows so captions line up with the calendar column
+ * (difference vs tall slot: 24px default/sm, 28px md — matches mt-6 / md:mt-7 headroom).
+ */
+const ourWeddingIconSlotCaptionAlignClassName = "mb-6 md:mb-7";
 
 export function OurWeddingSection() {
   const weddingTheme = useWeddingThemeFromDocument();
@@ -75,40 +100,77 @@ export function OurWeddingSection() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <div className="grid gap-8 md:gap-12 md:grid-cols-3 items-start">
+          <div className="grid gap-1.5 md:gap-2 md:grid-cols-3 md:items-start">
             <div className="flex flex-col items-center text-center">
-              <img
-                src={iconDate}
-                alt="Wedding date"
-                className={ourWeddingIconClassName}
-              />
-              <div className={ourWeddingCaptionClassName}>
+              <div className={ourWeddingCalendarIconSlotClassName}>
+                <div className="flex min-h-0 flex-1 flex-col justify-end">
+                  <img
+                    src={iconDate}
+                    alt="Wedding date"
+                    className={cn(
+                      ourWeddingIconClassName,
+                      "mt-6 md:mt-7",
+                    )}
+                  />
+                </div>
+              </div>
+              <div
+                className={cn(
+                  ourWeddingCaptionClassName,
+                  ourWeddingCaptionPanelClassName,
+                  ourWeddingCaptionPanelMaxWidthClassName,
+                )}
+              >
                 <p>Saturday</p>
                 <p>September 12, 2026</p>
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
-              <img
-                src={iconVenue}
-                alt="Wedding venue"
-                className={ourWeddingIconClassName}
-              />
-              <div className={`${ourWeddingCaptionClassName} max-w-[260px]`}>
+              <div
+                className={cn(
+                  ourWeddingIconSlotClassName,
+                  ourWeddingIconSlotCaptionAlignClassName,
+                )}
+              >
+                <img
+                  src={iconVenue}
+                  alt="Wedding venue"
+                  className={ourWeddingIconClassName}
+                />
+              </div>
+              <div
+                className={cn(
+                  ourWeddingCaptionClassName,
+                  ourWeddingCaptionPanelClassName,
+                  ourWeddingCaptionPanelMaxWidthClassName,
+                )}
+              >
                 <p>Gufo</p>
                 <p>660 Cambridge St., Cambridge</p>
               </div>
             </div>
             <div className="flex flex-col items-center text-center">
-              <img
-                src={iconSchedule}
-                alt="Wedding day schedule"
-                className={ourWeddingIconClassName}
-              />
-              <div className={ourWeddingCaptionClassName}>
+              <div
+                className={cn(
+                  ourWeddingIconSlotClassName,
+                  ourWeddingIconSlotCaptionAlignClassName,
+                )}
+              >
+                <img
+                  src={iconSchedule}
+                  alt="Wedding day schedule"
+                  className={ourWeddingIconClassName}
+                />
+              </div>
+              <div
+                className={cn(
+                  ourWeddingCaptionClassName,
+                  ourWeddingCaptionPanelClassName,
+                  ourWeddingCaptionPanelMaxWidthClassName,
+                )}
+              >
                 <p>Door Opens: 5PM</p>
-                <p>Ceremony: 5:30PM</p>
-                <p>Cocktail Hour: 6PM</p>
-                <p>Reception: 7PM</p>
+                <p>Ceremony Starts: 5:30PM</p>
               </div>
             </div>
           </div>

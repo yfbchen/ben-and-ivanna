@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { weddingNavLinkButtonTypographyClassName } from "@/config/weddingSectionLayout";
 import { WEDDING_NAV_LOCKUP_URLS } from "@/config/weddingLockups";
 import { useWeddingThemeFromDocument } from "@/hooks/useWeddingThemeFromDocument";
 import { scrollToSectionWithRetry } from "@/hooks/useScrollToSection";
@@ -96,7 +97,7 @@ const MainNav = ({
 
   const renderNavItem = (item: NavItemConfig, isMobile = false) => {
     const commonClasses =
-      "font-wedding-nav-link font-semibold text-[17px] lg:text-[18px] leading-none tracking-brand text-theme-navbar hover:opacity-90 transition-opacity";
+      `${weddingNavLinkButtonTypographyClassName} text-theme-navbar hover:opacity-90 transition-opacity`;
 
     const handleClick = () => {
       if (item.onClick) {

@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import { weddingNavLinkButtonTypographyClassName } from "@/config/weddingSectionLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -176,7 +177,7 @@ export function RsvpModalContent({
           <Button
             type="submit"
             size="lg"
-            className="w-full bg-rose-800 hover:bg-rose-900 text-white font-wedding-button-rsvp"
+            className={`w-full bg-rose-800 hover:bg-rose-900 text-white ${weddingNavLinkButtonTypographyClassName}`}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Saving..." : "Update response"}

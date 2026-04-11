@@ -1,4 +1,5 @@
 import {
+  weddingNavLinkButtonTypographyClassName,
   weddingRsvpBodyCopyClassName,
   weddingSectionClassName,
   weddingSectionContainerClassName,
@@ -72,7 +73,7 @@ export function RsvpSection({
                 type="submit"
                 variant="rsvp"
                 size="lg"
-                className="w-full rounded-full px-10 font-semibold tracking-brand font-wedding-button-rsvp"
+                className={`w-full rounded-full px-10 ${weddingNavLinkButtonTypographyClassName}`}
                 disabled={isSearching}
               >
                 {isSearching ? (

@@ -21,7 +21,14 @@ export const weddingRsvpBodyCopyClassName =
   "font-wedding-content text-base md:text-lg tracking-brand text-wedding-rsvp-body leading-relaxed";
 
 /**
- * “Add to calendar” / “See Gallery” elegant pills — identical label size (matches hero RSVP link scale).
+ * Primary nav link label style (`MainNav` desktop/mobile top-level links).
+ * Use for wedding CTAs so buttons match navbar size and weight.
+ */
+export const weddingNavLinkButtonTypographyClassName =
+  "font-wedding-nav-link font-semibold text-[17px] lg:text-[18px] leading-none tracking-brand";
+
+/**
+ * “Add to calendar” / “See Gallery” elegant pills — typography matches navbar links.
  */
 export const weddingElegantCtaButtonClassName =
-  "border-0 h-14 min-w-[220px] rounded-full px-10 text-[17px] md:text-[18px] normal-case leading-none";
+  `border-0 h-14 min-w-[220px] rounded-full px-10 normal-case ${weddingNavLinkButtonTypographyClassName}`;

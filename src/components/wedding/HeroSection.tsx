@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { weddingNavLinkButtonTypographyClassName } from "@/config/weddingSectionLayout";
 import { WEDDING_PALETTE, type WeddingTheme } from "@/config/weddingThemeTokens";
 import { SUPABASE_MISC_WEDDING_ASSETS, WEDDING_HERO_LOCKUP_URLS } from "@/config/weddingLockups";
 
@@ -37,9 +38,15 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
   return (
     <section
       id="hero"
-      className="relative overflow-hidden scroll-mt-20 md:scroll-mt-24"
+      className="relative scroll-mt-20 md:scroll-mt-24"
     >
-      <div className="relative w-full">
+      {/*
+        Keep `overflow-hidden` on the media wrapper only — not on this section.
+        `position: fixed` swatches below are section children; an `overflow-hidden`
+        ancestor + `relative` can make Safari vs Chrome resolve fixed/viewport width
+        differently and misalign the swatch row vs the nav.
+      */}
+      <div className="relative w-full overflow-hidden">
         <img
           src={HERO_THEME_IMAGES[selectedTheme]}
           alt="Ivanna and Ben on a tennis court"
@@ -57,7 +64,7 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
           />
           <Link
             to="/#rsvp"
-            className="pointer-events-auto hidden md:inline-flex items-center justify-center rounded-full bg-theme-button px-10 py-2.5 text-[17px] font-wedding-button-rsvp leading-none tracking-brand text-theme-button-text shadow-soft transition-opacity wedding-cta-hover-bright focus-visible:outline-none focus-visible:ring-0 md:px-12 md:py-3 md:text-[18px]"
+            className={`pointer-events-auto hidden md:inline-flex items-center justify-center rounded-full bg-theme-button px-10 py-2.5 ${weddingNavLinkButtonTypographyClassName} text-theme-button-text shadow-soft transition-opacity wedding-cta-hover-bright focus-visible:outline-none focus-visible:ring-0 md:px-12 md:py-3`}
           >
             RSVP
           </Link>
@@ -66,7 +73,7 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
       </div>
 
       <div className="fixed inset-x-0 top-20 md:top-24 z-40 pointer-events-none">
-        <div className="container mx-auto px-3 flex justify-start">
+        <div className="container relative mx-auto flex w-full max-w-full justify-start px-4 md:px-8 lg:px-12">
           <div className="flex flex-col items-center gap-2.5 pointer-events-auto">
             {HERO_THEME_SWATCHES.map(({ key, label, swatchColor }) => {
               const isActive = selectedTheme === key;

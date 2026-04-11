@@ -28,7 +28,7 @@ const PasswordPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white p-4">
+    <div className="min-h-screen flex items-center justify-center bg-wedding-main-surface p-4">
       <div className="w-full max-w-3xl animate-fade-in-up opacity-0">
         <div className="relative mx-auto flex min-h-[320px] w-full flex-col overflow-hidden rounded-2xl border border-[#d8b7bd] bg-[#722f37] shadow-[0_12px_35px_rgba(0,0,0,0.2)] sm:flex-row">
           <div className="relative flex flex-1 flex-col justify-center px-6 py-10 sm:px-10">
