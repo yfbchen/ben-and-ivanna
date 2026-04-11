@@ -89,6 +89,10 @@
     --theme-heading: #d81b3c;
     --theme-content: #d81b3c;
     --theme-button-text: #5c1010;
+    --theme-rsvp-heading: #d93f21;
+    --theme-rsvp-body: #e8e4dd;
+    --theme-rsvp-button: #d93f21;
+    --theme-rsvp-button-text: #ffffff;
   }
 
   .dark {
@@ -264,6 +268,23 @@
 
   .border-theme-content-subtle {
     border-color: color-mix(in srgb, var(--theme-content) 22%, transparent);
+  }
+
+  /** RSVP band (left column + form CTA) — driven by theme tokens */
+  .text-wedding-rsvp-heading {
+    color: var(--theme-rsvp-heading);
+  }
+
+  .text-wedding-rsvp-body {
+    color: var(--theme-rsvp-body);
+  }
+
+  .bg-wedding-rsvp-cta {
+    background-color: var(--theme-rsvp-button);
+  }
+
+  .text-wedding-rsvp-cta {
+    color: var(--theme-rsvp-button-text);
   }
 }
 

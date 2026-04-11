@@ -50,11 +50,6 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
           />
         </div>
 
-        <div className="absolute left-6 right-6 bottom-6 md:bottom-10 mx-auto max-w-[460px] rounded-full border border-gold/55 bg-ivory/92 px-6 py-3 text-center shadow-elegant">
-          <p className="font-wedding-content text-xs md:text-sm tracking-brand text-wedding-heading">
-            Saturday, September 12, 2026 · Cambridge, MA
-          </p>
-        </div>
       </div>
 
       <div className="fixed left-4 md:left-6 top-20 md:top-24 z-40 flex flex-col items-center gap-2.5">

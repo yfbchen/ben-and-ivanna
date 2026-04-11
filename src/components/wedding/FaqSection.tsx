@@ -10,13 +10,13 @@ const faqItems = [
     value: "dress-code",
     title: "What is the dress code?",
     answer:
-      "Semi-formal attire. No white, please. We’ll add more detail here before the wedding.",
+      "Semi-formal attire, garden party vibe. No white, please. The groom will also be wearing a deep brown suit, so avoid the same color for males. We’ll add more detail here before the wedding.",
   },
   {
     value: "plus-ones",
     title: "Can I bring a plus one?",
     answer:
-      "Your invitation will name everyone in your party. If you have a question about guests, reach out to us anytime.",
+      "Our venue is intimate, so we apologize that we are not able to accommodate any plus ones.",
   },
   {
     value: "parking",

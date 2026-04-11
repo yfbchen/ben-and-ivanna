@@ -12,6 +12,14 @@ export type WeddingThemeTokens = {
   headingColor: string;
   contentColor: string;
   buttonTextColor: string;
+  /** “RSVP” heading on the dark RSVP band (bright accent) */
+  rsvpHeadingColor: string;
+  /** Invite / deadline paragraph on the RSVP band (light, reads on wine) */
+  rsvpBodyColor: string;
+  /** RSVP form Search button fill (bright red) */
+  rsvpButtonBackground: string;
+  /** RSVP form Search button label */
+  rsvpButtonText: string;
 };
 
 /** Red wine matches the red hero swatch (`#6b1111` in HeroSection). */
@@ -26,6 +34,12 @@ const YELLOW = "#e4c35a";
 /** Dark label on yellow buttons for contrast. */
 const BUTTON_TEXT_ON_YELLOW = "#5c1010";
 
+/** RSVP band: bright accent (heading + form CTA) */
+const RSVP_ACCENT = "#d93f21";
+
+/** RSVP band: body copy on dark wine */
+const RSVP_BODY_LIGHT = "#e8e4dd";
+
 /** Shared palette | all themes match this for now. */
 const BASE_TOKENS: WeddingThemeTokens = {
   mainBackground: RED_WINE,
@@ -34,6 +48,10 @@ const BASE_TOKENS: WeddingThemeTokens = {
   headingColor: BRIGHT_RED,
   contentColor: BRIGHT_RED,
   buttonTextColor: BUTTON_TEXT_ON_YELLOW,
+  rsvpHeadingColor: RSVP_ACCENT,
+  rsvpBodyColor: RSVP_BODY_LIGHT,
+  rsvpButtonBackground: RSVP_ACCENT,
+  rsvpButtonText: "#ffffff",
 };
 
 export const WEDDING_THEME_TOKENS: Record<WeddingTheme, WeddingThemeTokens> = {
@@ -92,6 +110,10 @@ const THEME_CSS_VARS = [
   ["--theme-heading", "headingColor"],
   ["--theme-content", "contentColor"],
   ["--theme-button-text", "buttonTextColor"],
+  ["--theme-rsvp-heading", "rsvpHeadingColor"],
+  ["--theme-rsvp-body", "rsvpBodyColor"],
+  ["--theme-rsvp-button", "rsvpButtonBackground"],
+  ["--theme-rsvp-button-text", "rsvpButtonText"],
 ] as const satisfies ReadonlyArray<readonly [string, keyof WeddingThemeTokens]>;
 
 export function applyWeddingThemeCssVars(element: HTMLElement, theme: WeddingTheme): void {

@@ -19,6 +19,7 @@ const buttonVariants = cva(
         gold: "bg-gold text-foreground hover:bg-gold/80 shadow-soft hover:shadow-elegant",
         sage: "bg-sage text-primary-foreground hover:bg-sage/90 shadow-soft hover:shadow-elegant uppercase tracking-brand text-xs",
         minimal: "border border-foreground/20 bg-transparent text-foreground hover:border-foreground/40 hover:bg-foreground/5 uppercase tracking-brand text-xs",
+        rsvp: "border-0 bg-wedding-rsvp-cta text-wedding-rsvp-cta shadow-md hover:brightness-110",
       },
       size: {
         default: "h-10 px-4 py-2",
