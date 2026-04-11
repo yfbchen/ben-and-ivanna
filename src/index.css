@@ -119,6 +119,8 @@
     --theme-rsvp-body: #e8e4dd;
     --theme-rsvp-button: var(--wedding-palette-orange);
     --theme-rsvp-button-text: var(--wedding-palette-white-background);
+    /** Timeline / registry outline accent — overridden by `applyWeddingThemeCssVars` on the wedding page. */
+    --theme-accent: var(--wedding-palette-orange);
   }
 
   .dark {

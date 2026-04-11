@@ -39,32 +39,34 @@ export function FaqSection() {
       className={`${weddingSectionClassName} border-b border-wine/15`}
     >
       <div className={weddingSectionContainerClassName}>
-        <h2
-          className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
-        >
-          FAQ
-        </h2>
+        <div className="px-2.5">
+          <h2
+            className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
+          >
+            FAQ
+          </h2>
 
-        <Accordion
-          type="single"
-          collapsible
-          className="w-full border-t border-b border-wine/20"
-        >
-          {faqItems.map((item) => (
-            <AccordionItem
-              key={item.value}
-              value={item.value}
-              className="border-wine/15 last:border-b-0"
-            >
-              <AccordionTrigger className="font-wedding-content text-left text-base md:text-lg tracking-brand text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
-                {item.title}
-              </AccordionTrigger>
-              <AccordionContent className={`${weddingBodyCopyClassName} pr-8 md:pr-10`}>
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full border-t border-b border-wine/20"
+          >
+            {faqItems.map((item) => (
+              <AccordionItem
+                key={item.value}
+                value={item.value}
+                className="border-wine/15 last:border-b-0"
+              >
+                <AccordionTrigger className="font-wedding-content text-left text-base md:text-lg tracking-brand text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
+                  {item.title}
+                </AccordionTrigger>
+                <AccordionContent className={`${weddingBodyCopyClassName} pr-8 md:pr-10`}>
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );

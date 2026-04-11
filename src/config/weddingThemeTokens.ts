@@ -161,6 +161,9 @@ const THEME_CSS_VARS = [
   ["--theme-rsvp-button-text", "rsvpButtonText"],
 ] as const satisfies ReadonlyArray<readonly [string, keyof WeddingThemeTokens]>;
 
+/** Per hero theme: red → orange, green → bright red, orange → green (see `ourStoryTimelineAccentHex`). */
+export const THEME_ACCENT_CSS_VAR = "--theme-accent";
+
 export function applyWeddingThemeCssVars(element: HTMLElement, theme: WeddingTheme): void {
   const tokens = WEDDING_THEME_TOKENS[theme];
   for (const [cssVar, key] of THEME_CSS_VARS) {
@@ -170,6 +173,7 @@ export function applyWeddingThemeCssVars(element: HTMLElement, theme: WeddingThe
   for (const [cssVar, key] of TYPOGRAPHY_CSS_VARS) {
     element.style.setProperty(cssVar, typo[key]);
   }
+  element.style.setProperty(THEME_ACCENT_CSS_VAR, ourStoryTimelineAccentHex(theme));
 }
 
 export function clearWeddingThemeCssVars(element: HTMLElement): void {
@@ -179,4 +183,5 @@ export function clearWeddingThemeCssVars(element: HTMLElement): void {
   for (const [cssVar] of TYPOGRAPHY_CSS_VARS) {
     element.style.removeProperty(cssVar);
   }
+  element.style.removeProperty(THEME_ACCENT_CSS_VAR);
 }

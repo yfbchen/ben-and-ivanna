@@ -1,4 +1,7 @@
-/* Exact BruceMorpho structure from https://brucemorpho.github.io/Envelope-open-Animation-/ - red colors */
+/*
+ * Structure from https://brucemorpho.github.io/Envelope-open-Animation-/
+ * Facet colors match site wine red (`--wedding-palette-wine-red` / #3a0e0e) with depth via lighter sides + darker bottom fold.
+ */
 .envelope-modal-overlay {
   position: fixed;
   inset: 0;
@@ -6,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.45);
   animation: envelope-overlay-fade-in 0.3s ease-out;
 }
 
@@ -16,15 +19,26 @@
 }
 
 .envelope-wrapper {
+  --envelope-scale: 1;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--envelope-scale));
   height: 520px;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 800px;
+}
+
+/* Keep horizontal + vertical margins on small viewports (envelope is 420×520 logical px) */
+@media (max-width: 540px) {
+  .envelope-wrapper {
+    --envelope-scale: min(
+      min(1, calc((100vw - 2rem) / 420px)),
+      min(1, calc((100vh - 3rem) / 520px))
+    );
+  }
 }
 
 .envelope-container {
@@ -35,8 +49,8 @@
   margin-right: auto;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: #722F37;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background-color: var(--wedding-palette-wine-red, #3a0e0e);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   cursor: pointer;
 }
 
@@ -58,7 +72,7 @@
   border-left: 210px solid transparent;
   border-right: 210px solid transparent;
   border-bottom: 123px solid transparent;
-  border-top: 147px solid #722F37;
+  border-top: 147px solid var(--wedding-palette-wine-red, #3a0e0e);
   transform-origin: top;
   pointer-events: none;
 }
@@ -69,9 +83,9 @@
   height: 0;
   left: 0;
   top: 0;
-  border-left: 210px solid #8B3A5C;
-  border-right: 210px solid #8B3A5C;
-  border-bottom: 135px solid #7A3345;
+  border-left: 210px solid #4d1818;
+  border-right: 210px solid #4d1818;
+  border-bottom: 135px solid #2a0808;
   border-top: 135px solid transparent;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -112,7 +126,7 @@
 @keyframes envelope-exit {
   to {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.95);
+    transform: translate(-50%, -50%) scale(calc(var(--envelope-scale) * 0.95));
   }
 }
 
