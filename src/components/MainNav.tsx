@@ -38,17 +38,20 @@ const MainNav = ({
     <img
       src={lockupSrc}
       alt=""
-      className="h-5 sm:h-6 w-auto max-w-[min(8rem,34vw)] object-contain object-left"
+      className="h-5 sm:h-6 w-auto max-w-[min(8rem,34vw)] object-contain object-center lg:object-left"
       decoding="async"
     />
   );
+
+  const brandControlClass =
+    "shrink-0 hover:opacity-90 transition-opacity flex items-center justify-center lg:justify-start";
 
   const Brand = () =>
     brandOnClick ? (
       <button
         type="button"
         onClick={brandOnClick}
-        className="shrink-0 hover:opacity-90 transition-opacity flex items-center"
+        className={brandControlClass}
         aria-label="Ivanna & Ben — go to top navigation"
       >
         {brandLogo}
@@ -56,7 +59,7 @@ const MainNav = ({
     ) : (
       <Link
         to={brandTo}
-        className="shrink-0 hover:opacity-90 transition-opacity flex items-center"
+        className={brandControlClass}
         aria-label="Ivanna & Ben — go to top navigation"
       >
         {brandLogo}
@@ -84,7 +87,7 @@ const MainNav = ({
             key={item.label}
             to={item.to}
             onClick={handleClick}
-            className={`${commonClasses} py-3 text-left`}
+            className={`${commonClasses} block w-full py-3 text-center`}
           >
             {item.label}
           </Link>,
@@ -94,7 +97,7 @@ const MainNav = ({
           <button
             key={item.label}
             onClick={handleClick}
-            className={`${commonClasses} py-3 text-left w-full`}
+            className={`${commonClasses} w-full py-3 text-center`}
           >
             {item.label}
           </button>,
@@ -108,7 +111,7 @@ const MainNav = ({
               key={`${item.label}-${child.label}`}
               to={child.to}
               onClick={() => setIsMenuOpen(false)}
-              className="pl-4 font-wedding-nav-link font-semibold text-[14px] leading-none tracking-brand text-theme-navbar hover:opacity-90 transition-opacity py-2 text-left"
+              className="block w-full py-2 text-center font-wedding-nav-link font-semibold text-[14px] leading-none tracking-brand text-theme-navbar/90 hover:opacity-90 transition-opacity"
             >
               {child.label}
             </Link>,
@@ -116,7 +119,14 @@ const MainNav = ({
         });
       }
 
-      return <div key={item.label}>{elements}</div>;
+      return (
+        <div
+          key={item.label}
+          className="flex w-full flex-col items-center"
+        >
+          {elements}
+        </div>
+      );
     }
 
     // Desktop: with or without dropdown
@@ -213,11 +223,11 @@ const MainNav = ({
     );
 
     if (placement === "desktop") {
-      return <div className="hidden md:flex shrink-0">{baseButton}</div>;
+      return <div className="hidden shrink-0 lg:flex">{baseButton}</div>;
     }
 
     return (
-      <div className="pt-2 pb-1 md:hidden">
+      <div className="flex w-full justify-center pt-2 pb-1 lg:hidden">
         {baseButton}
       </div>
     );
@@ -225,12 +235,25 @@ const MainNav = ({
 
   return (
     <nav className="sticky top-0 left-0 right-0 z-50 wedding-nav-bar text-theme-navbar">
-      <div className="container mx-auto px-3 h-16 flex items-center gap-6">
-        <Brand />
+      {/*
+        Wordmark must center in the full-width bar. Putting it inside `.container` only
+        centers within that narrower box (often looks left vs the hero). This full-bleed
+        strip is < lg; `lg:block` brand in the row handles desktop.
+      */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex h-16 items-center justify-center lg:hidden">
+        <div className="pointer-events-auto">
+          <Brand />
+        </div>
+      </div>
+
+      <div className="container relative mx-auto flex h-16 items-center justify-end gap-6 px-3 lg:justify-start">
+        <div className="hidden shrink-0 lg:block">
+          <Brand />
+        </div>
 
         {/* Desktop Menu */}
         {navItems.length > 0 && (
-          <div className="hidden md:flex flex-1 items-center justify-end gap-10 pr-6">
+          <div className="hidden flex-1 items-center justify-end gap-10 pr-6 lg:flex">
             {navItems.map((item) => renderNavItem(item))}
           </div>
         )}
@@ -238,10 +261,10 @@ const MainNav = ({
         {/* Desktop Right CTA */}
         {renderRightCta("desktop")}
 
-        {/* Mobile Menu Button */}
         {navItems.length > 0 && (
           <button
-            className="md:hidden ml-auto p-2 text-theme-navbar"
+            type="button"
+            className="relative z-20 flex h-10 w-10 shrink-0 items-center justify-center p-2 text-theme-navbar lg:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
@@ -253,8 +276,8 @@ const MainNav = ({
 
       {/* Mobile Menu */}
       {isMenuOpen && navItems.length > 0 && (
-        <div className="md:hidden border-t border-white/20 bg-theme-main animate-fade-in">
-          <div className="container mx-auto px-3 py-4 flex flex-col gap-2">
+        <div className="border-t border-white/20 bg-theme-main animate-fade-in lg:hidden">
+          <div className="container mx-auto flex flex-col items-center gap-2 px-3 py-4">
             {navItems.map((item) => renderNavItem(item, true))}
             {renderRightCta("mobile")}
           </div>

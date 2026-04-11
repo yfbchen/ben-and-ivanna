@@ -20,9 +20,9 @@ export function GallerySection() {
         <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
           <div className="w-full flex justify-center">
             <img
-              src={images.heroHorizontal}
-              alt="Gallery placeholder"
-              className="aspect-[4/5] w-full max-w-sm object-cover rounded-xl border border-wine/30"
+              src={images.galleryFrame}
+              alt="Ben and Ivanna — engagement gallery preview"
+              className="w-full h-auto rounded-xl"
             />
           </div>
           <div className="max-w-xl w-full text-center md:text-left">

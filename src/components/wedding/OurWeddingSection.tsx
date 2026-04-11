@@ -58,7 +58,7 @@ export function OurWeddingSection() {
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="center"
-                className="bg-wedding-main-contrast border border-theme-content-subtle text-theme-navbar"
+                className="min-w-[var(--radix-dropdown-menu-trigger-width)] w-[var(--radix-dropdown-menu-trigger-width)] bg-wedding-main-contrast border border-theme-content-subtle text-theme-navbar"
               >
                 <DropdownMenuItem asChild>
                   <a

@@ -36,9 +36,9 @@ export function HisProposalSection() {
           </div>
           <div className="order-1 md:order-2 w-full flex justify-center">
             <img
-              src={images.heroHorizontal}
-              alt="Proposal placeholder"
-              className="aspect-[4/5] w-full max-w-sm object-cover rounded-xl border border-gold/40"
+              src={images.proposalFrame}
+              alt="Ben and Ivanna — proposal"
+              className="w-full h-auto rounded-xl"
             />
           </div>
         </div>
