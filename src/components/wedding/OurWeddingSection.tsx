@@ -59,7 +59,7 @@ export function OurWeddingSection() {
       <div className={weddingSectionContainerClassName}>
         <div className="max-w-7xl mx-auto">
           <h2
-            className={`font-wedding-section-heading text-3xl md:text-4xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
+            className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
           >
             Our Wedding
           </h2>

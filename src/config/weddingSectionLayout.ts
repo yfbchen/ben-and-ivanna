@@ -29,9 +29,9 @@ export const weddingSectionTitleMarginClassName = `${weddingSectionTitleCapOffse
 export const weddingSectionTitleMarginClassNameRsvp = `${weddingSectionTitleCapOffsetClassName} mb-3 md:mb-4`;
 
 /**
- * Our Story: no margin under the title — timeline is nudged up with negative margin on its wrapper.
+ * Our Story: mobile keeps space under the title; desktop uses `mb-0` and the timeline wrapper’s `md:-mt-6` nudge.
  */
-export const weddingSectionTitleMarginClassNameOurStory = `${weddingSectionTitleCapOffsetClassName} mb-0`;
+export const weddingSectionTitleMarginClassNameOurStory = `${weddingSectionTitleCapOffsetClassName} mb-4 md:mb-0`;
 
 /**
  * Main cream-surface body copy (same as His Proposal paragraphs).

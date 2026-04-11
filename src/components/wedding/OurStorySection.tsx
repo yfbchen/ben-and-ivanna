@@ -24,7 +24,7 @@ export function OurStorySection() {
         Our Story
       </h2>
 
-      <div className="-mt-3 md:-mt-6 w-full max-w-[min(100%,84rem)] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+      <div className="w-full max-w-[min(100%,84rem)] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 md:-mt-6">
         {/* Desktop: grid timeline */}
         <div className="relative h-[500px] hidden md:block">
           <div

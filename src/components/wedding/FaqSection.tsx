@@ -39,7 +39,7 @@ export function FaqSection() {
       className={`${weddingSectionClassName} border-b border-wine/15`}
     >
       <div className={weddingSectionContainerClassName}>
-        <div className="px-2.5">
+        <div className="mx-auto w-full max-w-none px-0 md:max-w-5xl md:px-2.5">
           <h2
             className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading text-center ${weddingSectionTitleMarginClassName}`}
           >
@@ -57,7 +57,7 @@ export function FaqSection() {
                 value={item.value}
                 className="border-wine/15 last:border-b-0"
               >
-                <AccordionTrigger className="font-wedding-content text-left text-base md:text-lg tracking-brand text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
+                <AccordionTrigger className="font-wedding-nav-link font-semibold text-left text-base md:text-lg leading-none tracking-brand text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
                   {item.title}
                 </AccordionTrigger>
                 <AccordionContent className={`${weddingBodyCopyClassName} pr-8 md:pr-10`}>
