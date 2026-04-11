@@ -13,6 +13,7 @@ const url = (path: string) =>
 
 export const images = {
   proposalFrame: `${MISC_BASE}/proposal_frame.png`,
+  proposalGif: `${MISC_BASE}/proposal-gif.gif`,
   galleryFrame: `${MISC_BASE}/gallery_frame.png`,
   heroHorizontal: url("photo1.jpg"),
   heroVertical: url("photo1-copy.jpg"),

@@ -6,7 +6,6 @@ import {
   weddingElegantCtaButtonClassName,
   weddingSectionClassName,
   weddingSectionContainerClassName,
-  weddingSectionTitleMarginClassName,
 } from "@/config/weddingSectionLayout";
 import { Button } from "@/components/ui/button";
 
@@ -17,20 +16,15 @@ export function GallerySection() {
       className={`${weddingSectionClassName} flex items-center justify-center`}
     >
       <div className={weddingSectionContainerClassName}>
-        <div className="max-w-5xl mx-auto grid gap-12 md:gap-16 md:grid-cols-2 items-center justify-items-center">
-          <div className="w-full flex justify-center">
-            <img
-              src={images.galleryFrame}
-              alt="Ben and Ivanna — engagement gallery preview"
-              className="w-full h-auto rounded-xl"
-            />
-          </div>
-          <div className="max-w-xl w-full text-center md:text-left">
-            <h2
-              className={`font-wedding-section-heading text-3xl md:text-5xl tracking-brand text-wedding-heading ${weddingSectionTitleMarginClassName}`}
-            >
-              Gallery
-            </h2>
+        <div
+          className="max-w-5xl mx-auto grid grid-cols-1 items-start justify-items-center gap-12 [grid-template-areas:'galleryHdr'_'galleryPhoto'_'galleryCopy'] md:grid-cols-2 md:justify-items-stretch md:gap-16 md:[grid-template-areas:'galleryPhoto_galleryHdr'_'galleryPhoto_galleryCopy']"
+        >
+          <h2
+            className="[grid-area:galleryHdr] mb-0 max-w-xl justify-self-center text-center font-wedding-section-heading text-3xl tracking-brand text-wedding-heading md:justify-self-start md:text-left md:text-5xl"
+          >
+            Gallery
+          </h2>
+          <div className="[grid-area:galleryCopy] max-w-xl justify-self-center text-center md:justify-self-start md:text-left">
             <p className={weddingBodyCopyClassName}>
               We can&apos;t wait to share photos from our wedding with you in the
               future! In the meantime, you can browse our engagement and
@@ -47,6 +41,13 @@ export function GallerySection() {
                 See Gallery
               </Link>
             </Button>
+          </div>
+          <div className="[grid-area:galleryPhoto] flex w-full justify-center">
+            <img
+              src={images.galleryFrame}
+              alt="Ben and Ivanna — engagement gallery preview"
+              className="h-auto w-full rounded-xl"
+            />
           </div>
         </div>
       </div>

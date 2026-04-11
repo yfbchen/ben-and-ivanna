@@ -51,8 +51,9 @@ export function HeroSection({ selectedTheme, onThemeChange }: HeroSectionProps) 
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 md:gap-6 pointer-events-none px-6 md:px-10 lg:px-14">
           <img
             src={WEDDING_HERO_LOCKUP_URLS[selectedTheme]}
-            alt="Ivanna and Ben"
-            className="w-[78%] max-w-[700px] md:w-[60%] lg:w-[52%] h-auto object-contain"
+            alt=""
+            aria-hidden
+            className="h-auto w-[78%] max-w-[700px] shrink-0 object-contain opacity-0 md:w-[60%] md:opacity-100 lg:w-[52%]"
           />
           <Link
             to="/#rsvp"
