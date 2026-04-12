@@ -4,7 +4,7 @@
 const WEDDING_EVENT = {
   title: "Ivanna & Ben's Wedding",
   start: "2026-09-12T17:30:00", // Ceremony — Eastern (Cambridge, MA)
-  end: "2026-09-12T23:00:00",
+  end: "2026-09-12T23:30:00",
   location: "Gufo, 660 Cambridge St., Cambridge, MA",
   description:
     "Dress code: Formal attire with a tropical garden flair. See FAQ for full details.",
@@ -17,7 +17,7 @@ export function getGoogleCalendarUrl(): string {
   const params = new URLSearchParams({
     action: "TEMPLATE",
     text: WEDDING_EVENT.title,
-    dates: "20260912T213000Z/20260913T030000Z", // UTC: 5:30pm–11pm EDT (Cambridge, MA)
+    dates: "20260912T213000Z/20260913T033000Z", // UTC: 5:30pm–11:30pm EDT (Cambridge, MA)
     location: WEDDING_EVENT.location,
     details: WEDDING_EVENT.description,
   });

@@ -13,6 +13,12 @@ import {
 
 const faqItems = [
   {
+    value: "general-information",
+    title: "General Information",
+    answer:
+      "Our wedding day is at Gufo, an Italian restaurant at 660 Cambridge St., Cambridge, MA. You can start showing up at 5:00 PM. The ceremony begins at 5:30 PM, with cocktail hour at 6:00 PM. Reception will start around 7:00 PM. Please plan to be out by 11:30 PM.",
+  },
+  {
     value: "dress-code",
     title: "What is the dress code?",
     answer:

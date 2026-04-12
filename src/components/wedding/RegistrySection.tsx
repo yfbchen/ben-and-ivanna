@@ -7,8 +7,8 @@ import {
 } from "@/config/weddingSectionLayout";
 
 export function RegistrySection() {
-  const paypalUrl = "https://paypal.me/your-profile";
-  const venmoUrl = "https://venmo.com/your-profile";
+  const paypalUrl = "https://paypal.me/yfbchen";
+  const venmoUrl = "https://account.venmo.com/u/benjamms";
 
   return (
     <section

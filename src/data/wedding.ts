@@ -38,7 +38,7 @@ export const ourStoryEvents = [
   },
   {
     date: "2010–2014",
-    text: "Our friendship grew throughout high school—late-night study sessions, prom dates, and even performing together as senior year dance partners.",
+    text: "Our friendship grew throughout high school. From late-night study sessions, prom dates, and even performing together as senior year dance partners.",
     image: images.heroHorizontal,
     alt: "High school years",
     imageAbove: true,

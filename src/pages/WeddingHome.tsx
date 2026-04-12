@@ -2,14 +2,9 @@ import { useRsvp } from "@/hooks/useRsvp";
 import { scrollToSectionWithRetry, useScrollToSection } from "@/hooks/useScrollToSection";
 import { useHeroImagesReady } from "@/hooks/useHeroImagesReady";
 import { EnvelopeModal } from "@/components/EnvelopeModal";
-import { flushSync } from "react-dom";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
-import {
-  applyWeddingThemeCssVars,
-  clearWeddingThemeCssVars,
-  type WeddingTheme,
-} from "@/config/weddingThemeTokens";
+import { useEffect } from "react";
 import { WEDDING_HERO_IMAGE_URLS } from "@/components/wedding/HeroSection";
+import { useWeddingThemeController } from "@/hooks/useWeddingThemeController";
 import {
   HeroSection,
   OurWeddingSection,
@@ -25,44 +20,7 @@ import {
 const WeddingHome = () => {
   const heroImagesReady = useHeroImagesReady(WEDDING_HERO_IMAGE_URLS);
   useScrollToSection(heroImagesReady);
-  const [selectedTheme, setSelectedTheme] = useState<WeddingTheme>("red");
-
-  /** Layout so CSS vars + `data-wedding-theme` apply before paint — needed for View Transitions’ “after” snapshot. */
-  useLayoutEffect(() => {
-    const root = document.documentElement;
-    root.setAttribute("data-wedding-theme", selectedTheme);
-    applyWeddingThemeCssVars(root, selectedTheme);
-  }, [selectedTheme]);
-
-  const handleThemeChange = useCallback(
-    (theme: WeddingTheme) => {
-      if (theme === selectedTheme) return;
-      const prefersReducedMotion =
-        typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (
-        prefersReducedMotion ||
-        typeof document.startViewTransition !== "function"
-      ) {
-        setSelectedTheme(theme);
-        return;
-      }
-      document.startViewTransition(() => {
-        flushSync(() => {
-          setSelectedTheme(theme);
-        });
-      });
-    },
-    [selectedTheme],
-  );
-
-  useEffect(() => {
-    return () => {
-      const root = document.documentElement;
-      root.removeAttribute("data-wedding-theme");
-      clearWeddingThemeCssVars(root);
-    };
-  }, []);
+  const { selectedTheme, handleThemeChange } = useWeddingThemeController();
 
   useEffect(() => {
     if (!heroImagesReady) {
