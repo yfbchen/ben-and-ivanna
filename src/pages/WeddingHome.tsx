@@ -73,7 +73,7 @@ const WeddingHome = () => {
         <OurWeddingSection />
         <OurStorySection />
         <HisProposalSection />
-        <GallerySection />
+        <GallerySection selectedTheme={selectedTheme} />
         <RegistrySection />
         <FaqSection />
       </main>

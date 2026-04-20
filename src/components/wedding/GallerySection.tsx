@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Images } from "lucide-react";
 import { images } from "@/config/images";
+import type { WeddingTheme } from "@/config/weddingThemeTokens";
 import {
   weddingBodyCopyClassName,
   weddingElegantCtaButtonClassName,
@@ -10,7 +11,11 @@ import {
 } from "@/config/weddingSectionLayout";
 import { Button } from "@/components/ui/button";
 
-export function GallerySection() {
+type GallerySectionProps = {
+  selectedTheme: WeddingTheme;
+};
+
+export function GallerySection({ selectedTheme }: GallerySectionProps) {
   return (
     <section
       id="gallery"
@@ -20,7 +25,7 @@ export function GallerySection() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 gap-12 md:grid-cols-2 md:items-center md:gap-x-16 md:gap-y-0">
           <div className="order-2 flex w-full justify-center md:order-none md:col-start-1 md:row-start-1">
             <img
-              src={images.galleryFrame}
+              src={images.galleryFrameByTheme[selectedTheme]}
               alt="Ben and Ivanna — engagement gallery preview"
               className="h-auto w-full rounded-xl"
             />

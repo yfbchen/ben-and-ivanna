@@ -10,10 +10,16 @@ const MISC_BASE =
 
 const url = (path: string) =>
   `${STORAGE_BASE}/${path.replace(/ /g, "%20")}`;
+const miscUrl = (path: string) =>
+  `${MISC_BASE}/${path.replace(/ /g, "%20")}`;
 
 export const images = {
-  proposalGif: `${MISC_BASE}/proposal-gif.gif`,
-  galleryFrame: `${MISC_BASE}/gallery_frame.png`,
+  proposalGif: miscUrl("proposal-gif.gif"),
+  galleryFrameByTheme: {
+    red: miscUrl("gallery_frame_red.png"),
+    orange: miscUrl("gallery_frame_orange.png"),
+    green: miscUrl("gallery_frame_green.png"),
+  },
   heroHorizontal: url("photo1.jpg"),
   heroVertical: url("photo1-copy.jpg"),
   gallery: [
