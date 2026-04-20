@@ -35,11 +35,8 @@ const ourWeddingIconClassName =
   "max-h-full w-full object-contain object-bottom rounded-xl";
 
 /** Space below the aligned icon block (replaces old negative margin now that slots are fixed). */
-const ourWeddingCaptionClassName = `${weddingBodyCopyClassName} space-y-0.5 mt-2`;
-
-/** Text-only frame under each illustration — border only, no fill. */
-const ourWeddingCaptionPanelClassName =
-  "w-full rounded-xl border border-wine/20 bg-transparent px-3 py-2.5";
+const ourWeddingCaptionClassName =
+  `${weddingBodyCopyClassName} space-y-0 mt-2 px-3 py-2.5 [&>p]:leading-tight`;
 
 /** Same width for all three caption frames (matches pasta / venue column). */
 const ourWeddingCaptionPanelMaxWidthClassName = "max-w-[260px]";
@@ -86,10 +83,12 @@ export function OurWeddingSection() {
               <div
                 className={cn(
                   ourWeddingCaptionClassName,
-                  ourWeddingCaptionPanelClassName,
                   ourWeddingCaptionPanelMaxWidthClassName,
                 )}
               >
+                <p className="-mt-3 mb-3 font-wedding-section-heading text-3xl leading-none tracking-brand text-wedding-heading">
+                  When
+                </p>
                 <p>Saturday</p>
                 <p>September 12, 2026</p>
               </div>
@@ -110,10 +109,12 @@ export function OurWeddingSection() {
               <div
                 className={cn(
                   ourWeddingCaptionClassName,
-                  ourWeddingCaptionPanelClassName,
                   ourWeddingCaptionPanelMaxWidthClassName,
                 )}
               >
+                <p className="-mt-3 mb-3 font-wedding-section-heading text-3xl leading-none tracking-brand text-wedding-heading">
+                  Where
+                </p>
                 <p>Gufo</p>
                 <p>660 Cambridge St., Cambridge</p>
               </div>
@@ -134,12 +135,15 @@ export function OurWeddingSection() {
               <div
                 className={cn(
                   ourWeddingCaptionClassName,
-                  ourWeddingCaptionPanelClassName,
                   ourWeddingCaptionPanelMaxWidthClassName,
                 )}
               >
+                <p className="-mt-3 mb-3 font-wedding-section-heading text-3xl leading-none tracking-brand text-wedding-heading">
+                  What
+                </p>
                 <p>Door Opens: 5PM</p>
-                <p>Ceremony Starts: 5:30PM</p>
+                <p>Ceremony: 5:30PM</p>
+                <p className="text-sm leading-tight">(full schedule in FAQ)</p>
               </div>
             </div>
           </div>

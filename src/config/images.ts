@@ -15,6 +15,7 @@ const miscUrl = (path: string) =>
 
 export const images = {
   proposalGif: miscUrl("proposal-gif.gif"),
+  passwordTicket: miscUrl("password_ticket.png"),
   galleryFrameByTheme: {
     red: miscUrl("gallery_frame_red.png"),
     orange: miscUrl("gallery_frame_orange.png"),
