@@ -13,6 +13,36 @@ const url = (path: string) =>
 const miscUrl = (path: string) =>
   `${MISC_BASE}/${path.replace(/ /g, "%20")}`;
 
+/** Tabs on `/gallery`; `all` is UI-only (not stored on items). */
+export const GALLERY_FILTER_TABS = [
+  { id: "all", label: "All" },
+  { id: "wedding", label: "Wedding" },
+  { id: "new-york", label: "New York" },
+  { id: "china-garden", label: "China - Garden" },
+  { id: "china-basketball", label: "China - Basketball" },
+  { id: "china-glass-house", label: "China - Glass House" },
+] as const;
+
+export type GalleryFilterId = (typeof GALLERY_FILTER_TABS)[number]["id"];
+export type GalleryCategoryId = Exclude<GalleryFilterId, "all">;
+
+/**
+ * Wedding-day (or other) photos in the `images` bucket — category `wedding` on `/gallery`.
+ * The New York / China shoots load from the `gallery` bucket folders (see `useGalleryCatalog`).
+ */
+const WEDDING_GALLERY_FILES = [] as const satisfies readonly string[];
+
+/** Static wedding entries for the grid (empty until you add filenames above). */
+export function getStaticWeddingGalleryItems(): {
+  src: string;
+  category: Extract<GalleryCategoryId, "wedding">;
+}[] {
+  return WEDDING_GALLERY_FILES.map((file) => ({
+    src: url(file),
+    category: "wedding" as const,
+  }));
+}
+
 export const images = {
   proposalGif: miscUrl("proposal-gif.gif"),
   passwordTicket: miscUrl("password_ticket.png"),
@@ -28,16 +58,6 @@ export const images = {
   timelineDating: miscUrl("timeline_dating.png"),
   timelineNyc: miscUrl("timeline_nyc.png"),
   timelineEngagement: miscUrl("timeline_engagement.png"),
-  gallery: [
-    "IMG_1199 copy 2.jpg",
-    "IMG_1199 copy 3.jpg",
-    "IMG_1199 copy.jpg",
-    "IMG_1199.jpg",
-    "photo1 copy 2.jpg",
-    "photo1 copy 3.jpg",
-    "photo1 copy 4.jpg",
-    "photo1 copy 5.jpg",
-    "photo1-copy.jpg",
-    "photo1.jpg",
-  ].map((f) => url(f)),
+  /** @deprecated Grid uses `useGalleryCatalog`; kept for any legacy reference. */
+  gallery: [],
 };

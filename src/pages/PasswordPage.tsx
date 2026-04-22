@@ -30,7 +30,8 @@ const PasswordPage = () => {
           <img
             src={images.passwordTicket}
             alt="Wedding ticket password prompt"
-            className="relative z-10 block w-full h-auto"
+            referrerPolicy="no-referrer"
+            className="relative z-10 block w-full h-auto drop-shadow-[0_10px_24px_#330404]"
           />
 
           <div className="absolute left-[42%] top-[77%] z-20 w-[62%] -translate-x-1/2 -translate-y-1/2 sm:left-[42%] sm:top-[74%] sm:w-[54%] md:left-[42%] md:top-[73%]">

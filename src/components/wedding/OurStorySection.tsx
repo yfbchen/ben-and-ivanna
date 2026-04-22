@@ -50,7 +50,8 @@ export function OurStorySection() {
                       <img
                         src={event.image}
                         alt={event.alt}
-                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                        className="h-full w-full rounded-full object-cover [transform:translateZ(0)]"
                       />
                     </div>
                   ) : (
@@ -91,7 +92,8 @@ export function OurStorySection() {
                       <img
                         src={event.image}
                         alt={event.alt}
-                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                        className="h-full w-full rounded-full object-cover [transform:translateZ(0)]"
                       />
                     </div>
                   )}
@@ -109,7 +111,8 @@ export function OurStorySection() {
                 <img
                   src={event.image}
                   alt={event.alt}
-                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                  className="h-full w-full rounded-full object-cover [transform:translateZ(0)]"
                 />
               </div>
               <p className={weddingBodyCopyClassName}>{event.date}</p>
