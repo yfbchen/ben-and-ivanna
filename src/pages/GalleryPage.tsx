@@ -11,6 +11,10 @@ const GalleryPage = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   const openViewer = (index: number) => {
     setSelectedImageIndex(index);
     setIsViewerOpen(true);

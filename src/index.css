@@ -395,6 +395,19 @@
   animation-delay: 500ms;
 }
 
+@keyframes route-page-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.route-page-fade {
+  animation: route-page-fade 520ms ease both;
+}
+
 /* View Transitions API — full-page cross-fade on wedding theme change (see WeddingHome) */
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -403,6 +416,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .route-page-fade {
+    animation: none;
+  }
+
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 1ms;

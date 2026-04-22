@@ -48,7 +48,7 @@ export function GallerySection({ selectedTheme }: GallerySectionProps) {
                 className={`mt-6 ${weddingElegantCtaButtonClassName}`}
                 asChild
               >
-                <Link to="/gallery">
+                <Link to="/gallery" viewTransition>
                   <Images className="h-5 w-5 shrink-0" />
                   See Gallery
                 </Link>
