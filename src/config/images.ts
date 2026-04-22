@@ -23,6 +23,11 @@ export const images = {
   },
   heroHorizontal: url("photo1.jpg"),
   heroVertical: url("photo1-copy.jpg"),
+  timelineEighthGrade: miscUrl("timeline_eighth_grade.png"),
+  timelineProm: miscUrl("timeline_prom.png"),
+  timelineDating: miscUrl("timeline_dating.png"),
+  timelineNyc: miscUrl("timeline_nyc.png"),
+  timelineEngagement: miscUrl("timeline_engagement.png"),
   gallery: [
     "IMG_1199 copy 2.jpg",
     "IMG_1199 copy 3.jpg",

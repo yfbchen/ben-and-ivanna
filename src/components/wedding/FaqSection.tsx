@@ -34,7 +34,7 @@ const faqItems = [
     value: "parking",
     title: "How do I find parking?",
     answer:
-      "We’ll share parking, shuttles, and nearby options closer to the date. Check back here for updates.",
+      "Gufo does not have designated parking. Street parking on the main road nearby is metered; depending on the block, it becomes free after 6 PM or 8 PM. Metered spots directly outside the restaurant are free after 6 PM.\n\nThe closest large garage option is One Kendall Square Garage, about a 10-minute walk (up to $50 for a full day). A smaller, more affordable lot is at 490 Columbia Street Parking Lot, about an 11-minute walk—availability is very limited and must be booked online.\n\nYou may find lower rates for both by reserving in advance through apps like SpotHero.",
   },
 ] as const;
 
@@ -66,7 +66,9 @@ export function FaqSection() {
                 <AccordionTrigger className="font-wedding-nav-link font-semibold text-left text-base md:text-lg leading-none tracking-brand text-wedding-body hover:no-underline hover:text-wedding-heading py-5 md:py-6 pr-2 [&[data-state=open]]:text-wedding-heading">
                   {item.title}
                 </AccordionTrigger>
-                <AccordionContent className={`${weddingBodyCopyClassName} pr-8 md:pr-10`}>
+                <AccordionContent
+                  className={`${weddingBodyCopyClassName} whitespace-pre-line pr-8 md:pr-10`}
+                >
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>
