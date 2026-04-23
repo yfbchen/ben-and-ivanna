@@ -12,6 +12,8 @@ export function OurStorySection() {
   const weddingTheme = useWeddingThemeFromDocument();
   const timelineAccent = ourStoryTimelineAccentHex(weddingTheme);
   const timelineLineColor = `color-mix(in srgb, ${timelineAccent} 55%, transparent)`;
+  const timelineDateClassName =
+    "font-wedding-section-heading font-bold text-base md:text-lg tracking-brand text-wedding-body leading-tight";
 
   return (
     <section
@@ -56,7 +58,7 @@ export function OurStorySection() {
                     </div>
                   ) : (
                     <div className="text-center">
-                      <p className={weddingBodyCopyClassName}>{event.date}</p>
+                      <p className={timelineDateClassName}>{event.date}</p>
                       <p
                         className={`${weddingBodyCopyClassName} max-w-[min(100%,12rem)] mt-0.5`}
                       >
@@ -80,7 +82,7 @@ export function OurStorySection() {
                 >
                   {event.imageAbove ? (
                     <div className="text-center">
-                      <p className={weddingBodyCopyClassName}>{event.date}</p>
+                      <p className={timelineDateClassName}>{event.date}</p>
                       <p
                         className={`${weddingBodyCopyClassName} max-w-[min(100%,12rem)] mt-0.5`}
                       >
@@ -115,7 +117,7 @@ export function OurStorySection() {
                   className="h-full w-full rounded-full object-cover [transform:translateZ(0)]"
                 />
               </div>
-              <p className={weddingBodyCopyClassName}>{event.date}</p>
+              <p className={timelineDateClassName}>{event.date}</p>
               <p className={`${weddingBodyCopyClassName} max-w-[240px] mt-0.5`}>
                 {event.text}
               </p>
