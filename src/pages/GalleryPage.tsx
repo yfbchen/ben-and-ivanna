@@ -236,57 +236,60 @@ const GalleryPage = () => {
       <Dialog open={isViewerOpen} onOpenChange={setIsViewerOpen}>
         <DialogContent
           overlayClassName="bg-black/90"
-          className="max-h-[92vh] max-w-[88vw] border border-border bg-background p-4 shadow-2xl focus:outline-none sm:max-w-4xl sm:rounded-lg sm:p-5 [&>button]:hidden"
+          className="w-[min(92vw,1100px)] max-w-none border-none bg-transparent p-0 shadow-none focus:outline-none [&>button]:hidden"
         >
           <DialogTitle className="sr-only">Expanded gallery image</DialogTitle>
           <DialogDescription className="sr-only">
             View large photo and navigate with previous or next controls.
           </DialogDescription>
-          <div className="relative mx-auto w-full max-w-4xl rounded-xl bg-muted/20 p-3 sm:p-4">
+          <div className="relative mx-auto flex max-h-[92vh] w-full flex-col overflow-hidden rounded-2xl border border-border bg-wedding-main-surface shadow-2xl">
             <DialogClose
-              className="absolute right-3 top-3 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/70 sm:right-4 sm:top-4"
+              className="absolute right-3 top-3 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/65 text-white transition hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               aria-label="Close preview"
             >
               <X className="h-5 w-5" />
             </DialogClose>
 
-            <div className="relative">
-              <div className="flex min-h-[18rem] items-center justify-center overflow-hidden rounded-xl bg-black/5 px-12 py-2 sm:min-h-[22rem] sm:px-14">
+            <div className="relative flex min-h-[18rem] flex-1 items-center justify-center bg-muted/10 px-12 py-4 sm:min-h-[24rem] sm:px-14 sm:py-5">
+              <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center justify-between px-3 sm:px-4">
+                <button
+                  type="button"
+                  onClick={showPreviousImage}
+                  disabled={visibleItems.length < 2}
+                  className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/70 disabled:pointer-events-none disabled:opacity-40"
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={showNextImage}
+                  disabled={visibleItems.length < 2}
+                  className="pointer-events-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/70 disabled:pointer-events-none disabled:opacity-40"
+                  aria-label="Next photo"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </div>
+
+              <div className="flex h-full w-full items-center justify-center">
                 {visibleItems[selectedImageIndex] && (
                   <img
                     src={visibleItems[selectedImageIndex].src}
                     alt={`Gallery photo ${selectedImageIndex + 1} expanded`}
-                    className="max-h-[68vh] w-auto max-w-full rounded-md object-contain"
+                    className="max-h-[72vh] w-auto max-w-full rounded-md object-contain"
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
                   />
                 )}
               </div>
-
-              <button
-                type="button"
-                onClick={showPreviousImage}
-                disabled={visibleItems.length < 2}
-                className="absolute left-2 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/70 disabled:pointer-events-none disabled:opacity-40 sm:left-3"
-                aria-label="Previous photo"
-              >
-                <ChevronLeft className="h-6 w-6" />
-              </button>
-
-              <button
-                type="button"
-                onClick={showNextImage}
-                disabled={visibleItems.length < 2}
-                className="absolute right-2 top-1/2 z-10 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/70 disabled:pointer-events-none disabled:opacity-40 sm:right-3"
-                aria-label="Next photo"
-              >
-                <ChevronRight className="h-6 w-6" />
-              </button>
             </div>
 
-            <div className="mt-3 overflow-x-auto px-1 pb-1">
-              <div className="flex w-max min-w-full gap-2 pr-1">
+            <div className="border-t border-border/70 bg-wedding-main-surface px-3 py-3 sm:px-4">
+              <div className="overflow-x-auto">
+                <div className="flex w-max min-w-full gap-2 pr-1">
                 {visibleItems.map((item, index) => {
                   const isActive = index === selectedImageIndex;
 
@@ -300,7 +303,7 @@ const GalleryPage = () => {
                       onClick={() => setSelectedImageIndex(index)}
                       aria-label={`View photo ${index + 1}`}
                       aria-current={isActive ? "true" : undefined}
-                      className={`h-14 w-20 shrink-0 overflow-hidden rounded-xl border-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-navbar/35 focus-visible:ring-offset-1 focus-visible:ring-offset-background ${
+                      className={`h-14 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-navbar/35 focus-visible:ring-offset-1 focus-visible:ring-offset-background ${
                         isActive
                           ? "border-4 border-theme-navbar"
                           : "border-border hover:border-theme-navbar/50"
@@ -316,6 +319,7 @@ const GalleryPage = () => {
                     </button>
                   );
                 })}
+                </div>
               </div>
             </div>
           </div>
