@@ -8,6 +8,9 @@ import { useWeddingThemeController } from "@/hooks/useWeddingThemeController";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+const INITIAL_VISIBLE_IMAGE_COUNT = 24;
+const VISIBLE_IMAGE_STEP = 24;
+
 const GalleryPage = () => {
   const { selectedTheme, handleThemeChange } = useWeddingThemeController();
   const { items: catalogItems, status: catalogStatus, errorMessage: catalogError } =
@@ -16,6 +19,8 @@ const GalleryPage = () => {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const loadMoreAnchorRef = useRef<HTMLDivElement | null>(null);
+  const [visibleImageCount, setVisibleImageCount] = useState(INITIAL_VISIBLE_IMAGE_COUNT);
 
   const visibleItems = useMemo(
     () =>
@@ -24,6 +29,11 @@ const GalleryPage = () => {
         : catalogItems.filter((item) => item.category === activeFilter),
     [activeFilter, catalogItems],
   );
+  const renderedItems = useMemo(
+    () => visibleItems.slice(0, visibleImageCount),
+    [visibleImageCount, visibleItems],
+  );
+  const hasMoreItems = renderedItems.length < visibleItems.length;
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -32,6 +42,38 @@ const GalleryPage = () => {
   useEffect(() => {
     setIsViewerOpen(false);
   }, [activeFilter]);
+
+  useEffect(() => {
+    setVisibleImageCount(INITIAL_VISIBLE_IMAGE_COUNT);
+  }, [activeFilter, catalogItems]);
+
+  useEffect(() => {
+    if (!hasMoreItems) {
+      return;
+    }
+
+    const target = loadMoreAnchorRef.current;
+    if (!target) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) {
+            continue;
+          }
+
+          setVisibleImageCount((current) => Math.min(current + VISIBLE_IMAGE_STEP, visibleItems.length));
+          break;
+        }
+      },
+      { rootMargin: "450px 0px" },
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [hasMoreItems, visibleItems.length]);
 
   const openViewer = (index: number) => {
     setSelectedImageIndex(index);
@@ -148,30 +190,44 @@ const GalleryPage = () => {
               </p>
             )}
             {catalogStatus === "loading" ? (
-              <p className={`${weddingBodyCopyClassName} text-center text-theme-navbar/85`}>
-                Loading gallery…
-              </p>
+              <div className="flex flex-col items-center justify-center gap-3 py-4" aria-live="polite">
+                <span
+                  className="h-8 w-8 animate-spin rounded-full border-2 border-theme-navbar/25 border-t-theme-navbar"
+                  aria-hidden="true"
+                />
+                <p className={`${weddingBodyCopyClassName} text-center text-theme-navbar/85`}>
+                  Loading gallery…
+                </p>
+              </div>
             ) : visibleItems.length === 0 ? (
               <p className={`${weddingBodyCopyClassName} text-center`}>Coming Soon!</p>
             ) : (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {visibleItems.map((item, index) => (
-                  <button
-                    key={item.src}
-                    type="button"
-                    onClick={() => openViewer(index)}
-                    className="group relative block w-full overflow-hidden rounded-xl border border-border bg-background text-left transition-transform duration-200 hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    aria-label={`Open photo ${index + 1} in full screen`}
-                  >
-                    <img
-                      src={item.src}
-                      alt={`Gallery photo ${index + 1}`}
-                      className="aspect-[4/5] h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                      loading="lazy"
-                    />
-                  </button>
-                ))}
-              </div>
+              <>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {renderedItems.map((item, index) => (
+                    <button
+                      key={item.src}
+                      type="button"
+                      onClick={() => openViewer(index)}
+                      className="group relative block w-full overflow-hidden rounded-xl border border-border bg-background text-left transition-transform duration-200 hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      aria-label={`Open photo ${index + 1} in full screen`}
+                    >
+                      <img
+                        src={item.src}
+                        alt={`Gallery photo ${index + 1}`}
+                        className="aspect-[4/5] h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        loading={index < 4 ? "eager" : "lazy"}
+                        fetchPriority={index < 4 ? "high" : "auto"}
+                        decoding="async"
+                        sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw"
+                      />
+                    </button>
+                  ))}
+                </div>
+                {hasMoreItems && (
+                  <div ref={loadMoreAnchorRef} className="mt-6 h-8 w-full" aria-hidden="true" />
+                )}
+              </>
             )}
           </div>
         </section>
@@ -201,6 +257,9 @@ const GalleryPage = () => {
                     src={visibleItems[selectedImageIndex].src}
                     alt={`Gallery photo ${selectedImageIndex + 1} expanded`}
                     className="max-h-[68vh] w-auto max-w-full rounded-md object-contain"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                 )}
               </div>
@@ -252,6 +311,7 @@ const GalleryPage = () => {
                         alt={`Gallery thumbnail ${index + 1}`}
                         className="h-full w-full object-cover"
                         loading="lazy"
+                        decoding="async"
                       />
                     </button>
                   );
