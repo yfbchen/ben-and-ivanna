@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { MainNav, type NavItemConfig } from "@/components/MainNav";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 const navItems: NavItemConfig[] = [
   { label: "Our Wedding", to: "/#our-wedding" },
@@ -34,6 +35,7 @@ const Layout = () => {
       <div key={location.pathname} className="route-page-fade">
         <Outlet />
       </div>
+      <ScrollToTopButton />
     </div>
   );
 };
