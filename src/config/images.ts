@@ -53,6 +53,7 @@ export const images = {
   },
   heroHorizontal: url("photo1.jpg"),
   heroVertical: url("photo1-copy.jpg"),
+  timelineKiddos: miscUrl("timeline_kiddos.jpg"),
   timelineEighthGrade: miscUrl("timeline_eighth_grade.png"),
   timelineProm: miscUrl("timeline_prom.png"),
   timelineDating: miscUrl("timeline_dating.png"),

@@ -25,7 +25,7 @@ export const ourStoryEvents = [
   {
     date: "2004",
     text: "We first met at age 8 at our parents' mutual friend's wedding.",
-    image: images.heroHorizontal,
+    image: images.timelineKiddos,
     alt: "When we first met",
     imageAbove: true,
   },
