@@ -18,9 +18,9 @@ export const GALLERY_FILTER_TABS = [
   { id: "all", label: "All" },
   { id: "wedding", label: "Wedding" },
   { id: "new-york", label: "New York" },
-  { id: "china-garden", label: "China - Garden" },
+  { id: "china-glass-house", label: "China - Formal" },
   { id: "china-basketball", label: "China - Basketball" },
-  { id: "china-glass-house", label: "China - Glass House" },
+  { id: "china-garden", label: "China - Traditional" },
 ] as const;
 
 export type GalleryFilterId = (typeof GALLERY_FILTER_TABS)[number]["id"];

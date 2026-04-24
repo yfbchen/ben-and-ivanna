@@ -71,9 +71,10 @@ async function fetchRemoteGalleryItems(): Promise<GalleryCatalogItem[]> {
 function sortCatalogForDisplay(items: GalleryCatalogItem[]): GalleryCatalogItem[] {
   const categoryRank = new Map<GalleryCategoryId, number>();
   categoryRank.set("wedding", 0);
-  GALLERY_REMOTE_FOLDERS.forEach((f, i) => {
-    categoryRank.set(f.category, i + 1);
-  });
+  categoryRank.set("new-york", 1);
+  categoryRank.set("china-glass-house", 2);
+  categoryRank.set("china-basketball", 3);
+  categoryRank.set("china-garden", 4);
 
   return [...items].sort((a, b) => {
     const ra = categoryRank.get(a.category) ?? 99;
