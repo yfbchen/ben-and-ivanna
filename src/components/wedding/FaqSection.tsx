@@ -16,7 +16,7 @@ const faqItems = [
     value: "general-information",
     title: "General Information",
     answer:
-      "Our wedding day is at Gufo, an Italian restaurant at 660 Cambridge St., Cambridge, MA. You can start showing up at 5:00 PM. The ceremony begins at 5:30 PM, with cocktail hour at 6:00 PM. Reception will start around 7:00 PM. Please plan to be out by 11:30 PM.",
+      "Our wedding will take place at Gufo, an Italian restaurant located at 660 Cambridge St., Cambridge, MA.\n\nDoors open at 5:00 PM, and we kindly ask guests to be seated by 5:30 PM for the ceremony. Cocktail hour will follow, with reception dinner beginning at 7:00 PM. The evening will wrap up around 11:30 PM.",
   },
   {
     value: "dress-code",
@@ -28,7 +28,7 @@ const faqItems = [
     value: "plus-ones",
     title: "Can I bring a plus one?",
     answer:
-      "Due to our intimate restaurant-style wedding and limited space, we are only able to invite the guests named on the invitation. We truly appreciate your understanding.",
+      "Due to our intimate restaurant-style wedding and limited space, we are only able to invite the guests named on the invitation. We truly appreciate your understanding!",
   },
   {
     value: "parking",

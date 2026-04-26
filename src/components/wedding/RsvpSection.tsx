@@ -40,7 +40,7 @@ export function RsvpSection({
               RSVP
             </h2>
             <p className={`max-w-[46ch] mx-auto md:mx-0 ${weddingRsvpBodyCopyClassName}`}>
-              Kindly respond by June 30, 2026 so we can plan the celebration
+              Kindly respond by July 1, 2026 so we can plan the celebration
               with you in mind.
             </p>
           </div>

@@ -36,7 +36,7 @@ export function HisProposalSection() {
                 decade of their lives together.
               </p>
               <p>
-                Through tears and laughter, he asked the question—and she said yes!
+                Through tears and laughter, he asked the question—and Ivanna said "yes"!
               </p>
             </div>
           </div>
