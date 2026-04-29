@@ -10,6 +10,7 @@ import GalleryPage from "@/pages/GalleryPage";
 import NotFound from "@/pages/NotFound";
 import Layout from "@/components/Layout";
 import { Analytics } from "@vercel/analytics/react";
+import ButtonClickTracker from "@/components/analytics/ButtonClickTracker";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>
+        <ButtonClickTracker />
         <Analytics />
       </AuthProvider>
     </TooltipProvider>
