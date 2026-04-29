@@ -9,6 +9,7 @@ import WeddingHome from "@/pages/WeddingHome";
 import GalleryPage from "@/pages/GalleryPage";
 import NotFound from "@/pages/NotFound";
 import Layout from "@/components/Layout";
+import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>
+        <Analytics />
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
