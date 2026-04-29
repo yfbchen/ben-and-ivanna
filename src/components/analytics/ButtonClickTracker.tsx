@@ -85,6 +85,11 @@ const ButtonClickTracker = () => {
         return;
       }
 
+      const excludedElement = event.target.closest("[data-analytics-ignore='true']");
+      if (excludedElement) {
+        return;
+      }
+
       const button = event.target.closest("button, [role='button']");
       if (!(button instanceof HTMLElement)) {
         return;

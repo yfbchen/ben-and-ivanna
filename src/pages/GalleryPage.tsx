@@ -240,6 +240,7 @@ const GalleryPage = () => {
                     <button
                       key={item.src}
                       type="button"
+                      data-analytics-ignore="true"
                       onClick={() => openViewer(index)}
                       className="group relative block w-full overflow-hidden rounded-xl border border-border bg-background text-left transition-transform duration-200 hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                       aria-label={`Open photo ${index + 1} in full screen`}
@@ -286,6 +287,7 @@ const GalleryPage = () => {
               <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center justify-between px-2 sm:px-4">
                 <button
                   type="button"
+                  data-analytics-ignore="true"
                   onClick={showPreviousImage}
                   disabled={visibleItems.length < 2}
                   className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/70 disabled:pointer-events-none disabled:opacity-40 sm:h-10 sm:w-10"
@@ -296,6 +298,7 @@ const GalleryPage = () => {
 
                 <button
                   type="button"
+                  data-analytics-ignore="true"
                   onClick={showNextImage}
                   disabled={visibleItems.length < 2}
                   className="pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/70 disabled:pointer-events-none disabled:opacity-40 sm:h-10 sm:w-10"
@@ -332,6 +335,7 @@ const GalleryPage = () => {
                         thumbnailRefs.current[index] = element;
                       }}
                       type="button"
+                      data-analytics-ignore="true"
                       onClick={() => setSelectedImageIndex(index)}
                       aria-label={`View photo ${index + 1}`}
                       aria-current={isActive ? "true" : undefined}
